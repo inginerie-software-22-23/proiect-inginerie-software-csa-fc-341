@@ -1,0 +1,3 @@
+# SQUAD MANAGER
+
+## Team
