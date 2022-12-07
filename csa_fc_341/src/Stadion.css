@@ -1,0 +1,13 @@
+
+  
+body::after {
+    content: "";
+    background: url(https://cacheimg.gsp.ro/autocrop/smp-images-production/gsp.ro/16082019/1565940254587.jpg?width=1200&height=0);
+    opacity: 0.2;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    position: absolute;
+    z-index: -1;   
+  }
