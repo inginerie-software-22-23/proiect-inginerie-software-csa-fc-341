@@ -1,7 +1,7 @@
 import { getFirestore, collection, getDocs, query, where } from "firebase/firestore";
 import { Table,Button } from 'semantic-ui-react'
 import { Link } from 'react-router-dom';
-
+import "../Stil.css";
 import {app} from '../../DatabaseConnection';
 import { doc, deleteDoc } from "firebase/firestore";
 import React,{useState,useEffect} from 'react';
@@ -101,6 +101,7 @@ deleteDoc(docRef)
 
 //console.log(stadioane)
     return(
+      <body>
         <div>
           <Button type="button" className="bt4" onClick={()=>add_stadium()}>
               Add a stadium
@@ -131,7 +132,8 @@ deleteDoc(docRef)
       onClick={() => requestSort('adresa')}
       className={getClassNamesFor('adresa')}
     >Address</button></Table.HeaderCell>
-                
+    <Table.HeaderCell className='titlu'></Table.HeaderCell> 
+    <Table.HeaderCell className='titlu'></Table.HeaderCell>              
                 
 
             </Table.Row>
@@ -162,6 +164,7 @@ return (
         </Table.Body>
     </Table>
     </div>
+    </body>
     );
 }
 
