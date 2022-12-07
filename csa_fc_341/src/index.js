@@ -2,8 +2,6 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
-<<<<<<< Updated upstream
-=======
 import {Stadion} from './Stadion';
 import {Weather} from './Weather'
 import Update_Stadium from './Controlere/Crud_Stadiums/Update_Stadium';
@@ -13,15 +11,8 @@ import Navigation  from "./Controlere/Navigation";
 import Home from "./Controlere/Home";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
->>>>>>> Stashed changes
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-<<<<<<< Updated upstream
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
-=======
   <Router>
     <Navigation />
     <Routes>
@@ -32,5 +23,4 @@ root.render(
       <Route path="/add_stadium" element={<Add_Stadium />} />
     </Routes>
   </Router>
->>>>>>> Stashed changes
 );

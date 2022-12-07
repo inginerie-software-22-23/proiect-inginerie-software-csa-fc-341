@@ -1,70 +1,26 @@
-# Getting Started with Create React App
+# Squad Manager - Web Application
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+## Descriere
 
-In the project directory, you can run:
+“Squad Manager” este o aplicatie web pentru gestionarea unui club sportiv. Aceasta este adresata in mod special echipelor care isi desfasoara activitatea in campionatele de fotbal.
 
-### `npm start`
+Aplicatia a fost dezvoltata pentru a usura munca cluburilor, ajutandu-i pe oamenii ce activeaza in industria sportiva sa gestioneze mai facil clubul, avand acces oricand la toate informatiile echipei.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Squad Manager, dupa cum sugereaza si denumirea, preia din atributiile managerului clubului. Memorand toate datele importante de la nivelul clubului, aplicatia este oricand pregatita sa iti ofere orice informatie ai nevoie referitoare la echipa ta. Cu aplicatia Squad Manager ai in permanenta un asistent personal capabil sa iti ofere datele necesare pentru face performanta. 
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
 
-### `npm test`
+## Echipa
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Avian Silviu Gabriel
 
-### `npm run build`
+Dijmarescu Cristina Maria
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Haiducu Stefan 
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Ioan Tudor Alexandru 
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Ionescu Alexandru 
 
-### `npm run eject`
+Stan Ana Maria
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
