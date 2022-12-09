@@ -1,16 +1,16 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
-import './Navigation.css';
+import './Navigation.scss';
 function Navigation() {
   return (
-    <div>
+    <div >
      
     <div className="navigation ">
       <nav className="navbar navbar-expand  ">
         <div className="container">
 
           <div>
-            <ul className="navbar-nav ml-auto">
+            <ul className="navbar-nav ml-auto" class="menu">
               <li className="nav-item">
                 <NavLink className="nav-link" to="/">
                   Home
@@ -19,7 +19,19 @@ function Navigation() {
               </li>
               <li className="nav-item">
                 <NavLink className="nav-link" to="/tostadion">
-                  Stadium
+                  Stadioane
+                </NavLink>
+              </li>
+              <li className="nav-item">
+                <NavLink className="nav-link" to="/tomeci">
+                  Meciuri
+                  
+                </NavLink>
+              </li>
+              <li className="nav-item">
+                <NavLink className="nav-link" to="/tojucator">
+                  Jucatori
+                  
                 </NavLink>
               </li>
               
