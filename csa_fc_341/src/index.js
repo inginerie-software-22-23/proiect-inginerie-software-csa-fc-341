@@ -7,6 +7,7 @@ import {Meci} from './Meci';
 import {Jucator} from './Jucator';
 import {Weather} from './Weather';
 import { Staff } from './Staff';
+import {Contract} from './Contract';
 import Update_Stadium from './Controlere/Crud_Stadiums/Update_Stadium';
 import Update_Staff from './Controlere/Crud_Staffs/Update_Staff';
 import Add_Stadium from './Controlere/Crud_Stadiums/Add_Stadium'
@@ -50,6 +51,9 @@ root.render(
       <Route path="/tostaff" element={<Staff />} />
       <Route path="/update_staff" element={<Update_Staff />} />
       <Route path="/add_staff" element={<Add_Staff />} />
+
+       {/* Ruta pentru pagina de Contracte */}
+       <Route path="/tocontract" element={<Contract />} />
 
     </Routes>
   </Router>

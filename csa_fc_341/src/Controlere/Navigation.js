@@ -40,6 +40,12 @@ function Navigation() {
                   
                 </NavLink>
               </li>
+              <li className="nav-item">
+                <NavLink className="nav-link" to="/tocontract">
+                  Contracte
+                  
+                </NavLink>
+              </li>
               
             </ul>
           </div>

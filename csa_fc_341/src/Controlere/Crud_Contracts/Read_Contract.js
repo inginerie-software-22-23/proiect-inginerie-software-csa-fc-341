@@ -42,9 +42,9 @@ const useSortableData = (items, config = null) => {
   };
 
 
-function Read_Staffs(){
+function Read_Contracts(){
 
-  const docRef = doc(db, "staff", "id");
+  const docRef = doc(db, "contract", "id");
 
 deleteDoc(docRef)
 .then(() => {
@@ -55,22 +55,22 @@ deleteDoc(docRef)
 })
   function update(x){
     
-    localStorage.setItem('staff_id',x)
+    localStorage.setItem('contract_id',x)
   }
   function onDelete(id) {
-    deleteDoc(doc(db, "staff", id));
+    deleteDoc(doc(db, "contract", id));
     window.location.reload();
 }
 
-  function add_staff(){
+  function add_contract(){
     
-    window.open('http://localhost:3000/add_staff','_parent','Add a staff member',param);
+    window.open('http://localhost:3000/add_contract','_parent','Add a contract',param);
     
   }
-  const [staffs, setStaffs] = useState([]);
+  const [contracts, setContracts] = useState([]);
   
-  const fetchStaffs = async()=>{
-    let response=collection(db, 'staff');
+  const fetchContracts = async()=>{
+    let response=collection(db, 'contract');
     let data =await getDocs(response).then((querySnapshot) => {
 
       querySnapshot.forEach(element => {
@@ -81,30 +81,30 @@ deleteDoc(docRef)
           
 
           //console.log(date);
-          setStaffs(arr => [...arr , date]);  
+          setContracts(arr => [...arr , date]);  
       });
   });
   }
 
     useEffect(()=>{
-      fetchStaffs();
+      fetchContracts();
 
     },[])
     
-    const { items, requestSort, sortConfig } = useSortableData(staffs);
-    const getClassNamesFor = (nume) => {
+    const { items, requestSort, sortConfig } = useSortableData(contracts);
+    const getClassNamesFor = (impresar) => {
         if (!sortConfig) {
             return;
         }
-        return sortConfig.key === nume ? sortConfig.direction : undefined;
+        return sortConfig.key === impresar ? sortConfig.direction : undefined;
         };
 
 //console.log(stadioane)
     return(
       <body>
         <div>
-          <Button type="button" className="bt4" onClick={()=>add_staff()}>
-              Add a staff member
+          <Button type="button" className="bt4" onClick={()=>add_contract()}>
+              Add a contract
           </Button>
 
         <Table singleLine className='tabel'>
@@ -114,34 +114,34 @@ deleteDoc(docRef)
             
                 <Table.HeaderCell className='titlu'><button
       type="button"
-      onClick={() => requestSort('nume')}
-      className={getClassNamesFor('nume')}
-    >Nume</button></Table.HeaderCell>
+      onClick={() => requestSort('data_inceput')}
+      className={getClassNamesFor('data_inceput')}
+    >Data semnare</button></Table.HeaderCell>
                 <Table.HeaderCell className='titlu'><button
       type="button"
-      onClick={() => requestSort('prenume')}
-      className={getClassNamesFor('prenume')}
-    >Prenume</button></Table.HeaderCell>
+      onClick={() => requestSort('data_final')}
+      className={getClassNamesFor('data_final')}
+    >Data expirare</button></Table.HeaderCell>
                 <Table.HeaderCell className='titlu'><button
       type="button"
-      onClick={() => requestSort('data_nastere')}
-      className={getClassNamesFor('data_nastere')}
-    >Data nastere</button></Table.HeaderCell>
+      onClick={() => requestSort('impresar')}
+      className={getClassNamesFor('impresar')}
+    >Impresar</button></Table.HeaderCell>
                 <Table.HeaderCell className='titlu'><button
       type="button"
-      onClick={() => requestSort('rol')}
-      className={getClassNamesFor('rol')}
-    >Rol</button></Table.HeaderCell>
+      onClick={() => requestSort('salariu')}
+      className={getClassNamesFor('salariu')}
+    >Salariu</button></Table.HeaderCell>
                 <Table.HeaderCell className='titlu'><button
       type="button"
-      onClick={() => requestSort('email')}
-      className={getClassNamesFor('email')}
-    >Email</button></Table.HeaderCell>
-                <Table.HeaderCell className='titlu'><button
+      onClick={() => requestSort('bonusuri')}
+      className={getClassNamesFor('bonusuri')}
+    >Bonusuri</button></Table.HeaderCell>
+                {/* <Table.HeaderCell className='titlu'><button
       type="button"
-      onClick={() => requestSort('telefon')}
-      className={getClassNamesFor('telefon')}
-    >Telefon</button></Table.HeaderCell>
+      onClick={() => requestSort('id_persoana')}
+      className={getClassNamesFor('id_persoana')}
+    >Id persoana</button></Table.HeaderCell> */}
     <Table.HeaderCell className='titlu'></Table.HeaderCell> 
     <Table.HeaderCell className='titlu'></Table.HeaderCell>              
                 
@@ -153,18 +153,19 @@ deleteDoc(docRef)
         
         {items.map((data) =>  {
 return (
-<Table.Row key = {data.nume}>
+<Table.Row key = {data.impresar}>
 
-<Table.Cell >{data.nume}</Table.Cell>
-          <Table.Cell >{data.prenume}</Table.Cell>
-          <Table.Cell >{data.data_nastere}</Table.Cell>
-          <Table.Cell >{data.rol}</Table.Cell>
-          <Table.Cell >{data.email}</Table.Cell>
-          <Table.Cell >{data.telefon}</Table.Cell>
+
+          <Table.Cell >{data.data_inceput}</Table.Cell>
+          <Table.Cell >{data.data_final}</Table.Cell>
+          <Table.Cell >{data.impresar}</Table.Cell>
+          <Table.Cell >{data.salariu}</Table.Cell>
+          <Table.Cell >{data.bonusuri}</Table.Cell>
+          {/* <Table.Cell >{data.id_persoana}</Table.Cell> */}
           <Table.Cell>
         <Button onClick={() =>onDelete(data.id)}>Delete</Button>
         </Table.Cell> 
-        <Link to='/update_staff'>
+        <Link to='/update_contract'>
           <Table.Cell> 
         <Button onClick={() =>update(data.id)}>Update</Button>
         </Table.Cell>
@@ -180,4 +181,4 @@ return (
     );
 }
 
-export default Read_Staffs;
+export default Read_Contracts;
