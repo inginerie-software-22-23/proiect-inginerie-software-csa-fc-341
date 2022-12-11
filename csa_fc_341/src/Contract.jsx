@@ -8,8 +8,10 @@ export function Contract() {
     <div className="main">
 
         
-    <h2 className="main-header">Lista contracte</h2>
-
+    <div className="container_coperta">
+        <img src="https://www.freewebheaders.com/wp-content/gallery/office-finance/currency-bank-notes-and-coins-website-header.jpg" id="poza_coperta"/>
+         <div className="centered"> &#x2605;    LISTA CONTRACTE    &#x2605; </div>
+      </div>   
    
     <div className="pls">
        <Read_Contract/>

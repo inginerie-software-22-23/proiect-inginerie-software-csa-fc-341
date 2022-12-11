@@ -103,7 +103,8 @@ deleteDoc(docRef)
     return(
       <body>
         <div>
-          <Button type="button" className="bt4" onClick={()=>add_stadium()}>
+       
+          <Button type="button" className="bt4" id="butonAdd" onClick={()=>add_stadium()}>
               Add a stadium
           </Button>
 

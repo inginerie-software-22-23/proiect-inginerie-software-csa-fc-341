@@ -103,7 +103,7 @@ deleteDoc(docRef)
     return(
       <body>
         <div>
-          <Button type="button" className="bt4" onClick={()=>add_staff()}>
+          <Button type="button" className="bt4" id="butonAdd" onClick={()=>add_staff()}>
               Add a staff member
           </Button>
 

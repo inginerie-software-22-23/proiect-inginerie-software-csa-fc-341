@@ -99,7 +99,7 @@ deleteDoc(docRef)
     return(
       <body>
         <div>
-          <Button type="button" className="bt4" onClick={()=>add_match()}>
+          <Button type="button" className="bt4" id="butonAdd" onClick={()=>add_match()}>
               Adauga un nou meci
           </Button>
 

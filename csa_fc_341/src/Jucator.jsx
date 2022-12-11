@@ -6,7 +6,11 @@ export function Jucator() {
     <div className="main">
 
         
-    <h2 className="main-header">Players List</h2>
+          
+      <div className="container_coperta">
+        <img src="https://www.freewebheaders.com/wp-content/gallery/football//world-cup-goal-keeper-sport-website-header.jpg" id="poza_coperta"/>
+         <div className="centered"> &#x2605;    LISTA JUCATORI    &#x2605; </div>
+      </div>  
 
    
     <div className="pls">
