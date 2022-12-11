@@ -6,9 +6,12 @@ import {Stadion} from './Stadion';
 import {Meci} from './Meci';
 import {Jucator} from './Jucator';
 import {Weather} from './Weather';
+import { Staff } from './Staff';
 import Update_Stadium from './Controlere/Crud_Stadiums/Update_Stadium';
+import Update_Staff from './Controlere/Crud_Staffs/Update_Staff';
 import Add_Stadium from './Controlere/Crud_Stadiums/Add_Stadium'
 import Add_Player from './Controlere/Crud_Players/Add_Player'
+import Add_Staff from './Controlere/Crud_Staffs/Add_Staff'
 // import Update_Match from './Controlere/Crud_Matches/Update_Match';
 // import Add_Match from './Controlere/Crud_Matches/Add_Match'
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
@@ -42,6 +45,11 @@ root.render(
       <Route path="/update_player" element={<Update_Player />} />
       <Route path="/add_player" element={<Add_Player />} />
 
+
+        {/* Ruta pentru pagina de Staff */}
+      <Route path="/tostaff" element={<Staff />} />
+      <Route path="/update_staff" element={<Update_Staff />} />
+      <Route path="/add_staff" element={<Add_Staff />} />
 
     </Routes>
   </Router>
