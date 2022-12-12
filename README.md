@@ -16,15 +16,15 @@ Squad Manager, dupa cum sugereaza si denumirea, preia din atributiile managerulu
 
 ## Echipa
 
-Avian Silviu Gabriel
+[Avian Silviu Gabriel](https://github.com/Silviu1409)
 
-Dijmarescu Cristina Maria
+[Dijmarescu Cristina Maria](https://github.com/crisdijma)
 
-Haiducu Stefan 
+[Haiducu Stefan](https://github.com/TakenUser123)
 
-Ioan Tudor Alexandru 
+[Ioan Tudor Alexandru](https://github.com/tudorioan20) 
 
-Ionescu Alexandru 
+[Ionescu Alexandru](https://github.com/aionescu01)
 
-Stan Ana Maria
+[Stan Ana Maria](https://github.com/yanastany)
 
