@@ -1,188 +1,71 @@
-import { getFirestore, collection, getDocs, query, where } from "firebase/firestore";
-import { Table,Button } from 'semantic-ui-react'
-import { Link } from 'react-router-dom';
-import "../Stil.css";
+import React, {useState} from 'react'
+import { Button, Checkbox, Form } from 'semantic-ui-react'
+import { getFirestore, collection, getDocs, query, where, waitForPendingWrites } from "firebase/firestore";
+import { addDoc } from "firebase/firestore"; 
 import {app} from '../../DatabaseConnection';
-import { doc, deleteDoc } from "firebase/firestore";
-import React,{useState,useEffect} from 'react';
+import { wait } from '@testing-library/user-event/dist/utils';
+
 const db = getFirestore(app);
-let param ="width=500,height=500";
-const useSortableData = (items, config = null) => {
-    const [sortConfig, setSortConfig] = React.useState(config);
-  
-    const sortedItems = React.useMemo(() => {
-      let sortableItems = [...items];
-      if (sortConfig !== null) {
-        sortableItems.sort((a, b) => {
-          if (a[sortConfig.key] < b[sortConfig.key]) {
-            return sortConfig.direction === 'ascending' ? -1 : 1;
-          }
-          if (a[sortConfig.key] > b[sortConfig.key]) {
-            return sortConfig.direction === 'ascending' ? 1 : -1;
-          }
-          return 0;
-        });
-      }
-      return sortableItems;
-    }, [items, sortConfig]);
-  
-    const requestSort = (key) => {
-      let direction = 'ascending';
-      if (
-        sortConfig &&
-        sortConfig.key === key &&
-        sortConfig.direction === 'ascending'
-      ) {
-        direction = 'descending';
-      }
-      setSortConfig({ key, direction });
-    };
-    //console.log(sortedItems)
-    return { items: sortedItems, requestSort, sortConfig };
-  };
+export default function Create_Staff() {
+    const [nume, setnume] = useState('');
+    const [prenume, setprenume] = useState('');
+    const [data_nastere, setdata_nastere] = useState('');
+    const [pozitie, setpozitie] = useState('');
+    const [picior, setpicior] = useState('');
+    const [nationalitate, setnationalitate] = useState('');
+    const [inaltime, setinaltime] = useState(0);
 
-
-function Read_Matches(){
-
-  const docRef = doc(db, "meci", "id");
-
-deleteDoc(docRef)
-.then(() => {
-    //console.log("Entire Document has been deleted successfully.")
-})
-.catch(error => {
-    console.log(error);
-})
-  function update(x){
-    
-    localStorage.setItem('match_id',x)
-  }
-  function onDelete(id) {
-    deleteDoc(doc(db, "meci", id));
-    window.location.reload();
-}
-
-  function add_match(){
-    
-    window.open('http://localhost:3000/add_match','_parent','Add a match',param);
-    
-  }
-  const [meciuri, setMeciuri] = useState([]);
-  
-  const fetchMeciuri = async()=>{
-    let response=collection(db, 'meci');
-    let data =await getDocs(response).then((querySnapshot) => {
-
-      querySnapshot.forEach(element => {
-
-          var date = element.data();
-          date.id = element.id;
-
-          setMeciuri(arr => [...arr , date]);  
-      });
-  });
-  }
-
-    useEffect(()=>{
-      fetchMeciuri();
-
-    },[])
-    
-    const { items, requestSort, sortConfig } = useSortableData(meciuri);
-    const getClassNamesFor = (adversar) => {
-        if (!sortConfig) {
-            return;
-        }
-        return sortConfig.key === adversar ? sortConfig.direction : undefined;
-        };
-
-    return(
-      <body>
-        <div>
-          <Button type="button" className="bt4" onClick={()=>add_match()}>
-              Adauga un nou meci
-          </Button>
-
-        <Table singleLine className='tabel'>
-        <Table.Header className='tt1'>
-            <Table.Row>
-            
-            
-                <Table.HeaderCell className='titlu'><button
-      type="button"
-      onClick={() => requestSort('adversar')}
-      className={getClassNamesFor('adversar')}
-    >Adversar</button></Table.HeaderCell>
-                <Table.HeaderCell className='titlu'><button
-      type="button"
-      onClick={() => requestSort('arbitru')}
-      className={getClassNamesFor('arbitru')}
-    >Arbitru</button></Table.HeaderCell>
-                <Table.HeaderCell className='titlu'><button
-      type="button"
-      onClick={() => requestSort('competitie')}
-      className={getClassNamesFor('competitie')}
-    >Competitie</button></Table.HeaderCell>
-                <Table.HeaderCell className='titlu'><button
-      type="button"
-      onClick={() => requestSort('data')}
-      className={getClassNamesFor('data')}
-    >Data</button></Table.HeaderCell>
-                <Table.HeaderCell className='titlu'><button
-      type="button"
-      onClick={() => requestSort('scor')}
-      className={getClassNamesFor('scor')}
-    >Scor</button></Table.HeaderCell>
-                {/* <Table.HeaderCell className='titlu'><button
-      type="button"
-      onClick={() => requestSort('id_stadion')}
-      className={getClassNamesFor('id_stadion')}
-    >Id Stadion</button></Table.HeaderCell> */}
-                {/* <Table.HeaderCell className='titlu'><button
-      type="button"
-      onClick={() => requestSort('lista_jucatori')}
-      className={getClassNamesFor('lista_jucatori')}
-    >Lista jucatori</button></Table.HeaderCell> */}
-    <Table.HeaderCell className='titlu'></Table.HeaderCell> 
-    <Table.HeaderCell className='titlu'></Table.HeaderCell>              
-                
-
-            </Table.Row>
-        </Table.Header>
-
-        <Table.Body>
+    async function add_player(event) {
         
-        {items.map((data) =>  {
-return (
-<Table.Row key = {data.adversar}>
+        //setWait(true)
+        var a = await addDoc(collection(db, "jucator"), {
+            nume: nume,
+            prenume: prenume,
+            data_nastere: data_nastere,
+            pozitie: pozitie,
+            picior: picior,
+            nationalitate: nationalitate,
+            inaltime: inaltime
+          }).then(
+          alert(`The player you added is: ${nume}`));
+          await Promise.all([a]);
+          window.location.href = "http://localhost:3000/tojucator";
+    }
 
-<Table.Cell >{data.adversar}</Table.Cell>
-<Table.Cell >{data.arbitru}</Table.Cell>
-<Table.Cell >{data.competitie}</Table.Cell>
-<Table.Cell >{data.data}</Table.Cell>
-<Table.Cell >{data.scor}</Table.Cell>
-{/* <Table.Cell >{data.id_stadion}</Table.Cell> */}
-{/* <Table.Cell >{data.lista_jucatori}</Table.Cell>  */}
 
- <Table.Cell>
-        <Button onClick={() =>onDelete(data.id)}>Delete</Button>
-</Table.Cell> 
-
- <Link to='/update_match'>
-    <Table.Cell> 
-        <Button onClick={() =>update(data.id)}>Update</Button>
-    </Table.Cell>
-</Link> 
-      
-
-</Table.Row>
-)})
-
-  }  </Table.Body>
-    </Table>
-    </div>
-    </body>
-    );
+    return (
+    
+        <Form className="create-form1">
+        <h2 className="bt2">Add a player</h2>
+        <Form.Field>
+            <label className='scris'>Nume</label>
+            <input className='raspuns' placeholder='Nume' onChange={(e) => setnume(e.target.value)} />
+        </Form.Field>
+        <Form.Field>
+            <label className='scris'>Prenume</label>
+            <input className='raspuns' placeholder='Prenume' onChange={(e) => setprenume(e.target.value)} />
+        </Form.Field>
+        <Form.Field>
+            <label className='scris'>Data nastere</label>
+            <input className='raspuns' placeholder='Data nastere' onChange={(e) => setdata_nastere(e.target.value)} />
+        </Form.Field>
+        <Form.Field>
+            <label className='scris'>Pozitie</label>
+            <input className='raspuns' placeholder='Pozitie' onChange={(e) => setpozitie(e.target.value)}/>
+        </Form.Field>
+        <Form.Field>
+            <label className='scris'>Picior</label>
+            <input className='raspuns' placeholder='Picior' onChange={(e) => setpicior(e.target.value)}/>
+        </Form.Field>
+        <Form.Field>
+            <label className='scris'>Nationalitate</label>
+            <input className='raspuns' placeholder='Nationalitate' onChange={(e) => setnationalitate(e.target.value)}/>
+        </Form.Field>
+        <Form.Field>
+            <label className='scris'>Inaltime</label>
+            <input className='raspuns' placeholder='Inaltime' onChange={(e) => setinaltime(e.target.value)}/>
+        </Form.Field>
+        <Button className='bt2' onClick={add_player} type = 'submit'>Submit</Button>
+    </Form>
+)
 }
-
-export default Read_Matches;

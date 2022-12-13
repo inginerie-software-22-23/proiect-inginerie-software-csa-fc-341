@@ -13,8 +13,10 @@ import Update_Staff from './Controlere/Crud_Staffs/Update_Staff';
 import Add_Stadium from './Controlere/Crud_Stadiums/Add_Stadium'
 import Add_Player from './Controlere/Crud_Players/Add_Player'
 import Add_Staff from './Controlere/Crud_Staffs/Add_Staff'
-// import Update_Match from './Controlere/Crud_Matches/Update_Match';
-// import Add_Match from './Controlere/Crud_Matches/Add_Match'
+import Add_Match from './Controlere/Crud_Matches/Add_Match'
+import Add_Contract from './Controlere/Crud_Contracts/Add_Contract'
+import Update_Match from './Controlere/Crud_Matches/Update_Match';
+import Update_Contract from './Controlere/Crud_Contracts/Update_Contract'
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Navigation  from "./Controlere/Navigation";
 import Home from "./Controlere/Home";
@@ -37,8 +39,8 @@ root.render(
 
       {/* Ruta pentru pagina de Meciuri */}
       <Route path="/tomeci" element={<Meci />} />
-      {/* <Route path="/update_match" element={<Update_Match />} />
-      <Route path="/add_match" element={<Add_Match />} /> */}
+      <Route path="/update_match" element={<Update_Match />} />
+      <Route path="/add_match" element={<Add_Match />} /> 
 
 
       {/* Ruta pentru pagina de Jucatori */}
@@ -54,6 +56,8 @@ root.render(
 
        {/* Ruta pentru pagina de Contracte */}
        <Route path="/tocontract" element={<Contract />} />
+       <Route path="/update_contract" element={<Update_Contract />} />
+      <Route path="/add_contract" element={<Add_Contract />} />
 
     </Routes>
   </Router>
