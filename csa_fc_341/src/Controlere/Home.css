@@ -47,3 +47,29 @@
   ol li::marker{
     content: "⚽";
   }
+
+  .divStats{
+    margin: 7% 5.5% 4% 5.5%;
+  }
+
+  .divStats > div{
+    padding: 2%;
+    box-shadow: -2px -2px 20px 2px #2C698D, 2px 2px 20px 2px #272643;
+    width: 30%;
+  }
+
+  .divStatsExtra{
+    margin: 0% 5.5% 4% 5.5%;
+  }
+
+  .divStatsExtra > div{
+    padding: 2%;
+    box-shadow: -2px -2px 20px 2px #2C698D, 2px 2px 20px 2px #272643;
+    width: 100%;
+    font-size: 75%;
+  }
+  
+  .divStatsExtra > div > ol > li > h1{
+    color: #272643;
+    font-family: "Monaco", monospace;
+  }

@@ -46,6 +46,12 @@ function Navigation() {
                   
                 </NavLink>
               </li>
+              <li className="nav-item">
+                <NavLink className="nav-link" to="/tostatistics">
+                  Statistici
+                  
+                </NavLink>
+              </li>
               
             </ul>
           </div>
