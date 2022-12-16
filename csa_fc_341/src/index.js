@@ -8,6 +8,7 @@ import {Jucator} from './Jucator';
 import {Weather} from './Weather';
 import { Staff } from './Staff';
 import {Contract} from './Contract';
+import {Statistics} from './Statistics';
 import Update_Stadium from './Controlere/Crud_Stadiums/Update_Stadium';
 import Update_Staff from './Controlere/Crud_Staffs/Update_Staff';
 import Add_Stadium from './Controlere/Crud_Stadiums/Add_Stadium'
@@ -40,7 +41,7 @@ root.render(
       {/* Ruta pentru pagina de Meciuri */}
       <Route path="/tomeci" element={<Meci />} />
       <Route path="/update_match" element={<Update_Match />} />
-      <Route path="/add_match" element={<Add_Match />} /> 
+      <Route path="/add_match" element={<Add_Match />} />
 
 
       {/* Ruta pentru pagina de Jucatori */}
@@ -58,6 +59,9 @@ root.render(
        <Route path="/tocontract" element={<Contract />} />
        <Route path="/update_contract" element={<Update_Contract />} />
       <Route path="/add_contract" element={<Add_Contract />} />
+
+      {/* Ruta pentru pagina de Statistici */}
+      <Route path="/tostatistics" element={<Statistics />} />
 
     </Routes>
   </Router>
