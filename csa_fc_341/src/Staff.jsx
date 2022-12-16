@@ -10,7 +10,7 @@ export function Staff() {
         
       <div className="container_coperta">
         <img src="https://www.freewebheaders.com/wp-content/gallery/office-finance/business-legal-services-website-header.jpg" id="poza_coperta"/>
-         <div className="centered"> &#x2605;    MEMBRI STAFF    &#x2605; </div>
+         <div className="centered"> &#x2605;    MEMBRII STAFF    &#x2605; </div>
       </div>        
 
    
