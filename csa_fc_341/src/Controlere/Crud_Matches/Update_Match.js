@@ -1,11 +1,10 @@
 import React, { useState,useEffect } from 'react';
-import { Button, Checkbox, Form } from 'semantic-ui-react'
-import axios from 'axios';
-import { useNavigate } from "react-router-dom";
+import { Button, Form } from 'semantic-ui-react';
 import {app} from '../../DatabaseConnection';
-import { getFirestore, collection, getDocs, query, where } from "firebase/firestore";
+import { getFirestore } from "firebase/firestore";
 import { doc, getDoc, updateDoc } from "firebase/firestore";
-import { Jucator } from '../../Jucator';
+
+
 const db = getFirestore(app);
 var date ;
 
@@ -19,23 +18,18 @@ export default function Update_Match() {
     
     var id = localStorage.getItem('match_id')
     console.log(id);
-    const bebe=()=>{
 
-    
+    const bebe = () => {
+        getDoc(doc(db, "meci", id)).then(docSnap =>{
+            date = docSnap.data();
 
-    getDoc(doc(db, "meci", id)).then(docSnap =>{
-       
-    date = docSnap.data(); 
-        setmatchid(date.id);
-        setadversar(date.adversar);
-        setarbitru(date.arbitru);
-        setcompetitie(date.competitie);
-        setdata(date.data);
-        setscor(date.scor);
-        
-    }
-    );
-    
+            setmatchid(date.id);
+            setadversar(date.adversar);
+            setarbitru(date.arbitru);
+            setcompetitie(date.competitie);
+            setdata(date.data);
+            setscor(date.scor); 
+        });
     }
     
 

@@ -1,12 +1,15 @@
-import { getFirestore, collection, getDocs, query, where } from "firebase/firestore";
+import { getFirestore, collection, getDocs } from "firebase/firestore";
 import { Table,Button } from 'semantic-ui-react'
 import { Link } from 'react-router-dom';
 import "../Stil.css";
 import {app} from '../../DatabaseConnection';
 import { doc, deleteDoc } from "firebase/firestore";
 import React,{useState,useEffect} from 'react';
+
+
 const db = getFirestore(app);
 let param ="width=500,height=500";
+
 const useSortableData = (items, config = null) => {
     const [sortConfig, setSortConfig] = React.useState(config);
   
@@ -71,7 +74,7 @@ deleteDoc(docRef)
   
   const fetchStadioane = async()=>{
     let response=collection(db, 'stadion');
-    let data =await getDocs(response).then((querySnapshot) => {
+    await getDocs(response).then((querySnapshot) => {
 
       querySnapshot.forEach(element => {
         //console.log(element.id);

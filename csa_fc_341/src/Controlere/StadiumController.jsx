@@ -1,6 +1,6 @@
 import { getFirestore, collection, getDocs, query, where } from "firebase/firestore";
 import { app } from "../DatabaseConnection"
-//import { Stadion } from "../Clase/Stadion"
+
 
 const db = getFirestore(app);
 

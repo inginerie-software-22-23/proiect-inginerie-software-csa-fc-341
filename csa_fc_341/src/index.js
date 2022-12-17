@@ -1,27 +1,32 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+import {BrowserRouter as Router, Route, Routes} from "react-router-dom";
+
 import './index.css';
-import App from './App';
+
 import {Stadion} from './Stadion';
 import {Meci} from './Meci';
 import {Jucator} from './Jucator';
 import {Weather} from './Weather';
-import { Staff } from './Staff';
+import {Staff} from './Staff';
 import {Contract} from './Contract';
 import {Statistics} from './Statistics';
-import Update_Stadium from './Controlere/Crud_Stadiums/Update_Stadium';
-import Update_Staff from './Controlere/Crud_Staffs/Update_Staff';
+
 import Add_Stadium from './Controlere/Crud_Stadiums/Add_Stadium'
 import Add_Player from './Controlere/Crud_Players/Add_Player'
 import Add_Staff from './Controlere/Crud_Staffs/Add_Staff'
 import Add_Match from './Controlere/Crud_Matches/Add_Match'
 import Add_Contract from './Controlere/Crud_Contracts/Add_Contract'
+
 import Update_Match from './Controlere/Crud_Matches/Update_Match';
 import Update_Contract from './Controlere/Crud_Contracts/Update_Contract'
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import Update_Stadium from './Controlere/Crud_Stadiums/Update_Stadium';
+import Update_Staff from './Controlere/Crud_Staffs/Update_Staff';
+import Update_Player from './Controlere/Crud_Players/Update_Player';
+
 import Navigation  from "./Controlere/Navigation";
 import Home from "./Controlere/Home";
-import Update_Player from './Controlere/Crud_Players/Update_Player';
+
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 

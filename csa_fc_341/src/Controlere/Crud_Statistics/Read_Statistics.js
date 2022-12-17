@@ -7,6 +7,7 @@ import Chart_Pozitie from "./Chart_Pozitie";
 import Chart_Varsta from "./Chart_Varsta";
 import '../Home.css';
 
+
 const db = getFirestore(app);
 let response = collection(db, 'jucator');
 
@@ -96,7 +97,7 @@ function Read_Statistics(){
   useEffect(() =>{
     fetchJucatori();
     if(localStorage.getItem("reloadedPage") === null){
-      setTimeout("window.location.reload()", 100);
+      setTimeout(window.location.reload(), 100);
       localStorage.setItem("reloadedPage", true);
     } else {
       localStorage.removeItem("reloadedPage");

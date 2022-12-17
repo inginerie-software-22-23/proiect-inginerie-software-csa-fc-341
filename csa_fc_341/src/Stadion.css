@@ -2,11 +2,8 @@
 .container_coperta {
   position: relative;
   padding-top: 4%;
-  /* padding-bottom: 7%; */
   text-align: center;
   color: #272643;
-
- 
 }
 
 /* Cover photo */
@@ -32,5 +29,4 @@
   border-radius: 20px;
   border-style: groove;
   box-shadow: #2C698D 0 20px 26px;
-
 }

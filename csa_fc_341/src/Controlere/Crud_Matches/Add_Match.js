@@ -1,11 +1,12 @@
 import React, {useState} from 'react'
-import { Button, Checkbox, Form } from 'semantic-ui-react'
-import { getFirestore, collection, getDocs, query, where, waitForPendingWrites } from "firebase/firestore";
+import { Button, Form } from 'semantic-ui-react'
+import { getFirestore, collection } from "firebase/firestore";
 import { addDoc } from "firebase/firestore"; 
 import {app} from '../../DatabaseConnection';
-import { wait } from '@testing-library/user-event/dist/utils';
+
 
 const db = getFirestore(app);
+
 export default function Create_Match() {
     const [adversar, setadversar] = useState('');
     const [arbitru, setarbitru] = useState('');
@@ -32,32 +33,32 @@ export default function Create_Match() {
           window.location.href = "http://localhost:3000/tomeci";
     }
 
-
     return (
-    
         <Form className="create-form1">
-        <h2 className="bt2">Add a match</h2>
-        <Form.Field>
-            <label className='scris'>Adversar</label>
-            <input className='raspuns' placeholder='Adverar' onChange={(e) => setadversar(e.target.value)} />
-        </Form.Field>
-        <Form.Field>
-            <label className='scris'>Arbitru</label>
-            <input className='raspuns' placeholder='Arbitru' onChange={(e) => setarbitru(e.target.value)} />
-        </Form.Field>
-        <Form.Field>
-            <label className='scris'>Competitie</label>
-            <input className='raspuns' placeholder='Competitie' onChange={(e) => setcompetitie(e.target.value)} />
-        </Form.Field>
-        <Form.Field>
-            <label className='scris'>Data</label>
-            <input className='raspuns' placeholder='Data' onChange={(e) => setdata(e.target.value)}/>
-        </Form.Field>
-        <Form.Field>
-            <label className='scris'>Scor</label>
-            <input className='raspuns' placeholder='Scor' onChange={(e) => setscor(e.target.value)}/>
-        </Form.Field>
-        <Button className='bt2' onClick={add_match} type = 'submit'>Submit</Button>
-    </Form>
-)
+            <h2 className="bt2">Add a match</h2>
+            
+            <Form.Field>
+                <label className='scris'>Adversar</label>
+                <input className='raspuns' placeholder='Adverar' onChange={(e) => setadversar(e.target.value)} />
+            </Form.Field>
+            <Form.Field>
+                <label className='scris'>Arbitru</label>
+                <input className='raspuns' placeholder='Arbitru' onChange={(e) => setarbitru(e.target.value)} />
+            </Form.Field>
+            <Form.Field>
+                <label className='scris'>Competitie</label>
+                <input className='raspuns' placeholder='Competitie' onChange={(e) => setcompetitie(e.target.value)} />
+            </Form.Field>
+            <Form.Field>
+                <label className='scris'>Data</label>
+                <input className='raspuns' placeholder='Data' onChange={(e) => setdata(e.target.value)}/>
+            </Form.Field>
+            <Form.Field>
+                <label className='scris'>Scor</label>
+                <input className='raspuns' placeholder='Scor' onChange={(e) => setscor(e.target.value)}/>
+            </Form.Field>
+            
+            <Button className='bt2' onClick={add_match} type = 'submit'>Submit</Button>
+        </Form>
+    )
 }

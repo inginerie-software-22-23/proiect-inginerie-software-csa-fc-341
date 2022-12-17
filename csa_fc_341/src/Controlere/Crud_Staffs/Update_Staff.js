@@ -1,12 +1,12 @@
 import React, { useState,useEffect } from 'react';
-import { Button, Checkbox, Form } from 'semantic-ui-react'
-import axios from 'axios';
-import { useNavigate } from "react-router-dom";
+import { Button, Form } from 'semantic-ui-react';
 import {app} from '../../DatabaseConnection';
-import { getFirestore, collection, getDocs, query, where } from "firebase/firestore";
+import { getFirestore } from "firebase/firestore";
 import { doc, getDoc, updateDoc } from "firebase/firestore";
+
+
 const db = getFirestore(app);
-var date ;
+var date;
 
 export default function Update_Stadium() {
     const [staffId, setstaffid] = useState();
