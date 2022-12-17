@@ -31,7 +31,7 @@ export default function Update_Contract() {
         });
     }
     
-    useEffect(()=> {bebe()},[])
+    useEffect(()=> {bebe()})
     
     const handleSubmit = (event) => {
         

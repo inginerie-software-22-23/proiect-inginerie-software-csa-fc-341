@@ -37,7 +37,7 @@ export default function Update_Stadium() {
     }
     
 
-    useEffect(()=> {bebe()},[])
+    useEffect(()=> {bebe()})
     
     const handleSubmit = (event) => {
         

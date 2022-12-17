@@ -33,7 +33,7 @@ export default function Update_Match() {
     }
     
 
-    useEffect(()=> {bebe()},[])
+    useEffect(()=> {bebe()})
     
     const handleSubmit = (event) => {
         

@@ -7,7 +7,7 @@ export function Contract() {
     <div className="main">
 
       <div className="container_coperta">
-        <img src="https://www.freewebheaders.com/wp-content/gallery/office-finance/currency-bank-notes-and-coins-website-header.jpg" id="poza_coperta"/>
+        <img src="https://www.freewebheaders.com/wp-content/gallery/office-finance/currency-bank-notes-and-coins-website-header.jpg" alt="poza contracte" id="poza_coperta"/>
         <div className="centered"> &#x2605;    LISTA CONTRACTE    &#x2605; </div>
       </div>   
    

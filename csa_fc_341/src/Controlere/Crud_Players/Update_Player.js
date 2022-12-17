@@ -37,7 +37,7 @@ export default function Update_Player() {
     }
     
 
-    useEffect(()=> {bebe()},[])
+    useEffect(()=> {bebe()})
     
     const handleSubmit = (event) => {
         
