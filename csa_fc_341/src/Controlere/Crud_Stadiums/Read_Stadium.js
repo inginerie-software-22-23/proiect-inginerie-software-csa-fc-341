@@ -104,7 +104,6 @@ deleteDoc(docRef)
 
 //console.log(stadioane)
     return(
-      <body>
         <div>
        
           <Button type="button" className="bt4" id="butonAdd" onClick={()=>add_stadium()}>
@@ -156,11 +155,13 @@ return (
           <Table.Cell>
         <Button onClick={() =>onDelete(data.id)}>Delete</Button>
         </Table.Cell> 
-        <Link to='/update_stadium'>
+        
           <Table.Cell> 
+          <Link to='/update_stadium'>
         <Button onClick={() =>update(data.id)}>Update</Button>
-        </Table.Cell>
         </Link>
+        </Table.Cell>
+        
       
 
 </Table.Row>
@@ -168,7 +169,6 @@ return (
         </Table.Body>
     </Table>
     </div>
-    </body>
     );
 }
 

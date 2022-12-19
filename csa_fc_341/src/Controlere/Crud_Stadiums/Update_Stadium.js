@@ -16,7 +16,7 @@ export default function Update_Stadium() {
     const [address, setaddress] = useState();
     var id = localStorage.getItem('stadium_id')
     //console.log(id);
-    const bebe=()=>{
+    const update=()=>{
 
     getDoc(doc(db, "stadion", id)).then(docSnap =>{
        
@@ -37,7 +37,9 @@ export default function Update_Stadium() {
     }
     
 
-    useEffect(()=> {bebe()})
+    useEffect(()=>{
+        update();
+      },[])
     
     const handleSubmit = (event) => {
         

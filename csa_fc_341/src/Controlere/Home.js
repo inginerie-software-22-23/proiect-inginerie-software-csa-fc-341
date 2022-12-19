@@ -7,10 +7,10 @@ function Home(){
         <div className="home">
 
             <svg viewBox="0 0 1320 300">
-                <text x="50%" y="30%" dy=".35em" text-anchor="middle">
+                <text x="50%" y="30%" dy=".35em" textAnchor="middle">
                     SQUAD 
                 </text>
-                <text x="50%" y="80%" dy=".35em" text-anchor="middle">
+                <text x="50%" y="80%" dy=".35em" textAnchor="middle">
                     MANAGER
                 </text>
             </svg> 
@@ -27,12 +27,12 @@ function Home(){
                 <div >
                     <h1> Echipa developeri </h1>
                     <ol>
-                        <li><span class="text-wrapper">Avian Silviu</span></li>
-                        <li><span class="text-wrapper">Dijmarescu Cristina</span></li>    
-                        <li><span class="text-wrapper">Haiducu Stefan</span></li>
-                        <li><span class="text-wrapper">Ioan Tudor</span></li>    
-                        <li><span class="text-wrapper">Ionescu Alexandru</span></li>
-                        <li><span class="text-wrapper">Stan Ana</span></li>
+                        <li><span className="text-wrapper">Avian Silviu</span></li>
+                        <li><span className="text-wrapper">Dijmarescu Cristina</span></li>    
+                        <li><span className="text-wrapper">Haiducu Stefan</span></li>
+                        <li><span className="text-wrapper">Ioan Tudor</span></li>    
+                        <li><span className="text-wrapper">Ionescu Alexandru</span></li>
+                        <li><span className="text-wrapper">Stan Ana</span></li>
                     </ol>
                 </div>
             </div>

@@ -103,10 +103,8 @@ deleteDoc(docRef)
         }
         return sortConfig.key === nume ? sortConfig.direction : undefined;
         };
-
 //console.log(stadioane)
     return(
-      <body>
         <div>
           <Button type="button" className="bt4" id="butonAdd" onClick={()=>add_player()}>
               Add a player
@@ -161,9 +159,12 @@ deleteDoc(docRef)
 
         <Table.Body>
         
-        {items.map((data) =>  {
+        {
+        
+        items.map((data) =>  {
+          
 return (
-<Table.Row key = {data.nume}>
+<Table.Row key = {data.id}>
 
 <Table.Cell >{data.nume}</Table.Cell>
           <Table.Cell >{data.prenume}</Table.Cell>
@@ -175,11 +176,13 @@ return (
           <Table.Cell>
         <Button onClick={() =>onDelete(data.id)}>Delete</Button>
         </Table.Cell> 
-        <Link to='/update_player'>
-          <Table.Cell> 
+        
+          <Table.Cell>
+          <Link to='/update_player'> 
         <Button onClick={() =>update(data.id)}>Update</Button>
-        </Table.Cell>
         </Link>
+        </Table.Cell>
+        
       
 
 </Table.Row>
@@ -187,7 +190,7 @@ return (
         </Table.Body>
     </Table>
     </div>
-    </body>
+    
     );
 }
 

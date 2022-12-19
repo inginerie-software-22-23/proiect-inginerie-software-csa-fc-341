@@ -3,7 +3,7 @@ import { Table,Button } from 'semantic-ui-react'
 import { Link } from 'react-router-dom';
 import "../Stil.css";
 import {app} from '../../DatabaseConnection';
-import { doc, deleteDoc } from "firebase/firestore";
+import { doc, deleteDoc, getDoc } from "firebase/firestore";
 import React,{useState,useEffect} from 'react';
 
 
@@ -74,24 +74,70 @@ deleteDoc(docRef)
   
   const fetchContracts = async()=>{
     let response=collection(db, 'contract');
-    await getDocs(response).then((querySnapshot) => {
+    var a = getDocs(response).then((querySnapshot) => {
 
       querySnapshot.forEach(element => {
         //console.log(element.id);
           //setStadioane(arr => [...arr, "id: '"+element.id+"'"])
           var date = element.data();
           date.id = element.id;
-          
-
-          //console.log(date);
+          //date.idperso = element.id_persoana;
+          //const docSnap = await getDoc(docRef);
+          //console.log(getDoc(date.id_persoana));
           setContracts(arr => [...arr , date]);  
       });
-  });
+      
+  }).then(console.log(contracts));
+  await Promise.all([a]);
+
   }
+  // const fetchPeople = async()=>{
+  //   console.log(contracts)
+  //   contracts.forEach(element => {
+  //     console.log(element.id_persoana)
+  //   });
+  // }
+
+  // let firstPromise = () => {
+  //   return new Promise(() => {
+  //     console.log("v")
+  //     let response=collection(db, 'contract');
+  //     var a = getDocs(response).then((querySnapshot) => {
+  
+  //       querySnapshot.forEach(element => {
+  //         //console.log(element.id);
+  //           //setStadioane(arr => [...arr, "id: '"+element.id+"'"])
+  //           var date = element.data();
+  //           date.id = element.id;
+  //           //date.idperso = element.id_persoana;
+  //           //const docSnap = await getDoc(docRef);
+  //           //console.log(getDoc(date.id_persoana));
+  //           setContracts(arr => [...arr , date]);  
+  //       });
+  //   });
+  // });}
+   
+  // // Defined our second promise
+  // let secondPromise = () => {
+  //   return new Promise(() => {
+  //     console.log(contracts)
+  //   });
+  // };
+
+  // let promiseExecution = async () => {
+  //   console.log("aa")
+  //   let promise = await Promise.all([
+  //     firstPromise().then(secondPromise())
+      
+  //   ]);
+  //   console.log(promise);
+  // };
+
 
     useEffect(()=>{
       fetchContracts();
-
+      //promiseExecution()
+      
     },[])
     
     const { items, requestSort, sortConfig } = useSortableData(contracts);
@@ -104,7 +150,6 @@ deleteDoc(docRef)
 
 //console.log(stadioane)
     return(
-      <body>
         <div>
           <Button type="button" className="bt4" id="butonAdd" onClick={()=>add_contract()}>
               Add a contract
@@ -156,7 +201,7 @@ deleteDoc(docRef)
         
         {items.map((data) =>  {
 return (
-<Table.Row key = {data.impresar}>
+<Table.Row key = {data.id}>
 
 
           <Table.Cell >{data.data_inceput}</Table.Cell>
@@ -168,11 +213,13 @@ return (
           <Table.Cell>
         <Button onClick={() =>onDelete(data.id)}>Delete</Button>
         </Table.Cell> 
-        <Link to='/update_contract'>
+        
           <Table.Cell> 
+          <Link to='/update_contract'>
         <Button onClick={() =>update(data.id)}>Update</Button>
-        </Table.Cell>
         </Link>
+        </Table.Cell>
+        
       
 
 </Table.Row>
@@ -180,7 +227,6 @@ return (
         </Table.Body>
     </Table>
     </div>
-    </body>
     );
 }
 

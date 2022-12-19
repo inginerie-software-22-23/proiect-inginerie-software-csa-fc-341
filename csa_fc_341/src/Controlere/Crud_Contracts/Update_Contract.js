@@ -15,24 +15,43 @@ export default function Update_Contract() {
     const [data_inceput, setdata_inceput] = useState();
     const [data_final, setdata_final] = useState();
     const [bonusuri, setbonusuri] = useState();
+    const [idpersoana, setidpersoana] = useState();
+    const [persoana, setpersoana] = useState();
 
     var id = localStorage.getItem('contract_id')
-    console.log(id);
-    const bebe = () =>{
+    //console.log(id);
+    const update = () =>{
         getDoc(doc(db, "contract", id)).then(docSnap =>{
             date = docSnap.data();
 
+            //console.log(date)
+            setidpersoana(date.id_persoana);
             setcontractid(date.id);
             setimpresar(date.impresar);
             setsalariu(date.salariu);
             setdata_inceput(date.data_inceput);
             setdata_final(date.data_final);
             setbonusuri(date.bonusuri);
+            
         });
+        
+    }
+
+    async function get_pers() {
+        
+        //setWait(true)
+        var a = await getDoc(date.id_persoana)
+          //alert(`The contract you added is: ${data_inceput}`));
+          await Promise.all([a]);
+          //window.location.href = "http://localhost:3000/tocontract";
     }
     
-    useEffect(()=> {bebe()})
+    useEffect(()=>{
+        update();
+      },[])
     
+      
+
     const handleSubmit = (event) => {
         
         console.log(impresar)
