@@ -21,7 +21,7 @@ export default function Update_Player() {
     var id = localStorage.getItem('player_id')
     console.log(id);
 
-    const bebe = () =>{
+    const update = () =>{
 
         getDoc(doc(db, "jucator", id)).then(docSnap =>{
             date = docSnap.data(); 
@@ -37,7 +37,10 @@ export default function Update_Player() {
     }
     
 
-    useEffect(()=> {bebe()})
+
+    useEffect(()=>{
+        update();
+      },[])
     
     const handleSubmit = (event) => {
         

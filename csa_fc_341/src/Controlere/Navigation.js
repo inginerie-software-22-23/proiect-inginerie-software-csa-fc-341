@@ -12,7 +12,7 @@ function Navigation() {
           <div className="container">
 
             <div>
-              <ul className="navbar-nav ml-auto" class="menu">
+              <ul className="navbar-nav ml-auto menu">
                 <li className="nav-item">
                   <NavLink className="nav-link" to="/">
                     Home

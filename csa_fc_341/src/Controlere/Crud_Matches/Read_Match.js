@@ -100,17 +100,13 @@ deleteDoc(docRef)
         };
 
     return(
-      <body>
         <div>
           <Button type="button" className="bt4" id="butonAdd" onClick={()=>add_match()}>
               Adauga un nou meci
           </Button>
-
         <Table singleLine className='tabel'>
         <Table.Header className='tt1'>
             <Table.Row>
-            
-            
                 <Table.HeaderCell className='titlu'><button
       type="button"
       onClick={() => requestSort('adversar')}
@@ -148,17 +144,12 @@ deleteDoc(docRef)
     >Lista jucatori</button></Table.HeaderCell> */}
     <Table.HeaderCell className='titlu'></Table.HeaderCell> 
     <Table.HeaderCell className='titlu'></Table.HeaderCell>              
-                
-
             </Table.Row>
         </Table.Header>
-
         <Table.Body>
-        
-        {items.map((data) =>  {
+          {items.map((data) =>  {
 return (
 <Table.Row key = {data.adversar}>
-
 <Table.Cell >{data.adversar}</Table.Cell>
 <Table.Cell >{data.arbitru}</Table.Cell>
 <Table.Cell >{data.competitie}</Table.Cell>
@@ -166,25 +157,20 @@ return (
 <Table.Cell >{data.scor}</Table.Cell>
 {/* <Table.Cell >{data.id_stadion}</Table.Cell> */}
 {/* <Table.Cell >{data.lista_jucatori}</Table.Cell>  */}
-
  <Table.Cell>
         <Button onClick={() =>onDelete(data.id)}>Delete</Button>
 </Table.Cell> 
-
- <Link to='/update_match'>
     <Table.Cell> 
+    <Link to='/update_match'>
         <Button onClick={() =>update(data.id)}>Update</Button>
+    </Link> 
     </Table.Cell>
-</Link> 
-      
-
 </Table.Row>
 )})
 
-  }  </Table.Body>
+  }</Table.Body>
     </Table>
     </div>
-    </body>
     );
 }
 
