@@ -5,8 +5,15 @@ import "../Stil.css";
 import {app} from '../../DatabaseConnection';
 import { doc, deleteDoc } from "firebase/firestore";
 import React,{useState,useEffect} from 'react';
+import {ExportExcel} from './Export_Excel';
+
+import{exp_sorted_date_export} from './Export_Excel';
+
 const db = getFirestore(app);
 let param ="width=500,height=500";
+
+let date_tabel = [];
+
 const useSortableData = (items, config = null) => {
     const [sortConfig, setSortConfig] = React.useState(config);
   
@@ -42,13 +49,15 @@ const useSortableData = (items, config = null) => {
   };
 
 
+export let date_export = date_tabel;
+
 function Read_Stadiums(){
 
   const docRef = doc(db, "stadion", "id");
 
 deleteDoc(docRef)
 .then(() => {
-    //console.log("Entire Document has been deleted successfully.")
+    
 })
 .catch(error => {
     console.log(error);
@@ -77,6 +86,11 @@ deleteDoc(docRef)
         //console.log(element.id);
           //setStadioane(arr => [...arr, "id: '"+element.id+"'"])
           var date = element.data();
+          //nu merge die myself if i know why
+          //if(date_tabel.some(item => _.isEqual(item, date))===false){
+            date_tabel.push(date);
+          //}
+          
           date.id = element.id;
           
 
@@ -119,7 +133,7 @@ deleteDoc(docRef)
     >Name</button></Table.HeaderCell>
                 <Table.HeaderCell className='titlu'><button
       type="button"
-      onClick={() => requestSort('capacitate')}
+      onClick={() => {requestSort('capacitate');}}
       className={getClassNamesFor('capacitate')}
     >Capacity</button></Table.HeaderCell>
                 <Table.HeaderCell className='titlu'><button
@@ -163,6 +177,9 @@ return (
 )})}
         </Table.Body>
     </Table>
+
+    <ExportExcel/>
+
     </div>
     </body>
     );
