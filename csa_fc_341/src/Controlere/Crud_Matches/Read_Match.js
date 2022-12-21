@@ -57,7 +57,7 @@ deleteDoc(docRef)
     console.log(error);
 })
   function update(x){
-    
+
     localStorage.setItem('match_id',x)
   }
   function onDelete(id) {
@@ -164,6 +164,11 @@ return (
     <Link to='/update_match'>
         <Button onClick={() =>update(data.id)}>Update</Button>
     </Link> 
+    </Table.Cell>
+    <Table.Cell>
+    <Link to={`/tomeci/meci/${data.id}`} params={{id: data.id}}>
+        <Button onClick={() =>update(data.id)}>Detalii</Button>
+    </Link>
     </Table.Cell>
 </Table.Row>
 )})

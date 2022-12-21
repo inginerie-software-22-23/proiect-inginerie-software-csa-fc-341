@@ -26,6 +26,7 @@ import Update_Player from './Controlere/Crud_Players/Update_Player';
 
 import Navigation  from "./Controlere/Navigation";
 import Home from "./Controlere/Home";
+import Match from './Match';
 
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
@@ -47,6 +48,9 @@ root.render(
       <Route path="/tomeci" element={<Meci />} />
       <Route path="/update_match" element={<Update_Match />} />
       <Route path="/add_match" element={<Add_Match />} />
+
+      {/* Ruta pentru pagina fiecarui meci */}
+      <Route path="/tomeci/meci/:id" element={<Match/>}/>
 
 
       {/* Ruta pentru pagina de Jucatori */}
