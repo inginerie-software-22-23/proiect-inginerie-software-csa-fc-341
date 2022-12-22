@@ -1,10 +1,10 @@
-import { getFirestore, collection, getDocs } from "firebase/firestore";
+import { getFirestore, collection, getDocs, getDoc, doc, deleteDoc } from "firebase/firestore";
 import { Table,Button } from 'semantic-ui-react'
 import { Link } from 'react-router-dom';
 import "../Stil.css";
-import {app} from '../../DatabaseConnection';
-import { doc, deleteDoc } from "firebase/firestore";
+import {app, auth} from '../../DatabaseConnection';
 import React,{useState,useEffect} from 'react';
+import { useAuthState } from "react-firebase-hooks/auth";
 
 
 const db = getFirestore(app);
@@ -102,13 +102,47 @@ deleteDoc(docRef)
         return sortConfig.key === denumire ? sortConfig.direction : undefined;
         };
 
+    const [user, loading, error] = useAuthState(auth);
+    const [rol_user, setRol_user] = useState("");
+    
+    
+    async function get_detalii_user(docID){
+      const ref = doc(db, "users", docID);
+  
+      await getDoc(ref)
+      .then((response) => {
+          let res = response.data();
+          
+          setRol_user(res.rol);
+      })
+      .catch((e) => console.log(e));
+    }
+  
+    useEffect(() => {
+      if (loading){
+        return;
+      } else if(user){
+        get_detalii_user(user.uid)
+      } else {
+        setRol_user("guest");
+      }
+    }, [loading, user]);
+
 //console.log(stadioane)
     return(
         <div>
-       
-          <Button type="button" className="bt4" id="butonAdd" onClick={()=>add_stadium()}>
-              Add a stadium
-          </Button>
+          {
+            rol_user === "admin" 
+            ?
+
+              <Button type="button" className="bt4" id="butonAdd" onClick={()=>add_stadium()}>
+                  Add a stadium
+              </Button>
+            
+            :
+              <></>
+
+          }
 
         <Table singleLine className='tabel'>
         <Table.Header className='tt1'>
@@ -152,15 +186,25 @@ return (
           <Table.Cell >{data.capacitate}</Table.Cell>
           <Table.Cell >{data.tip_gazon}</Table.Cell>
           <Table.Cell >{data.adresa}</Table.Cell>
-          <Table.Cell>
-        <Button onClick={() =>onDelete(data.id)}>Delete</Button>
-        </Table.Cell> 
-        
-          <Table.Cell> 
-          <Link to='/update_stadium'>
-        <Button onClick={() =>update(data.id)}>Update</Button>
-        </Link>
-        </Table.Cell>
+        {
+          rol_user === "admin" 
+          ?
+
+            <>
+              <Table.Cell>
+                <Button onClick={() =>onDelete(data.id)}>Delete</Button>
+              </Table.Cell> 
+              
+              <Table.Cell> 
+                <Link to='/update_stadium'>
+                  <Button onClick={() =>update(data.id)}>Update</Button>
+                </Link>
+              </Table.Cell>
+            </>
+
+          :
+            <></>
+        }
         
       
 
