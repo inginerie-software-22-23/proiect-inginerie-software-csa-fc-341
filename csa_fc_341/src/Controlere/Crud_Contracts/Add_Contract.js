@@ -1,8 +1,9 @@
-import React, {useState} from 'react'
+import React, { useState, useEffect } from 'react'
 import { Button, Form } from 'semantic-ui-react'
-import { getFirestore, collection } from "firebase/firestore";
-import { addDoc } from "firebase/firestore"; 
-import {app} from '../../DatabaseConnection';
+import { getFirestore, collection, addDoc, doc, getDoc } from "firebase/firestore";
+import { app, auth } from '../../DatabaseConnection';
+import { useNavigate } from "react-router-dom";
+import { useAuthState } from "react-firebase-hooks/auth";
 
 
 const db = getFirestore(app);
@@ -33,33 +34,71 @@ export default function Create_Contract() {
           window.location.href = "http://localhost:3000/tocontract";
     }
 
+    const [user, loading, error] = useAuthState(auth);
+    const [rol_user, setRol_user] = useState("");
+
+    let navigate = useNavigate();
+
+    async function get_detalii_user(docID){
+        const ref = doc(db, "users", docID);
+
+        await getDoc(ref)
+        .then(async (response) => {
+            let res = response.data();
+            
+            setRol_user(res.rol);
+            if(res.rol !== "admin"){
+                return navigate("/");
+            }
+        })
+        .catch((e) => console.log(e));
+    }
+
+    useEffect(() => {
+        if (loading){
+            return;
+        } else if(user){
+            get_detalii_user(user.uid);
+        } else {
+            return navigate("/");
+        }
+    }, [loading, user]);
+
 
     return (
-        <Form className="create-form1">
-            <h2 className="bt2">Add a contract</h2>
+        <div>
+            {
+                rol_user !== ""
+                ?
+                    <Form className="create-form1">
+                        <h2 className="bt2">Add a contract</h2>
 
-            <Form.Field>
-                <label className='scris'>Impresar</label>
-                <input className='raspuns' placeholder='Impresar' onChange={(e) => setimpresar(e.target.value)} />
-            </Form.Field>
-            <Form.Field>
-                <label className='scris'>Salariu</label>
-                <input className='raspuns' placeholder='Salariu' onChange={(e) => setsalariu(e.target.value)} />
-            </Form.Field>
-            <Form.Field>
-                <label className='scris'>Data inceput</label>
-                <input className='raspuns' placeholder='Data_inceput' onChange={(e) => setdata_inceput(e.target.value)} />
-            </Form.Field>
-            <Form.Field>
-                <label className='scris'>Data final</label>
-                <input className='raspuns' placeholder='Data_final' onChange={(e) => setdata_final(e.target.value)}/>
-            </Form.Field>
-            <Form.Field>
-                <label className='scris'>Bonusuri</label>
-                <input className='raspuns' placeholder='Bonusuri' onChange={(e) => setbonusuri(e.target.value)}/>
-            </Form.Field>
-            
-            <Button className='bt2' onClick={add_contract} type = 'submit'>Submit</Button>
-        </Form>
+                        <Form.Field>
+                            <label className='scris'>Impresar</label>
+                            <input className='raspuns' placeholder='Impresar' onChange={(e) => setimpresar(e.target.value)} />
+                        </Form.Field>
+                        <Form.Field>
+                            <label className='scris'>Salariu</label>
+                            <input className='raspuns' placeholder='Salariu' onChange={(e) => setsalariu(e.target.value)} />
+                        </Form.Field>
+                        <Form.Field>
+                            <label className='scris'>Data inceput</label>
+                            <input className='raspuns' placeholder='Data_inceput' onChange={(e) => setdata_inceput(e.target.value)} />
+                        </Form.Field>
+                        <Form.Field>
+                            <label className='scris'>Data final</label>
+                            <input className='raspuns' placeholder='Data_final' onChange={(e) => setdata_final(e.target.value)}/>
+                        </Form.Field>
+                        <Form.Field>
+                            <label className='scris'>Bonusuri</label>
+                            <input className='raspuns' placeholder='Bonusuri' onChange={(e) => setbonusuri(e.target.value)}/>
+                        </Form.Field>
+                        
+                        <Button className='bt2' onClick={add_contract} type = 'submit'>Submit</Button>
+                    </Form>
+                :
+                    <></>
+            }
+        </div>
     )
 }

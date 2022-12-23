@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import {BrowserRouter as Router, Route, Routes} from "react-router-dom";
+import {BrowserRouter as Router, Navigate, Route, Routes} from "react-router-dom";
 
 import './index.css';
 
@@ -76,6 +76,8 @@ root.render(
       {/* Ruta pentru pagina de Statistici */}
       <Route path="/tostatistics" element={<Statistics />} />
 
+      {/* Ruta default */}
+      <Route path="*" element={<Navigate to="/" />} />
     </Routes>
   </Router>
 );

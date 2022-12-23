@@ -1,8 +1,10 @@
-import React, {useState} from 'react'
+import React, { useState, useEffect } from 'react'
 import { Button, Form } from 'semantic-ui-react'
-import { getFirestore, collection} from "firebase/firestore";
+import { getFirestore, collection, doc, getDoc } from "firebase/firestore";
 import { addDoc } from "firebase/firestore"; 
-import {app} from '../../DatabaseConnection';
+import { app, auth } from '../../DatabaseConnection';
+import { useAuthState } from "react-firebase-hooks/auth";
+import { useNavigate } from "react-router-dom";
 
 
 const db = getFirestore(app);
@@ -27,28 +29,67 @@ export default function Create_Stadium() {
           window.location.href = "http://localhost:3000/tostadion";
     }
 
-    return (
-        <Form className="create-form1">
-            <h2 className="bt2">Add a stadium</h2>
 
-            <Form.Field>
-                <label className='scris'>name</label>
-                <input className='raspuns' placeholder='Name' onChange={(e) => setname(e.target.value)} />
-            </Form.Field>
-            <Form.Field>
-                <label className='scris'>capacity</label>
-                <input className='raspuns' placeholder='Capacity' onChange={(e) => setcapacity(e.target.value)} />
-            </Form.Field>
-            <Form.Field>
-                <label className='scris'>surface</label>
-                <input className='raspuns' placeholder='Surface' onChange={(e) => setsurface(e.target.value)} />
-            </Form.Field>
-            <Form.Field>
-                <label className='scris'>address</label>
-                <input className='raspuns' placeholder='Address' onChange={(e) => setaddress(e.target.value)}/>
-            </Form.Field>
+    const [user, loading, error] = useAuthState(auth);
+    const [rol_user, setRol_user] = useState("");
+
+    let navigate = useNavigate();
+
+    async function get_detalii_user(docID){
+        const ref = doc(db, "users", docID);
+
+        await getDoc(ref)
+        .then(async (response) => {
+            let res = response.data();
             
-            <Button className='bt2' onClick={add_stadium} type = 'submit'>Submit</Button>
-        </Form>
+            setRol_user(res.rol);
+            if(res.rol !== "admin"){
+                return navigate("/");
+            }
+        })
+        .catch((e) => console.log(e));
+    }
+
+    useEffect(() => {
+        if (loading){
+            return;
+        } else if(user){
+            get_detalii_user(user.uid);
+        } else {
+            return navigate("/");
+        }
+    }, [loading, user]);
+
+    return (
+        <div>
+            {
+                rol_user !== ""
+                ?
+                    <Form className="create-form1">
+                        <h2 className="bt2">Add a stadium</h2>
+
+                        <Form.Field>
+                            <label className='scris'>name</label>
+                            <input className='raspuns' placeholder='Name' onChange={(e) => setname(e.target.value)} />
+                        </Form.Field>
+                        <Form.Field>
+                            <label className='scris'>capacity</label>
+                            <input className='raspuns' placeholder='Capacity' onChange={(e) => setcapacity(e.target.value)} />
+                        </Form.Field>
+                        <Form.Field>
+                            <label className='scris'>surface</label>
+                            <input className='raspuns' placeholder='Surface' onChange={(e) => setsurface(e.target.value)} />
+                        </Form.Field>
+                        <Form.Field>
+                            <label className='scris'>address</label>
+                            <input className='raspuns' placeholder='Address' onChange={(e) => setaddress(e.target.value)}/>
+                        </Form.Field>
+                        
+                        <Button className='bt2' onClick={add_stadium} type = 'submit'>Submit</Button>
+                    </Form>
+                :
+                    <></>
+            }
+        </div>
     )
 }
