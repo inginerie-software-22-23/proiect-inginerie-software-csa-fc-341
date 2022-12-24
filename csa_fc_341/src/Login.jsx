@@ -8,6 +8,7 @@ function Login(){
     const [email, setEmail] = useState("");
     const [passwd, setPasswd] = useState("");
 
+
     const login = async (event) => {
         try{
             event.preventDefault();
@@ -17,10 +18,12 @@ function Login(){
             console.log(error.message);
         }
     }
+    
 
     return(
         <div>
             <h3>Login</h3>
+
             <input 
                 placeholder="Email"
                 onChange={(event) => {
@@ -28,7 +31,9 @@ function Login(){
                 }}
                 value={email}
             />
+            
             <br /> <br />
+
             <input 
                 placeholder="Parola"
                 onChange={(event) => {
@@ -36,6 +41,7 @@ function Login(){
                 }}
                 value={passwd}
             />
+
             <br /> <br />
 
             <Button onClick={(event) => {
@@ -46,6 +52,7 @@ function Login(){
                 }}>
                     Login
             </Button>
+
         </div>
     );
 }

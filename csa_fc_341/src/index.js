@@ -1,16 +1,16 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import {BrowserRouter as Router, Navigate, Route, Routes} from "react-router-dom";
+import { BrowserRouter as Router, Navigate, Route, Routes } from "react-router-dom";
 
 import './index.css';
 
-import {Stadion} from './Stadion';
-import {Meci} from './Meci';
-import {Jucator} from './Jucator';
-import {Weather} from './Weather';
-import {Staff} from './Staff';
-import {Contract} from './Contract';
-import {Statistics} from './Statistics';
+import { Stadion } from './Stadion';
+import { Meci } from './Meci';
+import { Jucator } from './Jucator';
+import { Weather } from './Weather';
+import { Staff } from './Staff';
+import { Contract } from './Contract';
+import { Statistics } from './Statistics';
 
 import Add_Stadium from './Controlere/Crud_Stadiums/Add_Stadium'
 import Add_Player from './Controlere/Crud_Players/Add_Player'
@@ -34,8 +34,11 @@ const root = ReactDOM.createRoot(document.getElementById("root"));
 
 root.render(
   <Router>
+    
     <Navigation />
+
     <Routes>
+
       {/* Ruta pentru pagina de Home */}
       <Route path="/" element={<Home />} />
 
@@ -78,6 +81,8 @@ root.render(
 
       {/* Ruta default */}
       <Route path="*" element={<Navigate to="/" />} />
+      
     </Routes>
+
   </Router>
 );

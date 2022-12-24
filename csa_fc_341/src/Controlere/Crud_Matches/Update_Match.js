@@ -43,7 +43,7 @@ export default function Update_Match() {
 
     useEffect(()=>{
         update();
-      },[])
+    },[])
     
     const handleSubmit = (event) => {
         
@@ -55,20 +55,22 @@ export default function Update_Match() {
 
         const washingtonRef = doc(db, "meci", id);
 
-    updateDoc(washingtonRef, {
-  adversar:adversar,
-  arbitru:arbitru,
-  competitie:competitie,
-  data:data,
-  scor: scor
-
-});     event.preventDefault();
+        updateDoc(washingtonRef, {
+            adversar:adversar,
+            arbitru:arbitru,
+            competitie:competitie,
+            data:data,
+            scor: scor
+        });     
+        
+        event.preventDefault();
         alert(`S-a modificat meciul cu: ${adversar}`);
         window.location.href = "http://localhost:3000/tomeci";
-}
+    }
     
     const [user, loading, error] = useAuthState(auth);
     const [rol_user, setRol_user] = useState("");
+
 
     async function get_detalii_user(docID){
         const ref = doc(db, "users", docID);
@@ -100,38 +102,39 @@ export default function Update_Match() {
         <div>
             {
                 rol_user !== ""
-                ?
-                    <form className='create-form1' onSubmit={handleSubmit}> 
-                    
-                        <div>
+                    ?
+                        <form className='create-form1' onSubmit={handleSubmit}> 
                         
-                            <Form.Field className='ff'>
-                                <label>adversar</label>
-                                <input placeholder={adversar} value={adversar} onChange={(e) => setadversar(e.target.value)}  />
-                            </Form.Field>
-                            <Form.Field className='ff'>
-                                <label>arbitru</label>
-                                <input placeholder={arbitru} value={arbitru} onChange={(e) => setarbitru(e.target.value)} />
-                            </Form.Field>
-                            <Form.Field className='ff'>
-                                <label>competitie</label>
-                                <input placeholder={competitie} value={competitie} onChange={(e) => setcompetitie(e.target.value)} />
-                            </Form.Field>
-                            <Form.Field className='ff'>
-                                <label>data</label>
-                                <input placeholder={data} value={data} onChange={(e) => setdata(e.target.value)} />
-                            </Form.Field>
-                            <Form.Field className='ff'>
-                                <label>scor</label>
-                                <input placeholder={scor} value={scor} onChange={(e) => setscor(e.target.value)} />
-                            </Form.Field>
-                    
-                        </div>
+                            <div>
+                            
+                                <Form.Field className='ff'>
+                                    <label>adversar</label>
+                                    <input placeholder={adversar} value={adversar} onChange={(e) => setadversar(e.target.value)}  />
+                                </Form.Field>
+                                <Form.Field className='ff'>
+                                    <label>arbitru</label>
+                                    <input placeholder={arbitru} value={arbitru} onChange={(e) => setarbitru(e.target.value)} />
+                                </Form.Field>
+                                <Form.Field className='ff'>
+                                    <label>competitie</label>
+                                    <input placeholder={competitie} value={competitie} onChange={(e) => setcompetitie(e.target.value)} />
+                                </Form.Field>
+                                <Form.Field className='ff'>
+                                    <label>data</label>
+                                    <input placeholder={data} value={data} onChange={(e) => setdata(e.target.value)} />
+                                </Form.Field>
+                                <Form.Field className='ff'>
+                                    <label>scor</label>
+                                    <input placeholder={scor} value={scor} onChange={(e) => setscor(e.target.value)} />
+                                </Form.Field>
                         
-                        <Button className='b1' type='submit' >Update</Button>
-                    </form>
-                :
-                    <></>
+                            </div>
+                            
+                            <Button className='b1' type='submit' >Update</Button>
+                            
+                        </form>
+                    :
+                        <></>
             }
         </div>
     )

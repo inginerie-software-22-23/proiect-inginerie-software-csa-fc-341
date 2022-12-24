@@ -28,17 +28,17 @@ export default function Create_Match() {
             competitie: competitie,
             data: data,
             scor: scor
-          }).then(
-          alert(`The match you added is: ${adversar}`));
+          }).then(alert(`The match you added is: ${adversar}`));
+          
           await Promise.all([a]);
           window.location.href = "http://localhost:3000/tomeci";
     }
-
 
     const [user, loading, error] = useAuthState(auth);
     const [rol_user, setRol_user] = useState("");
 
     let navigate = useNavigate();
+
 
     async function get_detalii_user(docID){
         const ref = doc(db, "users", docID);
@@ -65,39 +65,42 @@ export default function Create_Match() {
         }
     }, [loading, user]);
 
+
     return (
         <div>
             {
                 rol_user !== ""
-                ?
-                    <Form className="create-form1">
-                        <h2 className="bt2">Add a match</h2>
-                        
-                        <Form.Field>
-                            <label className='scris'>Adversar</label>
-                            <input className='raspuns' placeholder='Adverar' onChange={(e) => setadversar(e.target.value)} />
-                        </Form.Field>
-                        <Form.Field>
-                            <label className='scris'>Arbitru</label>
-                            <input className='raspuns' placeholder='Arbitru' onChange={(e) => setarbitru(e.target.value)} />
-                        </Form.Field>
-                        <Form.Field>
-                            <label className='scris'>Competitie</label>
-                            <input className='raspuns' placeholder='Competitie' onChange={(e) => setcompetitie(e.target.value)} />
-                        </Form.Field>
-                        <Form.Field>
-                            <label className='scris'>Data</label>
-                            <input className='raspuns' placeholder='Data' onChange={(e) => setdata(e.target.value)}/>
-                        </Form.Field>
-                        <Form.Field>
-                            <label className='scris'>Scor</label>
-                            <input className='raspuns' placeholder='Scor' onChange={(e) => setscor(e.target.value)}/>
-                        </Form.Field>
-                        
-                        <Button className='bt2' onClick={add_match} type = 'submit'>Submit</Button>
-                    </Form>
-                :
-                    <></>
+                    ?
+                        <Form className="create-form1">
+
+                            <h2 className="bt2">Add a match</h2>
+                            
+                            <Form.Field>
+                                <label className='scris'>Adversar</label>
+                                <input className='raspuns' placeholder='Adverar' onChange={(e) => setadversar(e.target.value)} />
+                            </Form.Field>
+                            <Form.Field>
+                                <label className='scris'>Arbitru</label>
+                                <input className='raspuns' placeholder='Arbitru' onChange={(e) => setarbitru(e.target.value)} />
+                            </Form.Field>
+                            <Form.Field>
+                                <label className='scris'>Competitie</label>
+                                <input className='raspuns' placeholder='Competitie' onChange={(e) => setcompetitie(e.target.value)} />
+                            </Form.Field>
+                            <Form.Field>
+                                <label className='scris'>Data</label>
+                                <input className='raspuns' placeholder='Data' onChange={(e) => setdata(e.target.value)}/>
+                            </Form.Field>
+                            <Form.Field>
+                                <label className='scris'>Scor</label>
+                                <input className='raspuns' placeholder='Scor' onChange={(e) => setscor(e.target.value)}/>
+                            </Form.Field>
+                            
+                            <Button className='bt2' onClick={add_match} type = 'submit'>Submit</Button>
+                            
+                        </Form>
+                    :
+                        <></>
             }
         </div>
     )

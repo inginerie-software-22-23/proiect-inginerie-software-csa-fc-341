@@ -5,8 +5,8 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import Read_Contract from './Controlere/Crud_Contracts/Read_Contract';
 import { useNavigate } from "react-router-dom";
 
-
 const db = getFirestore(app);
+
 
 export function Contract() {
 
@@ -45,7 +45,7 @@ export function Contract() {
     <div>
       {
         rol_user !== ""
-        ?
+          ?
             <div className="main">
 
               <div className="container_coperta">
@@ -58,8 +58,8 @@ export function Contract() {
               </div>
 
             </div>
-        : 
-          <></>
+          : 
+            <></>
       }
     </div>
   );

@@ -1,8 +1,7 @@
 import React, { useState,useEffect } from 'react';
 import { Button, Form } from 'semantic-ui-react';
 import { app, auth } from '../../DatabaseConnection';
-import { getFirestore } from "firebase/firestore";
-import { doc, getDoc, updateDoc } from "firebase/firestore";
+import { getFirestore, doc, getDoc, updateDoc } from "firebase/firestore";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useNavigate } from "react-router-dom";
 
@@ -46,32 +45,34 @@ export default function Update_Contract() {
     
     useEffect(()=>{
         update();
-      },[])
+    },[])
     
     const handleSubmit = (event) => {
         
-        console.log(impresar)
-        console.log(salariu)
-        console.log(data_inceput)
-        console.log(data_final)
-        console.log(bonusuri)
+        // console.log(impresar);
+        // console.log(salariu);
+        // console.log(data_inceput);
+        // console.log(data_final);
+        // console.log(bonusuri);
 
         const washingtonRef = doc(db, "contract", id);
 
-    updateDoc(washingtonRef, {
-  impresar: impresar,
-  salariu: salariu,
-  data_inceput: data_inceput,
-  data_final: data_final,
-  bonusuri:bonusuri
-
-});     event.preventDefault();
+        updateDoc(washingtonRef, {
+            impresar: impresar,
+            salariu: salariu,
+            data_inceput: data_inceput,
+            data_final: data_final,
+            bonusuri:bonusuri
+        });     
+        
+        event.preventDefault();
         alert(`S-a modificat contractul pentru impresar: ${impresar}`);
         window.location.href = "http://localhost:3000/tocontract";
-}
+    }
 
     const [user, loading, error] = useAuthState(auth);
     const [rol_user, setRol_user] = useState("");
+
 
     async function get_detalii_user(docID){
         const ref = doc(db, "users", docID);
@@ -103,37 +104,38 @@ export default function Update_Contract() {
         <div>
             {
                 rol_user !== ""
-                ?
-                    <form className='create-form1' onSubmit={handleSubmit}> 
-                        <div>
+                    ?
+                        <form className='create-form1' onSubmit={handleSubmit}> 
+                            <div>
 
-                            <Form.Field className='ff'>
-                                <label>impresar</label>
-                                <input placeholder={impresar} value={impresar} onChange={(e) => setimpresar(e.target.value)}  />
-                            </Form.Field>
-                            <Form.Field className='ff'>
-                                <label>salariu</label>
-                                <input placeholder={salariu} value={salariu} onChange={(e) => setsalariu(e.target.value)} />
-                            </Form.Field>
-                            <Form.Field className='ff'>
-                                <label>data incepere</label>
-                                <input placeholder={data_inceput} value={data_inceput} onChange={(e) => setdata_inceput(e.target.value)} />
-                            </Form.Field>
-                            <Form.Field className='ff'>
-                                <label>data finalizare</label>
-                                <input placeholder={data_final} value={data_final} onChange={(e) => setdata_final(e.target.value)} />
-                            </Form.Field>
-                            <Form.Field className='ff'>
-                                <label>bonusuri</label>
-                                <input placeholder={bonusuri} value={bonusuri} onChange={(e) => setbonusuri(e.target.value)} />
-                            </Form.Field>
+                                <Form.Field className='ff'>
+                                    <label>impresar</label>
+                                    <input placeholder={impresar} value={impresar} onChange={(e) => setimpresar(e.target.value)}  />
+                                </Form.Field>
+                                <Form.Field className='ff'>
+                                    <label>salariu</label>
+                                    <input placeholder={salariu} value={salariu} onChange={(e) => setsalariu(e.target.value)} />
+                                </Form.Field>
+                                <Form.Field className='ff'>
+                                    <label>data incepere</label>
+                                    <input placeholder={data_inceput} value={data_inceput} onChange={(e) => setdata_inceput(e.target.value)} />
+                                </Form.Field>
+                                <Form.Field className='ff'>
+                                    <label>data finalizare</label>
+                                    <input placeholder={data_final} value={data_final} onChange={(e) => setdata_final(e.target.value)} />
+                                </Form.Field>
+                                <Form.Field className='ff'>
+                                    <label>bonusuri</label>
+                                    <input placeholder={bonusuri} value={bonusuri} onChange={(e) => setbonusuri(e.target.value)} />
+                                </Form.Field>
 
-                        </div>
+                            </div>
 
-                        <Button className='b1' type='submit' >Update</Button>
-                    </form>
-                :
-                    <></>
+                            <Button className='b1' type='submit' >Update</Button>
+                            
+                        </form>
+                    :
+                        <></>
             }
         </div>
     )

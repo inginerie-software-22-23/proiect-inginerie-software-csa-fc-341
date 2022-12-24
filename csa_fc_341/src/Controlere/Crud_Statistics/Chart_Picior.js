@@ -2,12 +2,12 @@ import React, { useEffect, useState } from "react";
 import { Chart as ChartJS, Tooltip, ArcElement, Legend } from "chart.js";
 import { Pie } from "react-chartjs-2";
 
-
 ChartJS.register(
     Tooltip,
     Legend,
     ArcElement
 );
+
 
 const Chart_Picior = () => {
     var [chart, setChart] = useState([]);

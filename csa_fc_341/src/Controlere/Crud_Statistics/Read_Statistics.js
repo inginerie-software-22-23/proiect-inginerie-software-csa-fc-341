@@ -7,7 +7,6 @@ import Chart_Pozitie from "./Chart_Pozitie";
 import Chart_Varsta from "./Chart_Varsta";
 import '../Home.css';
 
-
 const db = getFirestore(app);
 let response = collection(db, 'jucator');
 
@@ -30,10 +29,12 @@ function add(acc, a){
   return acc+a;
 }
 
+
 export async function fetchJucatori(){
   try{
     await getDocs(response)
     .then((querySnapshot) => {
+
       let picior_preferat = [0, 0, 0];  //array for Chart_picior(stanga, dreapta, ambele)
       let pozitie = [0, 0, 0, 0];       //array for player positions(GK, DEF, MID, ATT)
       let catVarsta = [0, 0, 0, 0];     //array for player ages categories(-20, 21-25, 26-30, 31+)
@@ -41,6 +42,7 @@ export async function fetchJucatori(){
       let inaltime_juc = [];            //array for player heights
 
       querySnapshot.forEach(element => {
+
         var date = element.data();
 
         if(date?.picior === "Stang"){
@@ -96,6 +98,7 @@ function Read_Statistics(){
 
   useEffect(() =>{
     fetchJucatori();
+    
     if(localStorage.getItem("reloadedPage") === null){
       setTimeout(window.location.reload(), 100);
       localStorage.setItem("reloadedPage", true);
@@ -108,15 +111,21 @@ function Read_Statistics(){
     <div>
       <div className="divHome divStats">
         <div>
+
           <h1> Picior Preferat </h1>
+
           <Chart_Picior/>
         </div>
         <div>
+
           <h1> Pozitie </h1>
+
           <Chart_Pozitie/>
         </div>
         <div>
+          
           <h1> Varsta </h1>
+
           <Chart_Varsta/>
         </div>
       </div>

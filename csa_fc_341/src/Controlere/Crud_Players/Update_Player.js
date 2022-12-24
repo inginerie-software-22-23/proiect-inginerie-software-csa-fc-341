@@ -5,9 +5,9 @@ import { getFirestore, doc, getDoc, updateDoc } from "firebase/firestore";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useNavigate } from "react-router-dom";
 
-
 const db = getFirestore(app);
 var date;
+
 
 export default function Update_Player() {
     const [playerId, setplayerid] = useState();
@@ -28,15 +28,16 @@ export default function Update_Player() {
 
         if(id){
             getDoc(doc(db, "jucator", id)).then(docSnap =>{
-                date = docSnap.data(); 
-                    setplayerid(date.id);
-                    setnume(date.nume);
-                    setprenume(date.prenume);
-                    setpicior(date.picior);
-                    setpozitie(date.pozitie);
-                    setnationalitate(date.nationalitate);
-                    setinaltime(date.inaltime);
-                    setdata_nastere(date.data_nastere);
+                date = docSnap.data();
+                
+                setplayerid(date.id);
+                setnume(date.nume);
+                setprenume(date.prenume);
+                setpicior(date.picior);
+                setpozitie(date.pozitie);
+                setnationalitate(date.nationalitate);
+                setinaltime(date.inaltime);
+                setdata_nastere(date.data_nastere);
             });
         } else {
             navigate('/');
@@ -61,23 +62,25 @@ export default function Update_Player() {
 
         const washingtonRef = doc(db, "jucator", id);
 
-    updateDoc(washingtonRef, {
-  nume: nume,
-  prenume: prenume,
-  picior: picior,
-  pozitie: pozitie,
-  nationalitate: nationalitate,
-  inaltime: inaltime,
-  data_nastere: data_nastere
+        updateDoc(washingtonRef, {
+            nume: nume,
+            prenume: prenume,
+            picior: picior,
+            pozitie: pozitie,
+            nationalitate: nationalitate,
+            inaltime: inaltime,
+            data_nastere: data_nastere
 
-});     event.preventDefault();
+        });     
+        
+        event.preventDefault();
         alert(`S-a modificat jucatorul: ${nume}`);
         window.location.href = "http://localhost:3000/tojucator";
-}
+    }
     
-
     const [user, loading, error] = useAuthState(auth);
     const [rol_user, setRol_user] = useState("");
+
 
     async function get_detalii_user(docID){
         const ref = doc(db, "users", docID);
@@ -104,52 +107,52 @@ export default function Update_Player() {
         }
     }, [loading, user]);
 
+
     return (
         <div>
             {
                 rol_user !== ""
-                ?
-        
-                    <form className='create-form1' onSubmit={handleSubmit}> 
-                        <div>
+                    ?
+                        <form className='create-form1' onSubmit={handleSubmit}> 
+
+                            <div>
+                            
+                                <Form.Field className='ff'>
+                                    <label>nume</label>
+                                    <input placeholder={nume} value={nume} onChange={(e) => setnume(e.target.value)}  />
+                                </Form.Field>
+                                <Form.Field className='ff'>
+                                    <label>prenume</label>
+                                    <input placeholder={prenume} value={prenume} onChange={(e) => setprenume(e.target.value)} />
+                                </Form.Field>
+                                <Form.Field className='ff'>
+                                    <label>picior</label>
+                                    <input placeholder={picior} value={picior} onChange={(e) => setpicior(e.target.value)} />
+                                </Form.Field>
+                                <Form.Field className='ff'>
+                                    <label>pozitie</label>
+                                    <input placeholder={pozitie} value={pozitie} onChange={(e) => setpozitie(e.target.value)} />
+                                </Form.Field>
+                                <Form.Field className='ff'>
+                                    <label>nationalitate</label>
+                                    <input placeholder={nationalitate} value={nationalitate} onChange={(e) => setnationalitate(e.target.value)} />
+                                </Form.Field>
+                                <Form.Field className='ff'>
+                                    <label>inaltime</label>
+                                    <input placeholder={inaltime} value={inaltime} onChange={(e) => setinaltime(e.target.value)} />
+                                </Form.Field>
+                                <Form.Field className='ff'>
+                                    <label>data_nastere</label>
+                                    <input placeholder={data_nastere} value={data_nastere} onChange={(e) => setdata_nastere(e.target.value)} />
+                                </Form.Field>
                         
-                            <Form.Field className='ff'>
-                                <label>nume</label>
-                                <input placeholder={nume} value={nume} onChange={(e) => setnume(e.target.value)}  />
-                            </Form.Field>
-                            <Form.Field className='ff'>
-                                <label>prenume</label>
-                                <input placeholder={prenume} value={prenume} onChange={(e) => setprenume(e.target.value)} />
-                            </Form.Field>
-                            <Form.Field className='ff'>
-                                <label>picior</label>
-                                <input placeholder={picior} value={picior} onChange={(e) => setpicior(e.target.value)} />
-                            </Form.Field>
-                            <Form.Field className='ff'>
-                                <label>pozitie</label>
-                                <input placeholder={pozitie} value={pozitie} onChange={(e) => setpozitie(e.target.value)} />
-                            </Form.Field>
-                            <Form.Field className='ff'>
-                                <label>nationalitate</label>
-                                <input placeholder={nationalitate} value={nationalitate} onChange={(e) => setnationalitate(e.target.value)} />
-                            </Form.Field>
-                            <Form.Field className='ff'>
-                                <label>inaltime</label>
-                                <input placeholder={inaltime} value={inaltime} onChange={(e) => setinaltime(e.target.value)} />
-                            </Form.Field>
-                            <Form.Field className='ff'>
-                                <label>data_nastere</label>
-                                <input placeholder={data_nastere} value={data_nastere} onChange={(e) => setdata_nastere(e.target.value)} />
-                            </Form.Field>
-                    
-                        </div>
+                            </div>
 
-                        <Button className='b1' type='submit' >Update</Button>
-                    </form>
+                            <Button className='b1' type='submit' >Update</Button>
 
-                :
-                
-                    <></>
+                        </form>
+                    :
+                        <></>
             }
         </div>
     )

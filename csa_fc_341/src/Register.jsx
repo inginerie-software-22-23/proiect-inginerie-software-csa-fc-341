@@ -2,12 +2,12 @@ import { Button } from "semantic-ui-react";
 import { useState } from "react";
 import { app, auth } from "./DatabaseConnection";
 import { createUserWithEmailAndPassword } from "firebase/auth";
-import { getFirestore, setDoc, doc, getDoc, where, query, collection, getDocs, limit } from "firebase/firestore";
+import { getFirestore, setDoc, doc, where, query, collection, getDocs, limit } from "firebase/firestore";
 
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
-import Select, { SelectChangeEvent } from '@mui/material/Select';
+import Select from '@mui/material/Select';
 import Box from '@mui/material/Box';
 
 
@@ -38,15 +38,6 @@ function Register(){
         return docref;
     }
 
-    // async function checkDuplicates(userID){
-    //     const docdet = await getDoc(doc(db, "users", userID));
-    //     if(docdet._document){
-    //         return true;
-    //     } else{
-    //         return false;
-    //     }
-    // }
-
     const register = async (event) => {
         try{
             event.preventDefault();
@@ -64,7 +55,6 @@ function Register(){
                         user: userRef,
                     })
 
-                    console.log(res.user);
                 })
                 .catch((e) => console.log("E-mail deja folosit!"));
             } else {
@@ -74,10 +64,13 @@ function Register(){
             console.log(error.message);
         }
     }
+    
 
     return(
         <div>
+            
             <h3>Register</h3>
+
             <input 
                 placeholder="Email"
                 onChange={(event) => {
@@ -85,7 +78,9 @@ function Register(){
                 }}
                 value={email}
             />
+
             <br /> <br />
+
             <input 
                 placeholder="Parola"
                 onChange={(event) => {
@@ -93,7 +88,9 @@ function Register(){
                 }}
                 value={passwd}
             />
+
             <br /> <br />
+
             <input 
                 placeholder="Nume"
                 onChange={(event) => {
@@ -101,7 +98,9 @@ function Register(){
                 }}
                 value={nume}
             />
+
             <br /> <br />
+
             <input 
                 placeholder="Prenume"
                 onChange={(event) => {
@@ -109,9 +108,13 @@ function Register(){
                 }}
                 value={prenume}
             />
+
             <br /> <br />
+
             <Box sx={{ maxWidth: 120 }}>
+
                 <FormControl fullWidth>
+
                     <InputLabel id="demo-simple-select-label">Rol</InputLabel>
 
                     <Select
@@ -126,8 +129,11 @@ function Register(){
                             <MenuItem value={"jucator"}>Jucator</MenuItem>
                             <MenuItem value={"staff"}>Staff</MenuItem>
                     </Select>
+
                 </FormControl>
+
             </Box>
+            
             <br /> <br />
 
             <Button onClick={(event) => {
@@ -141,6 +147,7 @@ function Register(){
                 }}>
                     Register
             </Button>
+            
         </div>
     );
 }

@@ -1,10 +1,11 @@
 import { getFirestore, collection, getDocs, doc, getDoc, deleteDoc } from "firebase/firestore";
 import { Table,Button } from 'semantic-ui-react'
 import { Link } from 'react-router-dom';
-import "../Stil.css";
-import {app, auth} from '../../DatabaseConnection';
-import React,{useState,useEffect} from 'react';
+import { app, auth } from '../../DatabaseConnection';
+import React, { useState,useEffect } from 'react';
 import { useAuthState } from "react-firebase-hooks/auth";
+
+import "../Stil.css";
 
 
 const db = getFirestore(app);
@@ -14,7 +15,9 @@ const useSortableData = (items, config = null) => {
     const [sortConfig, setSortConfig] = React.useState(config);
   
     const sortedItems = React.useMemo(() => {
+
       let sortableItems = [...items];
+
       if (sortConfig !== null) {
         sortableItems.sort((a, b) => {
           if (a[sortConfig.key] < b[sortConfig.key]) {
@@ -26,11 +29,15 @@ const useSortableData = (items, config = null) => {
           return 0;
         });
       }
+
       return sortableItems;
+      
     }, [items, sortConfig]);
   
     const requestSort = (key) => {
+      
       let direction = 'ascending';
+
       if (
         sortConfig &&
         sortConfig.key === key &&
@@ -38,8 +45,10 @@ const useSortableData = (items, config = null) => {
       ) {
         direction = 'descending';
       }
+
       setSortConfig({ key, direction });
     };
+
     //console.log(sortedItems)
     return { items: sortedItems, requestSort, sortConfig };
   };
@@ -49,184 +58,195 @@ function Read_Matches(){
 
   const docRef = doc(db, "meci", "id");
 
-deleteDoc(docRef)
-.then(() => {
-    //console.log("Entire Document has been deleted successfully.")
-})
-.catch(error => {
-    console.log(error);
-})
-  function update(x){
+  deleteDoc(docRef)
+  .then(() => {
+      //console.log("Entire Document has been deleted successfully.")
+  })
+  .catch(error => {
+      console.log(error);
+  })
 
+  function update(x){
     localStorage.setItem('match_id',x)
   }
+
   function onDelete(id) {
     deleteDoc(doc(db, "meci", id));
     window.location.reload();
-}
+  }
 
   function add_match(){
-    
     window.open('http://localhost:3000/add_match','_parent','Add a match',param);
-    
   }
+
   const [meciuri, setMeciuri] = useState([]);
+
   
   const fetchMeciuri = async()=>{
     let response=collection(db, 'meci');
+
     await getDocs(response).then((querySnapshot) => {
 
       querySnapshot.forEach(element => {
-
           var date = element.data();
           date.id = element.id;
 
           setMeciuri(arr => [...arr , date]);  
       });
-  });
+    })
   }
 
-    useEffect(()=>{
-      fetchMeciuri();
+  useEffect(()=>{
+    fetchMeciuri();
 
-    },[])
+  },[])
     
-    const { items, requestSort, sortConfig } = useSortableData(meciuri);
-    const getClassNamesFor = (adversar) => {
-        if (!sortConfig) {
-            return;
-        }
-        return sortConfig.key === adversar ? sortConfig.direction : undefined;
-        };
-
-    const [user, loading, error] = useAuthState(auth);
-    const [rol_user, setRol_user] = useState("");
+  const { items, requestSort, sortConfig } = useSortableData(meciuri);
     
-    
-    async function get_detalii_user(docID){
-      const ref = doc(db, "users", docID);
-  
-      await getDoc(ref)
-      .then((response) => {
-          let res = response.data();
-          
-          setRol_user(res.rol);
-      })
-      .catch((e) => console.log(e));
-    }
-  
-    useEffect(() => {
-      if (loading){
-        return;
-      } else if(user){
-        get_detalii_user(user.uid)
-      } else {
-        setRol_user("guest");
+  const getClassNamesFor = (adversar) => {
+      if (!sortConfig) {
+          return;
       }
-    }, [loading, user]);
+      return sortConfig.key === adversar ? sortConfig.direction : undefined;
+      };
 
-    return(
-        <div>
-          {
-            rol_user === "admin" 
-            ?
+  const [user, loading, error] = useAuthState(auth);
+  const [rol_user, setRol_user] = useState("");
+    
+    
+  async function get_detalii_user(docID){
+    const ref = doc(db, "users", docID);
 
-              <Button type="button" className="bt4" id="butonAdd" onClick={()=>add_match()}>
-                  Adauga un nou meci
-              </Button>
-          
-            :
+    await getDoc(ref)
+    .then((response) => {
+        let res = response.data();
+        
+        setRol_user(res.rol);
+    })
+    .catch((e) => console.log(e));
+  }
+  
+  useEffect(() => {
+    if (loading){
+      return;
+    } else if(user){
+      get_detalii_user(user.uid)
+    } else {
+      setRol_user("guest");
+    }
+  }, [loading, user]);
 
-              <></>
 
-          }
-          
-        <Table singleLine className='tabel'>
-        <Table.Header className='tt1'>
-            <Table.Row>
-                <Table.HeaderCell className='titlu'><button
-      type="button"
-      onClick={() => requestSort('adversar')}
-      className={getClassNamesFor('adversar')}
-    >Adversar</button></Table.HeaderCell>
-                <Table.HeaderCell className='titlu'><button
-      type="button"
-      onClick={() => requestSort('arbitru')}
-      className={getClassNamesFor('arbitru')}
-    >Arbitru</button></Table.HeaderCell>
-                <Table.HeaderCell className='titlu'><button
-      type="button"
-      onClick={() => requestSort('competitie')}
-      className={getClassNamesFor('competitie')}
-    >Competitie</button></Table.HeaderCell>
-                <Table.HeaderCell className='titlu'><button
-      type="button"
-      onClick={() => requestSort('data')}
-      className={getClassNamesFor('data')}
-    >Data</button></Table.HeaderCell>
-                <Table.HeaderCell className='titlu'><button
-      type="button"
-      onClick={() => requestSort('scor')}
-      className={getClassNamesFor('scor')}
-    >Scor</button></Table.HeaderCell>
-                {/* <Table.HeaderCell className='titlu'><button
-      type="button"
-      onClick={() => requestSort('id_stadion')}
-      className={getClassNamesFor('id_stadion')}
-    >Id Stadion</button></Table.HeaderCell> */}
-                {/* <Table.HeaderCell className='titlu'><button
-      type="button"
-      onClick={() => requestSort('lista_jucatori')}
-      className={getClassNamesFor('lista_jucatori')}
-    >Lista jucatori</button></Table.HeaderCell> */}
-    <Table.HeaderCell className='titlu'></Table.HeaderCell> 
-    <Table.HeaderCell className='titlu'></Table.HeaderCell>              
-            </Table.Row>
-        </Table.Header>
-        <Table.Body>
-          {items.map((data) =>  {
-return (
-<Table.Row key = {data.adversar}>
-<Table.Cell >{data.adversar}</Table.Cell>
-<Table.Cell >{data.arbitru}</Table.Cell>
-<Table.Cell >{data.competitie}</Table.Cell>
-<Table.Cell >{data.data}</Table.Cell>
-<Table.Cell >{data.scor}</Table.Cell>
-{/* <Table.Cell >{data.id_stadion}</Table.Cell> */}
-{/* <Table.Cell >{data.lista_jucatori}</Table.Cell>  */}
-        {
-          rol_user === "admin" 
+  return(
+    <div>
+      {
+        rol_user === "admin" 
           ?
-
-            <>
-              <Table.Cell>
-                <Button onClick={() =>onDelete(data.id)}>Delete</Button>
-              </Table.Cell> 
-
-              <Table.Cell> 
-                <Link to='/update_match'>
-                    <Button onClick={() =>update(data.id)}>Update</Button>
-                </Link> 
-              </Table.Cell>
-            </>
-          
+            <Button type="button" className="bt4" id="butonAdd" onClick={()=>add_match()}>
+                Adauga un nou meci
+            </Button>
           :
-
             <></>
-        }
+      }
+      
+      <Table singleLine className='tabel'>
 
-  <Table.Cell>
-    <Link to={`/tomeci/meci/${data.id}`} params={{id: data.id}}>
-      <Button onClick={() =>update(data.id)}>Detalii</Button>
-    </Link>
-  </Table.Cell>
-</Table.Row>
-)})
+        <Table.Header className='tt1'>
 
-  }</Table.Body>
-    </Table>
+            <Table.Row>
+                <Table.HeaderCell className='titlu'>
+                  <button type="button"
+                          onClick={() => requestSort('adversar')}
+                          className={getClassNamesFor('adversar')}
+                            >Adversar
+                  </button>
+                </Table.HeaderCell>
+
+                <Table.HeaderCell className='titlu'>
+                  <button type="button"
+                          onClick={() => requestSort('arbitru')}
+                          className={getClassNamesFor('arbitru')}
+                            >Arbitru
+                  </button>
+                </Table.HeaderCell>
+
+                <Table.HeaderCell className='titlu'>
+                  <button type="button"
+                          onClick={() => requestSort('competitie')}
+                          className={getClassNamesFor('competitie')}
+                            >Competitie
+                  </button>
+                </Table.HeaderCell>
+
+                <Table.HeaderCell className='titlu'>
+                  <button type="button"
+                          onClick={() => requestSort('data')}
+                          className={getClassNamesFor('data')}
+                            >Data
+                  </button>
+                </Table.HeaderCell>
+
+                <Table.HeaderCell className='titlu'>
+                  <button type="button"
+                          onClick={() => requestSort('scor')}
+                          className={getClassNamesFor('scor')}
+                            >Scor
+                  </button>
+                </Table.HeaderCell>
+
+                <Table.HeaderCell className='titlu' />
+
+                <Table.HeaderCell className='titlu' />
+
+                <Table.HeaderCell className='titlu' />
+
+            </Table.Row>
+
+        </Table.Header>
+
+        <Table.Body>
+          {
+            items.map((data) =>  {
+
+              return (
+                <Table.Row key = {data.adversar}>
+
+                  <Table.Cell >{data.adversar}</Table.Cell>
+                  <Table.Cell >{data.arbitru}</Table.Cell>
+                  <Table.Cell >{data.competitie}</Table.Cell>
+                  <Table.Cell >{data.data}</Table.Cell>
+                  <Table.Cell >{data.scor}</Table.Cell>
+                  {
+                    rol_user === "admin" 
+                      ?
+                        <>
+                          <Table.Cell>
+                            <Button onClick={() =>onDelete(data.id)}>Delete</Button>
+                          </Table.Cell> 
+
+                          <Table.Cell> 
+                            <Link to='/update_match'>
+                                <Button onClick={() =>update(data.id)}>Update</Button>
+                            </Link> 
+                          </Table.Cell>
+                        </>
+                      :
+                        <></>
+                  }
+                  <Table.Cell>
+                    <Link to={`/tomeci/meci/${data.id}`} params={{id: data.id}}>
+                      <Button onClick={() =>update(data.id)}>Detalii</Button>
+                    </Link>
+                  </Table.Cell>
+                  
+                </Table.Row>
+              )
+            })
+          }
+        </Table.Body>
+      </Table>
     </div>
-    );
+  );
 }
 
 export default Read_Matches;

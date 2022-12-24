@@ -5,6 +5,7 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { Link } from 'react-router-dom';
 import { Button } from 'semantic-ui-react';
 import { app, auth } from './DatabaseConnection';
+
 import Login from './Login';
 import Register from './Register';
 
@@ -12,6 +13,7 @@ import Register from './Register';
 const db = getFirestore(app);
 
 function Auth(){
+    
     const [email, setEmail] = useState("");
 
     const sendPasswordReset = async (event) => {
@@ -91,6 +93,8 @@ function Auth(){
 
                             <Button onClick={(event) => {
                                 sendPasswordReset(event);
+
+                                setEmail('');
                                 }}>
                                     Reset
                             </Button>
