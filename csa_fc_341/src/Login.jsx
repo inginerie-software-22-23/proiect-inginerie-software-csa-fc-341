@@ -40,6 +40,9 @@ function Login(){
             }
             else if (error.code === "auth/wrong-password"){
                 setPasswdError(true);
+            } else if(error.code === "auth/user-not-found"){
+                setEmailError(true);
+                setPasswdError(true);
             }
         }
     }
@@ -58,7 +61,7 @@ function Login(){
                 <TextField
                     variant = "outlined"
                     error = {emailError}
-                    helperText = {emailError ? "Email incorect" : ""}
+                    helperText = {emailError ? passwdError ? "Userul nu exista" : "Email incorect" : ""}
                     placeholder = "Email"
                     onChange = {(event) => {
                         if(emailError){
@@ -78,7 +81,7 @@ function Login(){
                 <TextField
                     variant = "outlined"
                     error = {passwdError}
-                    helperText = {passwdError ? "Parola incorecta" : ""}
+                    helperText = {passwdError ? emailError ? "Userul nu exista" : "Parola incorecta" : ""}
                     type = {showPassword ? "text" : "password"}
                     placeholder = "Parola"
                     onChange = {(event) => {

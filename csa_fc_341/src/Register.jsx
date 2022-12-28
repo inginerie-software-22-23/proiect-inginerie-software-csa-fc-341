@@ -26,7 +26,8 @@ function Register(){
     const [showPassword, setShowPassword] = useState(true);
 
     const [userError, setUserError] = useState(false);
-    const [emailError, setEmailError] = useState(false);
+    const [emailUsedError, setEmailUsedError] = useState(false);
+    const [emailInvalidError, setEmailInvalidError] = useState(false);
     const [passwdError, setPasswdError] = useState(false);
 
 
@@ -76,7 +77,9 @@ function Register(){
                     if(error.code === "auth/weak-password"){
                         setPasswdError(true);
                     } else if(error.code === "auth/email-already-in-use"){
-                        setEmailError(true);
+                        setEmailUsedError(true);
+                    } else if(error.code === "auth/invalid-email"){
+                        setEmailInvalidError(true);
                     }
                 });
             } else {
@@ -101,12 +104,14 @@ function Register(){
                 <TextField
                     autoComplete = "new-password"
                     variant = "outlined"
-                    error = {emailError}
-                    helperText = {emailError ? "Email deja utilizat" : ""}
+                    error = {emailUsedError || emailInvalidError}
+                    helperText = {emailUsedError ? "Email deja utilizat" : emailInvalidError ? "Format nevalid de e-mail" : ""}
                     placeholder = "Email"
                     onChange = {(event) => {
-                        if(emailError){
-                            setEmailError(false);
+                        if(emailUsedError){
+                            setEmailUsedError(false);
+                        } else if (emailInvalidError){
+                            setEmailInvalidError(false);
                         }
                         setEmail(event.target.value);
                     }}
