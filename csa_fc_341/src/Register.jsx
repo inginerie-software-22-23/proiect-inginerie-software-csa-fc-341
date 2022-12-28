@@ -1,14 +1,17 @@
-import { Button } from "semantic-ui-react";
 import { useState } from "react";
 import { app, auth } from "./DatabaseConnection";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { getFirestore, setDoc, doc, where, query, collection, getDocs, limit } from "firebase/firestore";
 
-import InputLabel from '@mui/material/InputLabel';
-import MenuItem from '@mui/material/MenuItem';
-import FormControl from '@mui/material/FormControl';
-import Select from '@mui/material/Select';
-import Box from '@mui/material/Box';
+import { InputLabel, MenuItem, FormControl, Select, Box, TextField, IconButton, Button, FormHelperText } from '@mui/material';
+
+import EmailOutlinedIcon from '@mui/icons-material/EmailOutlined';
+import PasswordOutlinedIcon from '@mui/icons-material/PasswordOutlined';
+import VisibilityOutlinedIcon from '@mui/icons-material/VisibilityOutlined';
+import VisibilityOffOutlinedIcon from '@mui/icons-material/VisibilityOffOutlined';
+import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
+
+import "./Controlere/Stil.css";
 
 
 const db = getFirestore(app);
@@ -20,6 +23,14 @@ function Register(){
     const [prenume, setPrenume] = useState("");
     const [rol, setRol] = useState("");
 
+    const [showPassword, setShowPassword] = useState(true);
+
+    const [userError, setUserError] = useState(false);
+    const [emailError, setEmailError] = useState(false);
+    const [passwdError, setPasswdError] = useState(false);
+
+
+    const handleShowPassword = () => setShowPassword(!showPassword);
 
     async function checkUser(tabel, nume, prenume) {
         const col = collection(db, tabel);
@@ -53,12 +64,23 @@ function Register(){
                         parola: passwd,
                         rol: rol,
                         user: userRef,
-                    })
+                    });
 
+                    setEmail('');
+                    setPasswd('');
+                    setNume('');
+                    setPrenume('');
+                    setRol('');
                 })
-                .catch((e) => console.log("E-mail deja folosit!"));
+                .catch((error) => {
+                    if(error.code === "auth/weak-password"){
+                        setPasswdError(true);
+                    } else if(error.code === "auth/email-already-in-use"){
+                        setEmailError(true);
+                    }
+                });
             } else {
-                console.log("Userul nu exista!");
+                setUserError(true);
             }
         } catch (error){
             console.log(error.message);
@@ -67,85 +89,137 @@ function Register(){
     
 
     return(
-        <div>
+        <div className = "register">
             
-            <h3>Register</h3>
+            <h2>Register</h2>
 
-            <input 
-                placeholder="Email"
-                onChange={(event) => {
-                    setEmail(event.target.value);
-                }}
-                value={email}
-            />
+            <Box
+                className = "field"
+                sx = {{ display: 'flex', alignItems: 'flex-start' }}
+            >
+                <EmailOutlinedIcon sx = {{ color: 'action.active', mr: 2, mt: 2 }} />
+                <TextField
+                    autoComplete = "new-password"
+                    variant = "outlined"
+                    error = {emailError}
+                    helperText = {emailError ? "Email deja utilizat" : ""}
+                    placeholder = "Email"
+                    onChange = {(event) => {
+                        if(emailError){
+                            setEmailError(false);
+                        }
+                        setEmail(event.target.value);
+                    }}
+                    value = {email}
+                />
+            </Box>
+            
+            <Box
+                className = "field"
+                sx = {{ display: 'flex', alignItems: 'flex-start' }}
+            >
+                <PasswordOutlinedIcon sx = {{ color: 'action.active', mr: 2, mt: 2 }} />
+                <TextField
+                    autoComplete = "new-password"
+                    variant = "outlined"
+                    error = {passwdError}
+                    helperText = {passwdError ? "Parola slaba" : ""}
+                    type = {showPassword ? "text" : "password"}
+                    placeholder = "Parola"
+                    onChange = {(event) => {
+                        if(passwdError){
+                            setPasswdError(false);
+                        }
+                        setPasswd(event.target.value);
+                    }}
+                    value = {passwd}
+                />
+                <IconButton
+                    onClick = { handleShowPassword }
+                    sx = {{ color: 'action.active', ml: 2, mt: 1 }}
+                >
+                    {showPassword ? <VisibilityOutlinedIcon /> : <VisibilityOffOutlinedIcon />}
+                </IconButton>
+            </Box>
 
-            <br /> <br />
+            <Box
+                className = "field"
+                sx = {{ display: 'flex', alignItems: 'flex-start' }}
+            >
+                <AccountCircleOutlinedIcon sx = {{ color: 'action.active', mr: 2, mt: 2 }} />
+                <TextField
+                    autoComplete = "off"
+                    variant = "outlined"
+                    error = {userError}
+                    helperText = {userError ? "Membru inexistent" : ""}
+                    placeholder = "Nume"
+                    onChange = {(event) => {
+                        if(userError){
+                            setUserError(false);
+                        }
+                        setNume(event.target.value);
+                    }}
+                    value = {nume}
+                />
+            </Box>
 
-            <input 
-                placeholder="Parola"
-                onChange={(event) => {
-                    setPasswd(event.target.value);
-                }}
-                value={passwd}
-            />
+            <Box
+                className = "field"
+                sx = {{ display: 'flex', alignItems: 'flex-start' }}
+            >
+                <AccountCircleOutlinedIcon sx = {{ color: 'action.active', mr: 2, mt: 2 }} />
+                <TextField
+                    autoComplete = "off"
+                    variant = "outlined"
+                    error = {userError}
+                    helperText = {userError ? "Membru inexistent" : ""}
+                    placeholder = "Prenume"
+                    onChange = {(event) => {
+                        if(userError){
+                            setUserError(false);
+                        }
+                        setPrenume(event.target.value);
+                    }}
+                    value = {prenume}
+                />
+            </Box>
 
-            <br /> <br />
-
-            <input 
-                placeholder="Nume"
-                onChange={(event) => {
-                    setNume(event.target.value);
-                }}
-                value={nume}
-            />
-
-            <br /> <br />
-
-            <input 
-                placeholder="Prenume"
-                onChange={(event) => {
-                    setPrenume(event.target.value);
-                }}
-                value={prenume}
-            />
-
-            <br /> <br />
-
-            <Box sx={{ maxWidth: 120 }}>
+            <Box 
+                className = "field"
+                sx = {{ maxWidth: 135, margin: "auto" }}
+            >
 
                 <FormControl fullWidth>
 
-                    <InputLabel id="demo-simple-select-label">Rol</InputLabel>
+                    <InputLabel id = "demo-simple-select-label">Rol</InputLabel>
 
                     <Select
-                        labelId="demo-simple-select-label"
-                        id="demo-simple-select"
-                        value={rol}
-                        label="Rol"
-                        onChange={(event) => {
+                        labelId = "demo-simple-select-label"
+                        id = "demo-simple-select"
+                        error = {userError}
+                        value = {rol}
+                        label = "Rol"
+                        onChange = {(event) => {
                             setRol(event.target.value);
                         }}>
 
-                            <MenuItem value={"jucator"}>Jucator</MenuItem>
-                            <MenuItem value={"staff"}>Staff</MenuItem>
+                            <MenuItem value = {"jucator"}>Jucator</MenuItem>
+                            <MenuItem value = {"staff"}>Staff</MenuItem>
                     </Select>
+
+                    {userError ? <FormHelperText sx={{color: 'error.main'}}>Membru inexistent</FormHelperText> : <></>}
 
                 </FormControl>
 
             </Box>
-            
-            <br /> <br />
 
-            <Button onClick={(event) => {
-                register(event);
-
-                setEmail('');
-                setPasswd('');
-                setNume('');
-                setPrenume('');
-                setRol('');
-                }}>
-                    Register
+            <Button 
+                className = "buton"
+                variant = "contained"
+                onClick={(event) => {
+                    register(event);
+                    }}>
+                        Register
             </Button>
             
         </div>

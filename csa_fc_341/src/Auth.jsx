@@ -3,11 +3,16 @@ import React, { useEffect, useState } from 'react';
 import { getFirestore, doc, getDoc } from "firebase/firestore";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { Link } from 'react-router-dom';
-import { Button } from 'semantic-ui-react';
 import { app, auth } from './DatabaseConnection';
+
+import { Box, TextField, Button } from '@mui/material';
 
 import Login from './Login';
 import Register from './Register';
+
+import EmailOutlinedIcon from '@mui/icons-material/EmailOutlined';
+
+import "./Controlere/Stil.css";
 
 
 const db = getFirestore(app);
@@ -15,15 +20,22 @@ const db = getFirestore(app);
 function Auth(){
     
     const [email, setEmail] = useState("");
+    const [emailError, setEmailError] = useState(false);
+
 
     const sendPasswordReset = async (event) => {
         try {
             event.preventDefault();
 
             await sendPasswordResetEmail(auth, email);
+            
+            setEmail('');
+
             alert("Password reset link sent!");
         } catch (error) {
-            console.error(error.message);
+            if(error.code === "auth/invalid-email"){
+                setEmailError(true);
+            }
         }
     };
 
@@ -74,49 +86,59 @@ function Auth(){
                     <div>
                         <Login />
 
-                        <br /> <br />
-
                         <Register />
 
-                        <br /> <br />
+                        <div className = "reset">
 
-                        <div>
-                            <h3>Forgot password</h3>
-                            <input 
-                                placeholder="Email"
-                                onChange={(event) => {
-                                    setEmail(event.target.value);
-                                }}
-                                value={email}
-                            />
-                            <br /> <br />
+                            <h2>Forgot password</h2>
 
-                            <Button onClick={(event) => {
-                                sendPasswordReset(event);
+                            <Box
+                                className = "field"
+                                sx = {{ display: 'flex', alignItems: 'flex-start' }}
+                            >
+                                <EmailOutlinedIcon sx = {{ color: 'action.active', mr: 2, mt: 2 }} />
+                                <TextField
+                                    variant = "outlined"
+                                    error = {emailError}
+                                    helperText = {emailError ? "Email inexistent" : ""}
+                                    placeholder = "Email"
+                                    onChange = {(event) => {
+                                        if(emailError){
+                                            setEmailError(false);
+                                        }
+                                        setEmail(event.target.value);
+                                    }}
+                                    value = {email}
+                                />
+                            </Box>
 
-                                setEmail('');
-                                }}>
-                                    Reset
+                            <Button 
+                                className = "buton"
+                                variant = "contained"
+                                onClick={(event) => {
+                                    sendPasswordReset(event);
+                                    }}>
+                                        Reset
                             </Button>
                         </div>
                     </div>
                 : user ?
 
-                        <div>
-                            <br /> <br />
+                        <div className = "logged">
 
-                            <div>
+                            <div className = "text">
                                     <h3>Logged in as: {user.email}</h3>
                                     <h3>Role: {rol_user}</h3>
                             </div>
 
-                            <br /> <br />
-
                             <Link to="/">
-                                <Button onClick={() => {
-                                    logout();
-                                    }}>
-                                        Logout
+                                <Button 
+                                    className = "buton"
+                                    variant = "contained"
+                                    onClick={() => {
+                                        logout();
+                                        }}>
+                                            Logout
                                 </Button>
                             </Link>
                         </div>

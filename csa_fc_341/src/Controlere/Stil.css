@@ -83,3 +83,27 @@ button:hover {
     border-radius: 10px;
     background-color:#2C698D;
 }
+
+.login, .register, .reset, .logged{
+    display: block;
+    margin: auto;
+    width: fit-content;
+    text-align: center;
+    font-family: "Varela Round", sans-serif;
+    letter-spacing: 1.1px;
+    margin-top: 50px;
+}
+
+.login > .field, .register > .field, .reset > .field, .logged > .text {
+    margin-bottom: 25px;
+}
+
+.login > .buton, .register > .buton, .reset > .buton, .logged * .buton {
+    background-color: #272643;
+    font-family: "Varela Round", sans-serif;
+    letter-spacing: 1.1px;
+}
+
+.reset, .logged {
+    margin-bottom: 50px;
+}

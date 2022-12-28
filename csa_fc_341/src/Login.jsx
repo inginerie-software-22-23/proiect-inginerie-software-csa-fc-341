@@ -1,56 +1,109 @@
+import { Box, IconButton, TextField, Button } from "@mui/material";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { useState } from "react";
-import { Button } from "semantic-ui-react";
 import { auth } from "./DatabaseConnection";
+
+import EmailOutlinedIcon from '@mui/icons-material/EmailOutlined';
+import PasswordOutlinedIcon from '@mui/icons-material/PasswordOutlined';
+import VisibilityOutlinedIcon from '@mui/icons-material/VisibilityOutlined';
+import VisibilityOffOutlinedIcon from '@mui/icons-material/VisibilityOffOutlined';
+
+import "./Controlere/Stil.css";
 
 
 function Login(){
     const [email, setEmail] = useState("");
     const [passwd, setPasswd] = useState("");
 
+    const [showPassword, setShowPassword] = useState(true);
+
+    const [emailError, setEmailError] = useState(false);
+    const [passwdError, setPasswdError] = useState(false);
+
+
+    const handleShowPassword = () => setShowPassword(!showPassword);
 
     const login = async (event) => {
         try{
             event.preventDefault();
 
+            setEmailError(false);
+            setPasswdError(false);
+
             await signInWithEmailAndPassword(auth, email, passwd);
+            
+            setEmail('');
+            setPasswd('');
         } catch (error){
-            console.log(error.message);
+            if(error.code === "auth/invalid-email"){
+                setEmailError(true);
+            }
+            else if (error.code === "auth/wrong-password"){
+                setPasswdError(true);
+            }
         }
     }
     
 
     return(
-        <div>
-            <h3>Login</h3>
+        <div className = "login">
 
-            <input 
-                placeholder="Email"
-                onChange={(event) => {
-                    setEmail(event.target.value);
-                }}
-                value={email}
-            />
+            <h2>Login</h2>
+
+            <Box
+                className = "field"
+                sx = {{ display: 'flex', alignItems: 'flex-start' }}
+            >
+                <EmailOutlinedIcon sx = {{ color: 'action.active', mr: 2, mt: 2 }} />
+                <TextField
+                    variant = "outlined"
+                    error = {emailError}
+                    helperText = {emailError ? "Email incorect" : ""}
+                    placeholder = "Email"
+                    onChange = {(event) => {
+                        if(emailError){
+                            setEmailError(false);
+                        }
+                        setEmail(event.target.value);
+                    }}
+                    value = {email}
+                />
+            </Box>
             
-            <br /> <br />
+            <Box
+                className = "field"
+                sx = {{ display: 'flex', alignItems: 'flex-start' }}
+            >
+                <PasswordOutlinedIcon sx = {{ color: 'action.active', mr: 2, mt: 2 }} />
+                <TextField
+                    variant = "outlined"
+                    error = {passwdError}
+                    helperText = {passwdError ? "Parola incorecta" : ""}
+                    type = {showPassword ? "text" : "password"}
+                    placeholder = "Parola"
+                    onChange = {(event) => {
+                        if(passwdError){
+                            setPasswdError(false);
+                        }
+                        setPasswd(event.target.value);
+                    }}
+                    value = {passwd}
+                />
+                <IconButton
+                    onClick = { handleShowPassword }
+                    sx = {{ color: 'action.active', ml: 2, mt: 1 }}
+                >
+                    {showPassword ? <VisibilityOutlinedIcon /> : <VisibilityOffOutlinedIcon />}
+                </IconButton>
+            </Box>
 
-            <input 
-                placeholder="Parola"
-                onChange={(event) => {
-                    setPasswd(event.target.value);
-                }}
-                value={passwd}
-            />
-
-            <br /> <br />
-
-            <Button onClick={(event) => {
-                login(event);
-
-                setEmail('');
-                setPasswd('');
-                }}>
-                    Login
+            <Button
+                className = "buton"
+                variant = "contained"
+                onClick = {(event) => {
+                    login(event);
+                    }}>
+                        Login
             </Button>
 
         </div>
