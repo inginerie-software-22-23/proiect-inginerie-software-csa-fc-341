@@ -8,7 +8,8 @@ import PasswordOutlinedIcon from '@mui/icons-material/PasswordOutlined';
 import VisibilityOutlinedIcon from '@mui/icons-material/VisibilityOutlined';
 import VisibilityOffOutlinedIcon from '@mui/icons-material/VisibilityOffOutlined';
 
-import "./Controlere/Stil.css";
+//import "./Controlere/Stil.css";
+import "./Login.css"
 
 
 function Login(){
@@ -51,14 +52,17 @@ function Login(){
     return(
         <div className = "login">
 
-            <h2>Login</h2>
+            <label>LOGIN</label>
+            
 
             <Box
                 className = "field"
                 sx = {{ display: 'flex', alignItems: 'flex-start' }}
             >
-                <EmailOutlinedIcon sx = {{ color: 'action.active', mr: 2, mt: 2 }} />
+                <EmailOutlinedIcon sx = {{ color: '#E3F6F5', mr: 2, mt: 2 }} />
+
                 <TextField
+                    className="scriere"
                     variant = "outlined"
                     error = {emailError}
                     helperText = {emailError ? passwdError ? "Userul nu exista" : "Email incorect" : ""}
@@ -71,15 +75,17 @@ function Login(){
                     }}
                     value = {email}
                 />
+                
             </Box>
             
             <Box
                 className = "field"
                 sx = {{ display: 'flex', alignItems: 'flex-start' }}
             >
-                <PasswordOutlinedIcon sx = {{ color: 'action.active', mr: 2, mt: 2 }} />
+                <PasswordOutlinedIcon sx = {{ color: '#E3F6F5', mr: 2, mt: 2 }} />
                 <TextField
                     variant = "outlined"
+                    className="scriere"
                     error = {passwdError}
                     helperText = {passwdError ? emailError ? "Userul nu exista" : "Parola incorecta" : ""}
                     type = {showPassword ? "text" : "password"}
@@ -94,22 +100,22 @@ function Login(){
                 />
                 <IconButton
                     onClick = { handleShowPassword }
-                    sx = {{ color: 'action.active', ml: 2, mt: 1 }}
+                    sx = {{ color: '#E3F6F5', ml: 2, mt: 1 }}
                 >
                     {showPassword ? <VisibilityOutlinedIcon /> : <VisibilityOffOutlinedIcon />}
                 </IconButton>
             </Box>
 
             <Button
-                className = "buton"
+                className = "butonlogin"
                 variant = "contained"
                 onClick = {(event) => {
                     login(event);
                     }}>
                         Login
             </Button>
-
-        </div>
+            </div>
+        
     );
 }
 

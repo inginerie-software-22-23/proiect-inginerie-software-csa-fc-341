@@ -92,16 +92,17 @@ function Register(){
     
 
     return(
-        <div className = "register">
+        <div className = "login">
             
-            <h2>Register</h2>
+            <label>REGISTER</label>
 
             <Box
                 className = "field"
                 sx = {{ display: 'flex', alignItems: 'flex-start' }}
             >
-                <EmailOutlinedIcon sx = {{ color: 'action.active', mr: 2, mt: 2 }} />
+                <EmailOutlinedIcon sx = {{ color: '#E3F6F5', mr: 2, mt: 2 }} />
                 <TextField
+                    className="scriere"
                     autoComplete = "new-password"
                     variant = "outlined"
                     error = {emailUsedError || emailInvalidError}
@@ -123,10 +124,11 @@ function Register(){
                 className = "field"
                 sx = {{ display: 'flex', alignItems: 'flex-start' }}
             >
-                <PasswordOutlinedIcon sx = {{ color: 'action.active', mr: 2, mt: 2 }} />
+                <PasswordOutlinedIcon sx = {{ color: '#E3F6F5', mr: 2, mt: 2 }} />
                 <TextField
                     autoComplete = "new-password"
                     variant = "outlined"
+                    className="scriere"
                     error = {passwdError}
                     helperText = {passwdError ? "Parola slaba" : ""}
                     type = {showPassword ? "text" : "password"}
@@ -141,7 +143,7 @@ function Register(){
                 />
                 <IconButton
                     onClick = { handleShowPassword }
-                    sx = {{ color: 'action.active', ml: 2, mt: 1 }}
+                    sx = {{ color: '#E3F6F5', ml: 2, mt: 1 }}
                 >
                     {showPassword ? <VisibilityOutlinedIcon /> : <VisibilityOffOutlinedIcon />}
                 </IconButton>
@@ -151,8 +153,9 @@ function Register(){
                 className = "field"
                 sx = {{ display: 'flex', alignItems: 'flex-start' }}
             >
-                <AccountCircleOutlinedIcon sx = {{ color: 'action.active', mr: 2, mt: 2 }} />
+                <AccountCircleOutlinedIcon sx = {{ color: '#E3F6F5', mr: 2, mt: 2 }} />
                 <TextField
+                    className="scriere"
                     autoComplete = "off"
                     variant = "outlined"
                     error = {userError}
@@ -172,9 +175,10 @@ function Register(){
                 className = "field"
                 sx = {{ display: 'flex', alignItems: 'flex-start' }}
             >
-                <AccountCircleOutlinedIcon sx = {{ color: 'action.active', mr: 2, mt: 2 }} />
+                <AccountCircleOutlinedIcon sx = {{ color: '#E3F6F5', mr: 2, mt: 2 }} />
                 <TextField
                     autoComplete = "off"
+                    className="scriere"
                     variant = "outlined"
                     error = {userError}
                     helperText = {userError ? "Membru inexistent" : ""}
@@ -188,22 +192,22 @@ function Register(){
                     value = {prenume}
                 />
             </Box>
-
+            <h3>Selecteaza rolul tau in echipa</h3>
             <Box 
                 className = "field"
                 sx = {{ maxWidth: 135, margin: "auto" }}
             >
-
                 <FormControl fullWidth>
-
-                    <InputLabel id = "demo-simple-select-label">Rol</InputLabel>
+                {/* <InputLabel id = "demo-simple-select-label">Rol</InputLabel> */}
 
                     <Select
                         labelId = "demo-simple-select-label"
+                        className="scriere"
                         id = "demo-simple-select"
                         error = {userError}
                         value = {rol}
                         label = "Rol"
+        
                         onChange = {(event) => {
                             setRol(event.target.value);
                         }}>
@@ -211,15 +215,16 @@ function Register(){
                             <MenuItem value = {"jucator"}>Jucator</MenuItem>
                             <MenuItem value = {"staff"}>Staff</MenuItem>
                     </Select>
+                    
 
-                    {userError ? <FormHelperText sx={{color: 'error.main'}}>Membru inexistent</FormHelperText> : <></>}
+                    {userError ? <FormHelperText sx={{color: '#E3F6F5'}}>Membru inexistent</FormHelperText> : <></>}
 
                 </FormControl>
 
             </Box>
 
             <Button 
-                className = "buton"
+                className = "butonlogin"
                 variant = "contained"
                 onClick={(event) => {
                     register(event);

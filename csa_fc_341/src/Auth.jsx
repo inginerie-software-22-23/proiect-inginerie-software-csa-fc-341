@@ -83,22 +83,26 @@ function Auth(){
         <div>
             {
                 rol_user === "guest" ?
-                    <div>
+                    <div className='test'>
+                        
                         <Login />
 
                         <Register />
 
+                        
+                         
                         <div className = "reset">
 
-                            <h2>Forgot password</h2>
+                             <label>RESET PASSWORD</label>
 
                             <Box
                                 className = "field"
                                 sx = {{ display: 'flex', alignItems: 'flex-start' }}
                             >
-                                <EmailOutlinedIcon sx = {{ color: 'action.active', mr: 2, mt: 2 }} />
+                                <EmailOutlinedIcon sx = {{ color: '#E3F6F5', mr: 2, mt: 2 }} />
                                 <TextField
                                     variant = "outlined"
+                                    className="scriere"
                                     error = {emailError}
                                     helperText = {emailError ? "Email inexistent" : ""}
                                     placeholder = "Email"
@@ -113,7 +117,7 @@ function Auth(){
                             </Box>
 
                             <Button 
-                                className = "buton"
+                                 className = "butonlogin"
                                 variant = "contained"
                                 onClick={(event) => {
                                     sendPasswordReset(event);
@@ -128,6 +132,7 @@ function Auth(){
 
                             <div className = "text">
                                     <h3>Logged in as: {user.email}</h3>
+                                    <p></p>
                                     <h3>Role: {rol_user}</h3>
                             </div>
 
