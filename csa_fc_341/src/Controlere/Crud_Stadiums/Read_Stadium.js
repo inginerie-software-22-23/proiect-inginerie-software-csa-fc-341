@@ -1,10 +1,11 @@
-import { getFirestore, collection, getDocs } from "firebase/firestore";
+import { getFirestore, collection, getDocs, getDoc, doc, deleteDoc } from "firebase/firestore";
 import { Table,Button } from 'semantic-ui-react'
 import { Link } from 'react-router-dom';
+import { app, auth } from '../../DatabaseConnection';
+import React, { useState, useEffect } from 'react';
+import { useAuthState } from "react-firebase-hooks/auth";
+
 import "../Stil.css";
-import {app} from '../../DatabaseConnection';
-import { doc, deleteDoc } from "firebase/firestore";
-import React,{useState,useEffect} from 'react';
 
 
 const db = getFirestore(app);
@@ -14,7 +15,9 @@ const useSortableData = (items, config = null) => {
     const [sortConfig, setSortConfig] = React.useState(config);
   
     const sortedItems = React.useMemo(() => {
+
       let sortableItems = [...items];
+
       if (sortConfig !== null) {
         sortableItems.sort((a, b) => {
           if (a[sortConfig.key] < b[sortConfig.key]) {
@@ -26,11 +29,15 @@ const useSortableData = (items, config = null) => {
           return 0;
         });
       }
+
       return sortableItems;
+
     }, [items, sortConfig]);
   
     const requestSort = (key) => {
+
       let direction = 'ascending';
+
       if (
         sortConfig &&
         sortConfig.key === key &&
@@ -38,9 +45,10 @@ const useSortableData = (items, config = null) => {
       ) {
         direction = 'descending';
       }
+      
       setSortConfig({ key, direction });
     };
-    //console.log(sortedItems)
+
     return { items: sortedItems, requestSort, sortConfig };
   };
 
@@ -49,127 +57,182 @@ function Read_Stadiums(){
 
   const docRef = doc(db, "stadion", "id");
 
-deleteDoc(docRef)
-.then(() => {
-    //console.log("Entire Document has been deleted successfully.")
-})
-.catch(error => {
-    console.log(error);
-})
-  function update(x){
-    
+  deleteDoc(docRef)
+  .then(() => {
+      //console.log("Entire Document has been deleted successfully.")
+  })
+  .catch(error => {
+      console.log(error);
+  })
+
+  function update(x){  
     localStorage.setItem('stadium_id',x)
   }
+
   function onDelete(id) {
     deleteDoc(doc(db, "stadion", id));
     window.location.reload();
-}
-
-  function add_stadium(){
-    
-    window.open('http://localhost:3000/add_stadium','_parent','Add a stadium',param);
-    
   }
+
+  function add_stadium(){ 
+    window.open('http://localhost:3000/add_stadium','_parent','Add a stadium',param);
+  }
+
   const [stadioane, setStadioane] = useState([]);
   
+
   const fetchStadioane = async()=>{
     let response=collection(db, 'stadion');
+
     await getDocs(response).then((querySnapshot) => {
 
       querySnapshot.forEach(element => {
-        //console.log(element.id);
-          //setStadioane(arr => [...arr, "id: '"+element.id+"'"])
-          var date = element.data();
-          date.id = element.id;
-          
-
-          //console.log(date);
-          setStadioane(arr => [...arr , date]);  
+        
+        var date = element.data();
+        date.id = element.id;
+        
+        setStadioane(arr => [...arr , date]);
       });
-  });
+    });
   }
 
-    useEffect(()=>{
-      fetchStadioane();
-
-    },[])
+  useEffect(()=>{
+    fetchStadioane();
+  },[])
     
-    const { items, requestSort, sortConfig } = useSortableData(stadioane);
-    const getClassNamesFor = (denumire) => {
-        if (!sortConfig) {
-            return;
-        }
-        return sortConfig.key === denumire ? sortConfig.direction : undefined;
-        };
+  const { items, requestSort, sortConfig } = useSortableData(stadioane);
 
-//console.log(stadioane)
-    return(
-        <div>
-       
-          <Button type="button" className="bt4" id="butonAdd" onClick={()=>add_stadium()}>
-              Add a stadium
-          </Button>
+  const getClassNamesFor = (denumire) => {
+      if (!sortConfig) {
+          return;
+      }
+      return sortConfig.key === denumire ? sortConfig.direction : undefined;
+      };
 
-        <Table singleLine className='tabel'>
+  const [user, loading, error] = useAuthState(auth);
+  const [rol_user, setRol_user] = useState("");
+  
+  
+  async function get_detalii_user(docID){
+    const ref = doc(db, "users", docID);
+
+    await getDoc(ref)
+    .then((response) => {
+        let res = response.data();
+        
+        setRol_user(res.rol);
+    })
+    .catch((e) => console.log(e));
+  }
+
+  useEffect(() => {
+    if (loading){
+      return;
+    } else if(user){
+      get_detalii_user(user.uid)
+    } else {
+      setRol_user("guest");
+    }
+  }, [loading, user]);
+
+  return(
+    <div>
+      {
+        rol_user === "admin" 
+          ?
+            <Button type="button" className="bt4" id="butonAdd" onClick={()=>add_stadium()}>
+                Add a stadium
+            </Button>
+          :
+            <></>
+      }
+
+      <Table singleLine className='tabel'>
+
         <Table.Header className='tt1'>
-            <Table.Row>
+          
+          <Table.Row>
             
+            <Table.HeaderCell className='titlu'>
+              <button type="button"
+                      onClick={() => requestSort('denumire')}
+                      className={getClassNamesFor('denumire')}
+                        >Name
+              </button>
+            </Table.HeaderCell>
             
-                <Table.HeaderCell className='titlu'><button
-      type="button"
-      onClick={() => requestSort('denumire')}
-      className={getClassNamesFor('denumire')}
-    >Name</button></Table.HeaderCell>
-                <Table.HeaderCell className='titlu'><button
-      type="button"
-      onClick={() => requestSort('capacitate')}
-      className={getClassNamesFor('capacitate')}
-    >Capacity</button></Table.HeaderCell>
-                <Table.HeaderCell className='titlu'><button
-      type="button"
-      onClick={() => requestSort('tip_gazon')}
-      className={getClassNamesFor('tip_gazon')}
-    >Surface</button></Table.HeaderCell>
-                <Table.HeaderCell className='titlu'><button
-      type="button"
-      onClick={() => requestSort('adresa')}
-      className={getClassNamesFor('adresa')}
-    >Address</button></Table.HeaderCell>
-    <Table.HeaderCell className='titlu'></Table.HeaderCell> 
-    <Table.HeaderCell className='titlu'></Table.HeaderCell>              
-                
+            <Table.HeaderCell className='titlu'>
+              <button type="button"
+                      onClick={() => requestSort('capacitate')}
+                      className={getClassNamesFor('capacitate')}
+                        >Capacity
+              </button>
+            </Table.HeaderCell>
+            
+            <Table.HeaderCell className='titlu'>
+              <button type="button"
+                      onClick={() => requestSort('tip_gazon')}
+                      className={getClassNamesFor('tip_gazon')}
+                        >Surface
+              </button>
+            </Table.HeaderCell>
+            
+            <Table.HeaderCell className='titlu'>
+              <button type="button"
+                      onClick={() => requestSort('adresa')}
+                      className={getClassNamesFor('adresa')}
+                        >Address
+              </button>
+            </Table.HeaderCell>
 
-            </Table.Row>
+            <Table.HeaderCell className='titlu'></Table.HeaderCell>
+
+            <Table.HeaderCell className='titlu'></Table.HeaderCell>              
+                
+          </Table.Row>
+
         </Table.Header>
 
         <Table.Body>
         
-        {items.map((data) =>  {
-return (
-<Table.Row key = {data.denumire}>
+          {
+            items.map((data) =>  {
+              return (
 
-<Table.Cell >{data.denumire}</Table.Cell>
-          <Table.Cell >{data.capacitate}</Table.Cell>
-          <Table.Cell >{data.tip_gazon}</Table.Cell>
-          <Table.Cell >{data.adresa}</Table.Cell>
-          <Table.Cell>
-        <Button onClick={() =>onDelete(data.id)}>Delete</Button>
-        </Table.Cell> 
-        
-          <Table.Cell> 
-          <Link to='/update_stadium'>
-        <Button onClick={() =>update(data.id)}>Update</Button>
-        </Link>
-        </Table.Cell>
-        
-      
+                <Table.Row key = {data.denumire}>
 
-</Table.Row>
-)})}
+                  <Table.Cell >{data.denumire}</Table.Cell>
+                  <Table.Cell >{data.capacitate}</Table.Cell>
+                  <Table.Cell >{data.tip_gazon}</Table.Cell>
+                  <Table.Cell >{data.adresa}</Table.Cell>
+                  {
+                    rol_user === "admin" 
+                      ?
+                        <>
+                          <Table.Cell>
+                            <Button onClick={() =>onDelete(data.id)}>Delete</Button>
+                          </Table.Cell> 
+                          
+                          <Table.Cell> 
+                            <Link to='/update_stadium'>
+                              <Button onClick={() =>update(data.id)}>Update</Button>
+                            </Link>
+                          </Table.Cell>
+                        </>
+                      :
+                        <></>
+                  }
+                
+                </Table.Row>
+              )
+            })
+          }
         </Table.Body>
-    </Table>
+
+      </Table>
+
     </div>
-    );
+  );
 }
 
 export default Read_Stadiums;

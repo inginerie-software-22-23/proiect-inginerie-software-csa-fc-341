@@ -1,5 +1,5 @@
 import React from "react";
-import './Home.css'
+import './Home.css';
 
 
 function Home(){
@@ -26,6 +26,7 @@ function Home(){
 
                 <div >
                     <h1> Echipa developeri </h1>
+                    
                     <ol>
                         <li><span className="text-wrapper">Avian Silviu</span></li>
                         <li><span className="text-wrapper">Dijmarescu Cristina</span></li>    

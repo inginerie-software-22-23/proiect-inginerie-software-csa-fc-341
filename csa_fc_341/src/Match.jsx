@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom"
 import { Button, Table } from 'semantic-ui-react'
-import {app} from './DatabaseConnection';
+import { app } from './DatabaseConnection';
 import { getFirestore, getDoc, doc } from "firebase/firestore";
 
-
 const db = getFirestore(app);
+
 
 const Match = () => {
     const {id} = useParams();
@@ -35,11 +35,13 @@ const Match = () => {
                     let echipa_gazda = res.adversar;
                     res["echipa_gazda"] = echipa_gazda;
                     res["echipa_oaspete"] = "FCSB";
+
                     SetMatch(res);
                 } else {
                     let echipa_oaspete = res.adversar;
                     res["echipa_gazda"] = "FCSB";
                     res["echipa_oaspete"] = echipa_oaspete;
+
                     SetMatch(res);
                 }
 
@@ -80,12 +82,15 @@ const Match = () => {
     return (
         <div>
             <h1>Competitie: {match?.competitie}</h1>
+
             <h2>Data: {match?.data}</h2>
+
             <h2>{match?.echipa_gazda} {match?.scor} {match?.echipa_oaspete}</h2>
             
             <br />
 
             <h3>Echipa de start: </h3>
+
             <div>
                 <Table singleLine className='tabel'>
                     <Table.Body>
@@ -105,11 +110,14 @@ const Match = () => {
 
             <footer>
                 <h4>Arbitru: {match?.arbitru}</h4>
+                
                 <h4>Stadion: {stadion?.denumire}({stadion?.oras})</h4>
+
                 <Link to="/tomeci">
                     <Button>Go back</Button>
                 </Link>
             </footer>
+
         </div>
     );
 }

@@ -48,7 +48,6 @@ body{
     color: #272643;
 }
 
-/* CSS */
 button {
   background-color: #272643;
   border-radius: 100px;
@@ -82,4 +81,46 @@ button:hover {
     box-shadow: #272643 0 10px 18px;
     border-radius: 10px;
     background-color:#2C698D;
+}
+
+.login, .reset, .logged, .form{
+    display: block;
+    margin: auto;
+    width: fit-content;
+    text-align: center;
+    font-family: "Varela Round", sans-serif;
+    letter-spacing: 1.1px;
+    margin-top: 50px;
+}
+
+.field > .raspuns {
+    display: block;
+    margin: auto;
+    width: fit-content;
+    text-align: center;
+    font-family: "Varela Round", sans-serif;
+    letter-spacing: 1.1px;
+}
+
+.login > .field, .register > .field, .reset > .field, .logged > .text {
+    margin-bottom: 25px;
+}
+
+.login > .buton, .register > .buton, .reset > .buton, .logged * .buton {
+    background-color: #272643;
+    font-family: "Varela Round", sans-serif;
+    letter-spacing: 1.1px;
+}
+
+.reset, .logged {
+    margin-bottom: 50px;
+}
+
+.field > label{
+    color: #272643;
+    font-size: 1.5em;
+}
+
+.form > Button, .login > Button, .reset > Button{
+    margin: 25px;
 }

@@ -1,16 +1,16 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import {BrowserRouter as Router, Route, Routes} from "react-router-dom";
+import { BrowserRouter as Router, Navigate, Route, Routes } from "react-router-dom";
 
 import './index.css';
 
-import {Stadion} from './Stadion';
-import {Meci} from './Meci';
-import {Jucator} from './Jucator';
-import {Weather} from './Weather';
-import {Staff} from './Staff';
-import {Contract} from './Contract';
-import {Statistics} from './Statistics';
+import { Stadion } from './Stadion';
+import { Meci } from './Meci';
+import { Jucator } from './Jucator';
+import { Weather } from './Weather';
+import { Staff } from './Staff';
+import { Contract } from './Contract';
+import { Statistics } from './Statistics';
 
 import Add_Stadium from './Controlere/Crud_Stadiums/Add_Stadium'
 import Add_Player from './Controlere/Crud_Players/Add_Player'
@@ -27,16 +27,23 @@ import Update_Player from './Controlere/Crud_Players/Update_Player';
 import Navigation  from "./Controlere/Navigation";
 import Home from "./Controlere/Home";
 import Match from './Match';
+import Auth from './Auth';
 
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
 root.render(
   <Router>
+    
     <Navigation />
+
     <Routes>
+
       {/* Ruta pentru pagina de Home */}
       <Route path="/" element={<Home />} />
+
+      {/* Ruta pentru pagina de Autentificare */}
+      <Route path="/toauth" element={<Auth />} />
 
       {/* Ruta pentru pagina de Stadioane */}
       <Route path="/tostadion" element={<Stadion />} />
@@ -65,13 +72,17 @@ root.render(
       <Route path="/add_staff" element={<Add_Staff />} />
 
        {/* Ruta pentru pagina de Contracte */}
-       <Route path="/tocontract" element={<Contract />} />
-       <Route path="/update_contract" element={<Update_Contract />} />
+      <Route path="/tocontract" element={<Contract />} />
+      <Route path="/update_contract" element={<Update_Contract />} />
       <Route path="/add_contract" element={<Add_Contract />} />
 
       {/* Ruta pentru pagina de Statistici */}
       <Route path="/tostatistics" element={<Statistics />} />
 
+      {/* Ruta default */}
+      <Route path="*" element={<Navigate to="/" />} />
+      
     </Routes>
+
   </Router>
 );
