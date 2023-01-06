@@ -1,11 +1,12 @@
 import { getFirestore, collection, getDocs } from "firebase/firestore";
-import "../Stil.css";
 import { app } from '../../DatabaseConnection';
 import React, { useEffect } from 'react';
 import Chart_Picior from "./Chart_Picior";
 import Chart_Pozitie from "./Chart_Pozitie";
 import Chart_Varsta from "./Chart_Varsta";
+
 import '../Home.css';
+import "../Stil.css";
 
 const db = getFirestore(app);
 let response = collection(db, 'jucator');

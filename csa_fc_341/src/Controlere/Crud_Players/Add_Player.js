@@ -19,7 +19,6 @@ export default function Create_Staff() {
 
     async function add_player(event) {
         
-        //setWait(true)
         var a = await addDoc(collection(db, "jucator"), {
             nume: nume,
             prenume: prenume,
@@ -28,10 +27,10 @@ export default function Create_Staff() {
             picior: picior,
             nationalitate: nationalitate,
             inaltime: inaltime
-          }).then(alert(`The player you added is: ${nume}`));
+        }).then(alert(`The player you added is: ${nume}`));
           
-          await Promise.all([a]);
-          window.location.href = "http://localhost:3000/tojucator";
+        await Promise.all([a]);
+        window.location.href = "http://localhost:3000/tojucator";
     }
 
     const [user, loading, error] = useAuthState(auth);

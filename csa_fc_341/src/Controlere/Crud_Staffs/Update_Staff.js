@@ -28,19 +28,15 @@ export default function Update_Stadium() {
         if(id){
             getDoc(doc(db, "staff", id)).then(docSnap =>{
             
-            date = docSnap.data(); 
-            setstaffid(date.id);
-            setnume(date.nume);
-            setprenume(date.prenume);
-            setdata_nastere(date.data_nastere);
-            setrol(date.rol);
-            setemail(date.email);
-            settelefon(date.telefon);
+                date = docSnap.data();
 
-            // setnameform(date.denumire);
-            // setcapacityform(date.capacitate);
-            // setsurfaceform(date.tip_gazon)
-            // setaddressform(date.adresa);
+                setstaffid(date.id);
+                setnume(date.nume);
+                setprenume(date.prenume);
+                setdata_nastere(date.data_nastere);
+                setrol(date.rol);
+                setemail(date.email);
+                settelefon(date.telefon);
                 
             });
         } else {
@@ -121,22 +117,27 @@ export default function Update_Stadium() {
                                     <label>Nume</label>
                                     <input placeholder={nume} value={nume} onChange={(e) => setnume(e.target.value)}  />
                                 </Form.Field>
+
                                 <Form.Field className='ff'>
                                     <label>Prenume</label>
                                     <input placeholder={prenume} value={prenume} onChange={(e) => setprenume(e.target.value)} />
                                 </Form.Field>
+
                                 <Form.Field className='ff'>
                                     <label>Data_nastere</label>
                                     <input placeholder={data_nastere} value={data_nastere} onChange={(e) => setdata_nastere(e.target.value)} />
                                 </Form.Field>
+
                                 <Form.Field className='ff'>
                                     <label>Rol</label>
                                     <input placeholder={rol} value={rol} onChange={(e) => setrol(e.target.value)} />
                                 </Form.Field>
+
                                 <Form.Field className='ff'>
                                     <label>Email</label>
                                     <input placeholder={email} value={email} onChange={(e) => setemail(e.target.value)} />
                                 </Form.Field>
+                                
                                 <Form.Field className='ff'>
                                     <label>Telefon</label>
                                     <input placeholder={telefon} value={telefon} onChange={(e) => settelefon(e.target.value)} />

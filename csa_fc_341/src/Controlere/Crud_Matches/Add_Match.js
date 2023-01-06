@@ -15,23 +15,18 @@ export default function Create_Match() {
     const [data, setdata] = useState('');
     const [scor, setscor] = useState('');
 
-    // NU MERG
-    // const [id_stadion, setid_stadion] = useState('');
-    // const [lista_jucatori, setlista_jucatori] = useState('');
-
     async function add_match(event) {
         
-        //setWait(true)
         var a = await addDoc(collection(db, "meci"), {
             adversar: adversar,
             arbitru: arbitru,
             competitie: competitie,
             data: data,
             scor: scor
-          }).then(alert(`The match you added is: ${adversar}`));
-          
-          await Promise.all([a]);
-          window.location.href = "http://localhost:3000/tomeci";
+        }).then(alert(`The match you added is: ${adversar}`));
+        
+        await Promise.all([a]);
+        window.location.href = "http://localhost:3000/tomeci";
     }
 
     const [user, loading, error] = useAuthState(auth);

@@ -17,7 +17,6 @@ export default function Update_Contract() {
     const [data_final, setdata_final] = useState();
     const [bonusuri, setbonusuri] = useState();
     const [idpersoana, setidpersoana] = useState();
-    const [persoana, setpersoana] = useState();
 
     let navigate = useNavigate();
 
@@ -48,12 +47,6 @@ export default function Update_Contract() {
     },[])
     
     const handleSubmit = (event) => {
-        
-        // console.log(impresar);
-        // console.log(salariu);
-        // console.log(data_inceput);
-        // console.log(data_final);
-        // console.log(bonusuri);
 
         const washingtonRef = doc(db, "contract", id);
 

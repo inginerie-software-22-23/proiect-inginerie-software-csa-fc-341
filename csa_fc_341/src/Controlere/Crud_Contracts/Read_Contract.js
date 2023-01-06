@@ -11,46 +11,45 @@ const db = getFirestore(app);
 let param ="width=500,height=500";
 
 const useSortableData = (items, config = null) => {
-    const [sortConfig, setSortConfig] = React.useState(config);
-  
-    const sortedItems = React.useMemo(() => {
+  const [sortConfig, setSortConfig] = React.useState(config);
 
-      let sortableItems = [...items];
+  const sortedItems = React.useMemo(() => {
 
-      if (sortConfig !== null) {
-        sortableItems.sort((a, b) => {
-          if (a[sortConfig.key] < b[sortConfig.key]) {
-            return sortConfig.direction === 'ascending' ? -1 : 1;
-          }
-          if (a[sortConfig.key] > b[sortConfig.key]) {
-            return sortConfig.direction === 'ascending' ? 1 : -1;
-          }
-          return 0;
-        });
-      }
+    let sortableItems = [...items];
 
-      return sortableItems;
+    if (sortConfig !== null) {
+      sortableItems.sort((a, b) => {
+        if (a[sortConfig.key] < b[sortConfig.key]) {
+          return sortConfig.direction === 'ascending' ? -1 : 1;
+        }
+        if (a[sortConfig.key] > b[sortConfig.key]) {
+          return sortConfig.direction === 'ascending' ? 1 : -1;
+        }
+        return 0;
+      });
+    }
 
-    }, [items, sortConfig]);
-  
-    const requestSort = (key) => {
+    return sortableItems;
 
-      let direction = 'ascending';
+  }, [items, sortConfig]);
 
-      if (
-        sortConfig &&
-        sortConfig.key === key &&
-        sortConfig.direction === 'ascending'
-      ) {
-        direction = 'descending';
-      }
-      
-      setSortConfig({ key, direction });
-    };
+  const requestSort = (key) => {
+
+    let direction = 'ascending';
+
+    if (
+      sortConfig &&
+      sortConfig.key === key &&
+      sortConfig.direction === 'ascending'
+    ) {
+      direction = 'descending';
+    }
     
-    //console.log(sortedItems)
-    return { items: sortedItems, requestSort, sortConfig };
+    setSortConfig({ key, direction });
   };
+  
+  return { items: sortedItems, requestSort, sortConfig };
+};
 
 
 function Read_Contracts(){
@@ -86,14 +85,10 @@ function Read_Contracts(){
     var a = getDocs(response).then((querySnapshot) => {
 
       querySnapshot.forEach(element => {
-        //console.log(element.id);
-          //setStadioane(arr => [...arr, "id: '"+element.id+"'"])
-          var date = element.data();
-          date.id = element.id;
-          //date.idperso = element.id_persoana;
-          //const docSnap = await getDoc(docRef);
-          //console.log(getDoc(date.id_persoana));
-          setContracts(arr => [...arr , date]);  
+        var date = element.data();
+        date.id = element.id;
+        
+        setContracts(arr => [...arr , date]);  
       });
       
     }).then(console.log(contracts));
@@ -101,52 +96,9 @@ function Read_Contracts(){
     await Promise.all([a]);
 
   }
-  // const fetchPeople = async()=>{
-  //   console.log(contracts)
-  //   contracts.forEach(element => {
-  //     console.log(element.id_persoana)
-  //   });
-  // }
-
-  // let firstPromise = () => {
-  //   return new Promise(() => {
-  //     console.log("v")
-  //     let response=collection(db, 'contract');
-  //     var a = getDocs(response).then((querySnapshot) => {
-  
-  //       querySnapshot.forEach(element => {
-  //         //console.log(element.id);
-  //           //setStadioane(arr => [...arr, "id: '"+element.id+"'"])
-  //           var date = element.data();
-  //           date.id = element.id;
-  //           //date.idperso = element.id_persoana;
-  //           //const docSnap = await getDoc(docRef);
-  //           //console.log(getDoc(date.id_persoana));
-  //           setContracts(arr => [...arr , date]);  
-  //       });
-  //   });
-  // });}
-   
-  // // Defined our second promise
-  // let secondPromise = () => {
-  //   return new Promise(() => {
-  //     console.log(contracts)
-  //   });
-  // };
-
-  // let promiseExecution = async () => {
-  //   console.log("aa")
-  //   let promise = await Promise.all([
-  //     firstPromise().then(secondPromise())
-      
-  //   ]);
-  //   console.log(promise);
-  // };
-
 
   useEffect(()=>{
     fetchContracts();
-    //promiseExecution()
   },[])
   
   const { items, requestSort, sortConfig } = useSortableData(contracts);

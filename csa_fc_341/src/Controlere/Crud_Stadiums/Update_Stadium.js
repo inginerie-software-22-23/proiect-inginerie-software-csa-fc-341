@@ -26,18 +26,13 @@ export default function Update_Stadium() {
         if(id){
             getDoc(doc(db, "stadion", id)).then(docSnap =>{
                 
-            date = docSnap.data(); 
-            
-            setstadiumid(date.id)
-            setname(date.denumire);
-            setcapacity(date.capacitate);
-            setsurface(date.tip_gazon)
-            setaddress(date.adresa);
-
-            // setnameform(date.denumire);
-            // setcapacityform(date.capacitate);
-            // setsurfaceform(date.tip_gazon)
-            // setaddressform(date.adresa);
+                date = docSnap.data(); 
+                
+                setstadiumid(date.id)
+                setname(date.denumire);
+                setcapacity(date.capacitate);
+                setsurface(date.tip_gazon)
+                setaddress(date.adresa);
                 
             });
         } else {
@@ -47,7 +42,7 @@ export default function Update_Stadium() {
 
     useEffect(()=>{
         update();
-      },[])
+    },[])
     
     const handleSubmit = (event) => {
         

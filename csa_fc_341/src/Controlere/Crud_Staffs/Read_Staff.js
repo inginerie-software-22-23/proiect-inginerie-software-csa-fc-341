@@ -47,7 +47,6 @@ const useSortableData = (items, config = null) => {
     setSortConfig({ key, direction });
   };
 
-  //console.log(sortedItems)
   return { items: sortedItems, requestSort, sortConfig };
 };
 
@@ -86,13 +85,11 @@ function Read_Staffs(){
     await getDocs(response).then((querySnapshot) => {
 
       querySnapshot.forEach(element => {
-        //console.log(element.id);
-          //setStadioane(arr => [...arr, "id: '"+element.id+"'"])
-          var date = element.data();
-          date.id = element.id;
-          
-          //console.log(date);
-          setStaffs(arr => [...arr , date]);  
+        
+        var date = element.data();
+        date.id = element.id;
+        
+        setStaffs(arr => [...arr , date]);
       });
     });
   }

@@ -48,7 +48,6 @@ body{
     color: #272643;
 }
 
-/* CSS */
 button {
   background-color: #272643;
   border-radius: 100px;
@@ -84,7 +83,7 @@ button:hover {
     background-color:#2C698D;
 }
 
-.login, .register, .reset, .logged{
+.login, .reset, .logged, .form{
     display: block;
     margin: auto;
     width: fit-content;
@@ -92,6 +91,15 @@ button:hover {
     font-family: "Varela Round", sans-serif;
     letter-spacing: 1.1px;
     margin-top: 50px;
+}
+
+.field > .raspuns {
+    display: block;
+    margin: auto;
+    width: fit-content;
+    text-align: center;
+    font-family: "Varela Round", sans-serif;
+    letter-spacing: 1.1px;
 }
 
 .login > .field, .register > .field, .reset > .field, .logged > .text {
@@ -106,4 +114,13 @@ button:hover {
 
 .reset, .logged {
     margin-bottom: 50px;
+}
+
+.field > label{
+    color: #272643;
+    font-size: 1.5em;
+}
+
+.form > Button, .login > Button, .reset > Button{
+    margin: 25px;
 }

@@ -16,16 +16,15 @@ export default function Create_Stadium() {
 
     async function add_stadium(event) {
         
-        //setWait(true)
         var a = await addDoc(collection(db, "stadion"), {
             adresa: address,
             capacitate: capacity,
             denumire: name,
             tip_gazon: surface
-          }).then(alert(`The stadium you added is: ${name}`));
+        }).then(alert(`The stadium you added is: ${name}`));
           
-          await Promise.all([a]);
-          window.location.href = "http://localhost:3000/tostadion";
+        await Promise.all([a]);
+        window.location.href = "http://localhost:3000/tostadion";
     }
 
     const [user, loading, error] = useAuthState(auth);

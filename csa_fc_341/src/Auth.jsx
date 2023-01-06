@@ -4,7 +4,6 @@ import { getFirestore, doc, getDoc } from "firebase/firestore";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { Link } from 'react-router-dom';
 import { app, auth } from './DatabaseConnection';
-
 import { Box, TextField, Button } from '@mui/material';
 
 import Login from './Login';
@@ -82,75 +81,80 @@ function Auth(){
     return (
         <div>
             {
-                rol_user === "guest" ?
-                    <div className='test'>
-                        
-                        <Login />
+                rol_user === "guest"
+                    
+                    ?
 
-                        <Register />
+                        <div className='test'>
+                            
+                            <Login />
 
-                        
-                         
-                        <div className = "reset">
+                            <Register />
 
-                             <label>RESET PASSWORD</label>
+                            
+                            
+                            <div className = "reset">
 
-                            <Box
-                                className = "field"
-                                sx = {{ display: 'flex', alignItems: 'flex-start' }}
-                            >
-                                <EmailOutlinedIcon sx = {{ color: '#E3F6F5', mr: 2, mt: 2 }} />
-                                <TextField
-                                    variant = "outlined"
-                                    className="scriere"
-                                    error = {emailError}
-                                    helperText = {emailError ? "Email inexistent" : ""}
-                                    placeholder = "Email"
-                                    onChange = {(event) => {
-                                        if(emailError){
-                                            setEmailError(false);
-                                        }
-                                        setEmail(event.target.value);
-                                    }}
-                                    value = {email}
-                                />
-                            </Box>
+                                <label>RESET PASSWORD</label>
 
-                            <Button 
-                                 className = "butonlogin"
-                                variant = "contained"
-                                onClick={(event) => {
-                                    sendPasswordReset(event);
-                                    }}>
-                                        Reset
-                            </Button>
-                        </div>
-                    </div>
-                : user ?
+                                <Box
+                                    className = "field"
+                                    sx = {{ display: 'flex', alignItems: 'flex-start' }}
+                                >
+                                    <EmailOutlinedIcon sx = {{ color: '#E3F6F5', mr: 2, mt: 2 }} />
+                                    <TextField
+                                        variant = "outlined"
+                                        className="scriere"
+                                        error = {emailError}
+                                        helperText = {emailError ? "Email inexistent" : ""}
+                                        placeholder = "Email"
+                                        onChange = {(event) => {
+                                            if(emailError){
+                                                setEmailError(false);
+                                            }
+                                            setEmail(event.target.value);
+                                        }}
+                                        value = {email}
+                                    />
+                                </Box>
 
-                        <div className = "logged">
-
-                            <div className = "text">
-                                    <h3>Logged in as: {user.email}</h3>
-                                    <p></p>
-                                    <h3>Role: {rol_user}</h3>
-                            </div>
-
-                            <Link to="/">
                                 <Button 
-                                    className = "buton"
+                                    className = "butonlogin"
                                     variant = "contained"
-                                    onClick={() => {
-                                        logout();
+                                    onClick={(event) => {
+                                        sendPasswordReset(event);
                                         }}>
-                                            Logout
+                                            Reset
                                 </Button>
-                            </Link>
+                            </div>
                         </div>
+                    : user 
+                        
+                        ?
+
+                            <div className = "logged">
+
+                                <div className = "text">
+                                        <h3>Logged in as: {user.email}</h3>
+                                        <p></p>
+                                        <h3>Role: {rol_user}</h3>
+                                </div>
+
+                                <Link to="/">
+                                    <Button 
+                                        className = "buton"
+                                        variant = "contained"
+                                        onClick={() => {
+                                            logout();
+                                            }}>
+                                                Logout
+                                    </Button>
+                                </Link>
+                            </div>
                         
                         :
 
-                        <></>
+                            <></>
 
             }
         </div>

@@ -8,7 +8,6 @@ import PasswordOutlinedIcon from '@mui/icons-material/PasswordOutlined';
 import VisibilityOutlinedIcon from '@mui/icons-material/VisibilityOutlined';
 import VisibilityOffOutlinedIcon from '@mui/icons-material/VisibilityOffOutlined';
 
-//import "./Controlere/Stil.css";
 import "./Login.css"
 
 
@@ -54,7 +53,6 @@ function Login(){
 
             <label>LOGIN</label>
             
-
             <Box
                 className = "field"
                 sx = {{ display: 'flex', alignItems: 'flex-start' }}
@@ -114,7 +112,8 @@ function Login(){
                     }}>
                         Login
             </Button>
-            </div>
+        
+        </div>
         
     );
 }

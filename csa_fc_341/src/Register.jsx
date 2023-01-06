@@ -3,7 +3,7 @@ import { app, auth } from "./DatabaseConnection";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { getFirestore, setDoc, doc, where, query, collection, getDocs, limit } from "firebase/firestore";
 
-import { InputLabel, MenuItem, FormControl, Select, Box, TextField, IconButton, Button, FormHelperText } from '@mui/material';
+import { MenuItem, FormControl, Select, Box, TextField, IconButton, Button, FormHelperText } from '@mui/material';
 
 import EmailOutlinedIcon from '@mui/icons-material/EmailOutlined';
 import PasswordOutlinedIcon from '@mui/icons-material/PasswordOutlined';
@@ -198,7 +198,6 @@ function Register(){
                 sx = {{ maxWidth: 135, margin: "auto" }}
             >
                 <FormControl fullWidth>
-                {/* <InputLabel id = "demo-simple-select-label">Rol</InputLabel> */}
 
                     <Select
                         labelId = "demo-simple-select-label"

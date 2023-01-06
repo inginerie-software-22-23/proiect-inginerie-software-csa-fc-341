@@ -49,7 +49,6 @@ const useSortableData = (items, config = null) => {
       setSortConfig({ key, direction });
     };
 
-    //console.log(sortedItems)
     return { items: sortedItems, requestSort, sortConfig };
   };
 
