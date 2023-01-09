@@ -124,3 +124,19 @@ button:hover {
 .form > Button, .login > Button, .reset > Button{
     margin: 25px;
 }
+
+.export{
+    display: block;
+    margin: auto;
+    width: fit-content;
+    text-align: center;
+    padding: 25px 0px 50px 0px;
+}
+
+.export > .buton{
+    margin-left: 2em;
+}
+
+.export > CSVLink{
+    color: white;
+}

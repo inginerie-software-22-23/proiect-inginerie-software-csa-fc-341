@@ -1,9 +1,10 @@
 import { getFirestore, collection, getDocs, doc, getDoc, deleteDoc } from "firebase/firestore";
-import { Table,Button } from 'semantic-ui-react'
+import { Table, Button } from 'semantic-ui-react'
 import { Link } from 'react-router-dom';
 import { app, auth } from '../../DatabaseConnection';
 import React, { useState, useEffect } from 'react';
 import { useAuthState } from "react-firebase-hooks/auth";
+import { ExportExcel } from '../Export/Export_Excel_Players';
 
 import "../Stil.css";
 
@@ -12,45 +13,45 @@ const db = getFirestore(app);
 let param ="width=500,height=500";
 
 const useSortableData = (items, config = null) => {
-    const [sortConfig, setSortConfig] = React.useState(config);
-  
-    const sortedItems = React.useMemo(() => {
+  const [sortConfig, setSortConfig] = React.useState(config);
 
-      let sortableItems = [...items];
+  const sortedItems = React.useMemo(() => {
 
-      if (sortConfig !== null) {
-        sortableItems.sort((a, b) => {
-          if (a[sortConfig.key] < b[sortConfig.key]) {
-            return sortConfig.direction === 'ascending' ? -1 : 1;
-          }
-          if (a[sortConfig.key] > b[sortConfig.key]) {
-            return sortConfig.direction === 'ascending' ? 1 : -1;
-          }
-          return 0;
-        });
-      }
+    let sortableItems = [...items];
 
-      return sortableItems;
-      
-    }, [items, sortConfig]);
-  
-    const requestSort = (key) => {
+    if (sortConfig !== null) {
+      sortableItems.sort((a, b) => {
+        if (a[sortConfig.key] < b[sortConfig.key]) {
+          return sortConfig.direction === 'ascending' ? -1 : 1;
+        }
+        if (a[sortConfig.key] > b[sortConfig.key]) {
+          return sortConfig.direction === 'ascending' ? 1 : -1;
+        }
+        return 0;
+      });
+    }
 
-      let direction = 'ascending';
+    return sortableItems;
+    
+  }, [items, sortConfig]);
 
-      if (
-        sortConfig &&
-        sortConfig.key === key &&
-        sortConfig.direction === 'ascending'
-      ) {
-        direction = 'descending';
-      }
+  const requestSort = (key) => {
 
-      setSortConfig({ key, direction });
-    };
+    let direction = 'ascending';
 
-    return { items: sortedItems, requestSort, sortConfig };
+    if (
+      sortConfig &&
+      sortConfig.key === key &&
+      sortConfig.direction === 'ascending'
+    ) {
+      direction = 'descending';
+    }
+
+    setSortConfig({ key, direction });
   };
+
+  return { items: sortedItems, requestSort, sortConfig };
+};
 
 
 function Read_Players(){
@@ -88,6 +89,8 @@ function Read_Players(){
 
       querySnapshot.forEach(element => {
         var date = element.data();
+        date_tabel.push(date);
+        SetDate(date_tabel);
         date.id = element.id;
 
         setJucatori(arr => [...arr , date]);  
@@ -124,6 +127,9 @@ function Read_Players(){
     })
     .catch((e) => console.log(e));
   }
+
+  const [date_tabel, SetDate] = useState([]);
+
   
   useEffect(() => {
     if (loading){
@@ -206,7 +212,7 @@ function Read_Players(){
               <button type="button"
                       onClick={() => requestSort('data_nastere')}
                       className={getClassNamesFor('data_nastere')}
-                        >Data Nastere
+                        >Data Nasterii
               </button>
             </Table.HeaderCell>
 
@@ -259,9 +265,10 @@ function Read_Players(){
         </Table.Body>
 
       </Table>
+
+      { items === [] ? <></> : <ExportExcel date_export={date_tabel} /> }
       
     </div>
-  
   );
 }
 

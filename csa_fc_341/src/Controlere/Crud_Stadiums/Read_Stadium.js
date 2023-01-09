@@ -1,9 +1,10 @@
 import { getFirestore, collection, getDocs, getDoc, doc, deleteDoc } from "firebase/firestore";
-import { Table,Button } from 'semantic-ui-react'
+import { Table, Button } from 'semantic-ui-react'
 import { Link } from 'react-router-dom';
 import { app, auth } from '../../DatabaseConnection';
 import React, { useState, useEffect } from 'react';
 import { useAuthState } from "react-firebase-hooks/auth";
+import { ExportExcel } from '../Export/Export_Excel_Stadiums';
 
 import "../Stil.css";
 
@@ -12,45 +13,45 @@ const db = getFirestore(app);
 let param ="width=500,height=500";
 
 const useSortableData = (items, config = null) => {
-    const [sortConfig, setSortConfig] = React.useState(config);
-  
-    const sortedItems = React.useMemo(() => {
+  const [sortConfig, setSortConfig] = React.useState(config);
 
-      let sortableItems = [...items];
+  const sortedItems = React.useMemo(() => {
 
-      if (sortConfig !== null) {
-        sortableItems.sort((a, b) => {
-          if (a[sortConfig.key] < b[sortConfig.key]) {
-            return sortConfig.direction === 'ascending' ? -1 : 1;
-          }
-          if (a[sortConfig.key] > b[sortConfig.key]) {
-            return sortConfig.direction === 'ascending' ? 1 : -1;
-          }
-          return 0;
-        });
-      }
+    let sortableItems = [...items];
 
-      return sortableItems;
+    if (sortConfig !== null) {
+      sortableItems.sort((a, b) => {
+        if (a[sortConfig.key] < b[sortConfig.key]) {
+          return sortConfig.direction === 'ascending' ? -1 : 1;
+        }
+        if (a[sortConfig.key] > b[sortConfig.key]) {
+          return sortConfig.direction === 'ascending' ? 1 : -1;
+        }
+        return 0;
+      });
+    }
 
-    }, [items, sortConfig]);
-  
-    const requestSort = (key) => {
+    return sortableItems;
 
-      let direction = 'ascending';
+  }, [items, sortConfig]);
 
-      if (
-        sortConfig &&
-        sortConfig.key === key &&
-        sortConfig.direction === 'ascending'
-      ) {
-        direction = 'descending';
-      }
-      
-      setSortConfig({ key, direction });
-    };
+  const requestSort = (key) => {
 
-    return { items: sortedItems, requestSort, sortConfig };
+    let direction = 'ascending';
+
+    if (
+      sortConfig &&
+      sortConfig.key === key &&
+      sortConfig.direction === 'ascending'
+    ) {
+      direction = 'descending';
+    }
+    
+    setSortConfig({ key, direction });
   };
+
+  return { items: sortedItems, requestSort, sortConfig };
+};
 
 
 function Read_Stadiums(){
@@ -87,8 +88,9 @@ function Read_Stadiums(){
     await getDocs(response).then((querySnapshot) => {
 
       querySnapshot.forEach(element => {
-        
         var date = element.data();
+        date_tabel.push(date);
+        SetDate(date_tabel);
         date.id = element.id;
         
         setStadioane(arr => [...arr , date]);
@@ -103,11 +105,12 @@ function Read_Stadiums(){
   const { items, requestSort, sortConfig } = useSortableData(stadioane);
 
   const getClassNamesFor = (denumire) => {
-      if (!sortConfig) {
-          return;
-      }
-      return sortConfig.key === denumire ? sortConfig.direction : undefined;
-      };
+    if (!sortConfig) {
+        return;
+    }
+
+    return sortConfig.key === denumire ? sortConfig.direction : undefined;
+  };
 
   const [user, loading, error] = useAuthState(auth);
   const [rol_user, setRol_user] = useState("");
@@ -118,12 +121,14 @@ function Read_Stadiums(){
 
     await getDoc(ref)
     .then((response) => {
-        let res = response.data();
-        
-        setRol_user(res.rol);
+      let res = response.data();
+      
+      setRol_user(res.rol);
     })
     .catch((e) => console.log(e));
   }
+
+  const [date_tabel, SetDate] = useState([]);
 
   useEffect(() => {
     if (loading){
@@ -157,7 +162,7 @@ function Read_Stadiums(){
               <button type="button"
                       onClick={() => requestSort('denumire')}
                       className={getClassNamesFor('denumire')}
-                        >Name
+                        >Nume
               </button>
             </Table.HeaderCell>
             
@@ -165,7 +170,7 @@ function Read_Stadiums(){
               <button type="button"
                       onClick={() => requestSort('capacitate')}
                       className={getClassNamesFor('capacitate')}
-                        >Capacity
+                        >Capacitate
               </button>
             </Table.HeaderCell>
             
@@ -173,7 +178,7 @@ function Read_Stadiums(){
               <button type="button"
                       onClick={() => requestSort('tip_gazon')}
                       className={getClassNamesFor('tip_gazon')}
-                        >Surface
+                        >Suprafata
               </button>
             </Table.HeaderCell>
             
@@ -181,7 +186,7 @@ function Read_Stadiums(){
               <button type="button"
                       onClick={() => requestSort('adresa')}
                       className={getClassNamesFor('adresa')}
-                        >Address
+                        >Adresa
               </button>
             </Table.HeaderCell>
 
@@ -230,6 +235,8 @@ function Read_Stadiums(){
         </Table.Body>
 
       </Table>
+
+      { items === [] ? <></> : <ExportExcel date_export={date_tabel} /> }
 
     </div>
   );
