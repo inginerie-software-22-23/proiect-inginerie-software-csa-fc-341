@@ -83,7 +83,7 @@ button:hover {
     background-color:#2C698D;
 }
 
-.login, .reset, .logged, .form{
+.login, .reset, .logged, .form, .match{
     display: block;
     margin: auto;
     width: fit-content;
@@ -91,6 +91,30 @@ button:hover {
     font-family: "Varela Round", sans-serif;
     letter-spacing: 1.1px;
     margin-top: 50px;
+}
+
+.title{
+    display: flex;
+    justify-content: flex-start;
+    position: relative;
+    width: 100em;
+    height: 15em;
+}
+
+.title > Weather {
+    flex: 0 1 auto;
+    width: 30em;
+    height: 15em;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+}
+  
+.title > div:first-of-type {
+    flex: 0 1 auto;
+    width: 60em;
+    height: 15em;
+    margin-left: auto;
 }
 
 .field > .raspuns {
@@ -102,7 +126,7 @@ button:hover {
     letter-spacing: 1.1px;
 }
 
-.login > .field, .register > .field, .reset > .field, .logged > .text {
+.login > .field, .register > .field, .reset > .field, .logged > .text, .match > footer {
     margin-bottom: 25px;
 }
 

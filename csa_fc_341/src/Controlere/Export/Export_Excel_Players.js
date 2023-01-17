@@ -33,6 +33,4 @@ export function ExportExcel(date_export){
             <button className="buton" onClick={()=>Export_To_PDF(sorted_date_export)}>Export to PDF</button>
         </div>
     );
-
-
 }

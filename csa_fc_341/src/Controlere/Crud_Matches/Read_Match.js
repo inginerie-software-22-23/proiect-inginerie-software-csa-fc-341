@@ -192,6 +192,14 @@ function Read_Matches(){
 
                 <Table.HeaderCell className='titlu'>
                   <button type="button"
+                          onClick={() => requestSort('ora')}
+                          className={getClassNamesFor('ora')}
+                            >Ora
+                  </button>
+                </Table.HeaderCell>
+
+                <Table.HeaderCell className='titlu'>
+                  <button type="button"
                           onClick={() => requestSort('scor')}
                           className={getClassNamesFor('scor')}
                             >Scor
@@ -219,6 +227,7 @@ function Read_Matches(){
                   <Table.Cell >{data.arbitru}</Table.Cell>
                   <Table.Cell >{data.competitie}</Table.Cell>
                   <Table.Cell >{data.data}</Table.Cell>
+                  <Table.Cell >{data.ora}</Table.Cell>
                   <Table.Cell >{data.scor}</Table.Cell>
                   {
                     rol_user === "admin" 
