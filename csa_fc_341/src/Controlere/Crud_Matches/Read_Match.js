@@ -100,7 +100,7 @@ function Read_Matches(){
 
   useEffect(()=>{
     fetchMeciuri();
-
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   },[])
     
   const { items, requestSort, sortConfig } = useSortableData(meciuri);
@@ -112,7 +112,7 @@ function Read_Matches(){
       return sortConfig.key === adversar ? sortConfig.direction : undefined;
       };
 
-  const [user, loading, error] = useAuthState(auth);
+  const [user, loading] = useAuthState(auth);
   const [rol_user, setRol_user] = useState("");
     
     

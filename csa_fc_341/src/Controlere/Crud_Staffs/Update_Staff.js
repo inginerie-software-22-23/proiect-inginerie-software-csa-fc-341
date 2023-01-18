@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { Button, Form } from 'semantic-ui-react';
 import { app, auth } from '../../DatabaseConnection';
 import { getFirestore, doc, getDoc, updateDoc } from "firebase/firestore";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useNavigate } from "react-router-dom";
+import { Box, TextField, Button } from '@mui/material';
+
+import "../Stil.css";
+
 
 const db = getFirestore(app);
 var date;
@@ -50,13 +53,6 @@ export default function Update_Stadium() {
     },[])
     
     const handleSubmit = (event) => {
-        console.log(nume)
-        console.log(prenume)
-        console.log(data_nastere)
-        console.log(rol)
-        console.log(email)
-        console.log(telefon)
-
         const washingtonRef = doc(db, "staff", id);
 
         updateDoc(washingtonRef, {
@@ -105,43 +101,111 @@ export default function Update_Stadium() {
 
     
     return (
-        <div>
+        <div className='form'>
             {
                 rol_user !== ""
                     ?
                         <form className='create-form1' onSubmit={handleSubmit}>
                             
                             <div>
+
+                                <h2 className="bt2">Update staff member</h2>
+
+                                <Box
+                                    className = "field"
+                                    sx = {{ display: 'flex', alignItems: 'flex-start' }}
+                                >
+                                    <label className='scris'>Nume</label>
+                                    <TextField
+                                        className="raspuns"
+                                        variant = "outlined"
+                                        placeholder = {nume}
+                                        onChange = {(e) => {
+                                            setnume(e.target.value);
+                                        }}
+                                        value = {nume}
+                                    />
+                                </Box>
                             
-                                <Form.Field className='ff'>
-                                    <label>Nume</label>
-                                    <input placeholder={nume} value={nume} onChange={(e) => setnume(e.target.value)}  />
-                                </Form.Field>
+                                <Box
+                                    className = "field"
+                                    sx = {{ display: 'flex', alignItems: 'flex-start' }}
+                                >
+                                    <label className='scris'>Prenume</label>
+                                    <TextField
+                                        className="raspuns"
+                                        variant = "outlined"
+                                        placeholder = {prenume}
+                                        onChange = {(e) => {
+                                            setprenume(e.target.value);
+                                        }}
+                                        value = {prenume}
+                                    />
+                                </Box>
 
-                                <Form.Field className='ff'>
-                                    <label>Prenume</label>
-                                    <input placeholder={prenume} value={prenume} onChange={(e) => setprenume(e.target.value)} />
-                                </Form.Field>
+                                <Box
+                                    className = "field"
+                                    sx = {{ display: 'flex', alignItems: 'flex-start' }}
+                                >
+                                    <label className='scris'>Data nastere</label>
+                                    <TextField
+                                        className="raspuns"
+                                        variant = "outlined"
+                                        placeholder = {data_nastere}
+                                        onChange = {(e) => {
+                                            setdata_nastere(e.target.value);
+                                        }}
+                                        value = {data_nastere}
+                                    />
+                                </Box>
 
-                                <Form.Field className='ff'>
-                                    <label>Data_nastere</label>
-                                    <input placeholder={data_nastere} value={data_nastere} onChange={(e) => setdata_nastere(e.target.value)} />
-                                </Form.Field>
+                                <Box
+                                    className = "field"
+                                    sx = {{ display: 'flex', alignItems: 'flex-start' }}
+                                >
+                                    <label className='scris'>Rol</label>
+                                    <TextField
+                                        className="raspuns"
+                                        variant = "outlined"
+                                        placeholder = {rol}
+                                        onChange = {(e) => {
+                                            setrol(e.target.value);
+                                        }}
+                                        value = {rol}
+                                    />
+                                </Box>
 
-                                <Form.Field className='ff'>
-                                    <label>Rol</label>
-                                    <input placeholder={rol} value={rol} onChange={(e) => setrol(e.target.value)} />
-                                </Form.Field>
+                                <Box
+                                    className = "field"
+                                    sx = {{ display: 'flex', alignItems: 'flex-start' }}
+                                >
+                                    <label className='scris'>Email</label>
+                                    <TextField
+                                        className="raspuns"
+                                        variant = "outlined"
+                                        placeholder = {email}
+                                        onChange = {(e) => {
+                                            setemail(e.target.value);
+                                        }}
+                                        value = {email}
+                                    />
+                                </Box>
 
-                                <Form.Field className='ff'>
-                                    <label>Email</label>
-                                    <input placeholder={email} value={email} onChange={(e) => setemail(e.target.value)} />
-                                </Form.Field>
-                                
-                                <Form.Field className='ff'>
-                                    <label>Telefon</label>
-                                    <input placeholder={telefon} value={telefon} onChange={(e) => settelefon(e.target.value)} />
-                                </Form.Field>
+                                <Box
+                                    className = "field"
+                                    sx = {{ display: 'flex', alignItems: 'flex-start' }}
+                                >
+                                    <label className='scris'>Telefon</label>
+                                    <TextField
+                                        className="raspuns"
+                                        variant = "outlined"
+                                        placeholder = {telefon}
+                                        onChange = {(e) => {
+                                            settelefon(e.target.value);
+                                        }}
+                                        value = {telefon}
+                                    />
+                                </Box>
                             
                             </div>
 

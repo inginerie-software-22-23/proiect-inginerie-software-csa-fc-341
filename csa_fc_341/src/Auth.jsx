@@ -42,7 +42,7 @@ function Auth(){
         signOut(auth);
     }
 
-    const [user, loading, error] = useAuthState(auth);
+    const [user, loading] = useAuthState(auth);
     const [rol_user, setRol_user] = useState("");
     const [det_user, setDet_user] = useState({});
 
@@ -92,7 +92,6 @@ function Auth(){
                             <Register />
 
                             
-                            
                             <div className = "reset">
 
                                 <label>RESET PASSWORD</label>
@@ -128,34 +127,107 @@ function Auth(){
                                 </Button>
                             </div>
                         </div>
+
                     : user 
                         
                         ?
 
-                            <div className = "logged">
+                            rol_user === "admin"
+                                
+                                ?
 
-                                <div className = "text">
-                                        <h3>Logged in as: {user.email}</h3>
-                                        <p></p>
-                                        <h3>Role: {rol_user}</h3>
-                                </div>
+                                    <div className = "logged">
+                                        <div className = "text">
+                                            <div display="flex">
+                                                <h3 style={{paddingRight: "25em", paddingLeft: "42em"}}>Logged in as: Gigi Becali</h3>
+                                                <img src="https://i.ytimg.com/vi/ibg1Bz5ykFY/mqdefault.jpg" width="300" height="150"/>
+                                            </div>
+                                            <p></p>
+                                            <h3>Role: admin</h3>
+                                        </div>
 
-                                <Link to="/">
-                                    <Button 
-                                        className = "buton"
-                                        variant = "contained"
-                                        onClick={() => {
-                                            logout();
-                                            }}>
-                                                Logout
-                                    </Button>
-                                </Link>
-                            </div>
+                                        <div>
+                                            <Link to="/">
+                                                <Button 
+                                                    className = "buton"
+                                                    variant = "contained"
+                                                    onClick={() => {
+                                                        logout();
+                                                        }}>
+                                                            Logout
+                                                </Button>
+                                            </Link>
+                                        </div>
+                                    </div>
+                                
+                                :
+
+                                    rol_user === "jucator"
+
+                                    ?
+                                    
+                                        <div className = "logged">
+                                            <div className = "text">
+                                                    <h3>Logged in as: {det_user.prenume} {det_user.nume}</h3>
+                                                    <br/>
+                                                    <h3>Pozitie: {det_user.pozitie}</h3>
+                                                    <br/>
+                                                    <h3>Nationalitate: {det_user.nationalitate}</h3>
+                                                    <br/>
+                                                    <h3>Data nasterii: {det_user.data_nastere}</h3>
+                                                    <br/>
+                                                    <br/>
+                                                    <h3>Role: {rol_user}</h3>
+                                            </div>
+
+                                            <div>
+                                                <Link to="/">
+                                                    <Button 
+                                                        className = "buton"
+                                                        variant = "contained"
+                                                        onClick={() => {
+                                                            logout();
+                                                            }}>
+                                                                Logout
+                                                    </Button>
+                                                </Link>
+                                            </div>
+                                        </div>
+
+                                    :
+                                        <div className = "logged">
+                                            <div className = "text">
+                                                    <h3>Logged in as: {det_user.prenume} {det_user.nume}</h3>
+                                                    <br/>
+                                                    <h3>Rol: {det_user.rol}</h3>
+                                                    <br/>
+                                                    <h3>Data nasterii: {det_user.data_nastere}</h3>
+                                                    <br/>
+                                                    <h3>Email: {det_user.email}</h3>
+                                                    <br/>
+                                                    <h3>Telefon: {det_user.telefon}</h3>
+                                                    <br/>
+                                                    <br/>
+                                                    <h3>Role: {rol_user}</h3>
+                                            </div>
+
+                                            <div>
+                                                <Link to="/">
+                                                    <Button 
+                                                        className = "buton"
+                                                        variant = "contained"
+                                                        onClick={() => {
+                                                            logout();
+                                                            }}>
+                                                                Logout
+                                                    </Button>
+                                                </Link>
+                                            </div>
+                                        </div>
                         
                         :
 
                             <></>
-
             }
         </div>
     )

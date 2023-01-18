@@ -1,9 +1,12 @@
 import React, { useState,useEffect } from 'react';
-import { Button, Form } from 'semantic-ui-react';
 import { app, auth } from '../../DatabaseConnection';
 import { getFirestore, doc, getDoc, updateDoc } from "firebase/firestore";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useNavigate } from "react-router-dom";
+import { Box, TextField, Button } from '@mui/material';
+
+import "../Stil.css";
+
 
 const db = getFirestore(app);
 var date;
@@ -51,15 +54,6 @@ export default function Update_Player() {
       },[])
     
     const handleSubmit = (event) => {
-        
-        console.log(nume)
-        console.log(prenume)
-        console.log(picior)
-        console.log(pozitie)
-        console.log(nationalitate)
-        console.log(inaltime)
-        console.log(data_nastere)
-
         const washingtonRef = doc(db, "jucator", id);
 
         updateDoc(washingtonRef, {
@@ -109,42 +103,127 @@ export default function Update_Player() {
 
 
     return (
-        <div>
+        <div className='form'>
             {
                 rol_user !== ""
                     ?
                         <form className='create-form1' onSubmit={handleSubmit}> 
 
                             <div>
-                            
-                                <Form.Field className='ff'>
-                                    <label>nume</label>
-                                    <input placeholder={nume} value={nume} onChange={(e) => setnume(e.target.value)}  />
-                                </Form.Field>
-                                <Form.Field className='ff'>
-                                    <label>prenume</label>
-                                    <input placeholder={prenume} value={prenume} onChange={(e) => setprenume(e.target.value)} />
-                                </Form.Field>
-                                <Form.Field className='ff'>
-                                    <label>picior</label>
-                                    <input placeholder={picior} value={picior} onChange={(e) => setpicior(e.target.value)} />
-                                </Form.Field>
-                                <Form.Field className='ff'>
-                                    <label>pozitie</label>
-                                    <input placeholder={pozitie} value={pozitie} onChange={(e) => setpozitie(e.target.value)} />
-                                </Form.Field>
-                                <Form.Field className='ff'>
-                                    <label>nationalitate</label>
-                                    <input placeholder={nationalitate} value={nationalitate} onChange={(e) => setnationalitate(e.target.value)} />
-                                </Form.Field>
-                                <Form.Field className='ff'>
-                                    <label>inaltime</label>
-                                    <input placeholder={inaltime} value={inaltime} onChange={(e) => setinaltime(e.target.value)} />
-                                </Form.Field>
-                                <Form.Field className='ff'>
-                                    <label>data_nastere</label>
-                                    <input placeholder={data_nastere} value={data_nastere} onChange={(e) => setdata_nastere(e.target.value)} />
-                                </Form.Field>
+
+                                <h2 className="bt2">Update player</h2>
+
+                                <Box
+                                    className = "field"
+                                    sx = {{ display: 'flex', alignItems: 'flex-start' }}
+                                >
+                                    <label className='scris'>Nume</label>
+                                    <TextField
+                                        className="raspuns"
+                                        variant = "outlined"
+                                        placeholder = {nume}
+                                        onChange = {(e) => {
+                                            setnume(e.target.value);
+                                        }}
+                                        value = {nume}
+                                    />
+                                </Box>
+
+                                <Box
+                                    className = "field"
+                                    sx = {{ display: 'flex', alignItems: 'flex-start' }}
+                                >
+                                    <label className='scris'>Prenume</label>
+                                    <TextField
+                                        className="raspuns"
+                                        variant = "outlined"
+                                        placeholder = {prenume}
+                                        onChange = {(e) => {
+                                            setprenume(e.target.value);
+                                        }}
+                                        value = {prenume}
+                                    />
+                                </Box>
+
+                                <Box
+                                    className = "field"
+                                    sx = {{ display: 'flex', alignItems: 'flex-start' }}
+                                >
+                                    <label className='scris'>Picior</label>
+                                    <TextField
+                                        className="raspuns"
+                                        variant = "outlined"
+                                        placeholder = {picior}
+                                        onChange = {(e) => {
+                                            setpicior(e.target.value);
+                                        }}
+                                        value = {picior}
+                                    />
+                                </Box>
+
+                                <Box
+                                    className = "field"
+                                    sx = {{ display: 'flex', alignItems: 'flex-start' }}
+                                >
+                                    <label className='scris'>Pozitie</label>
+                                    <TextField
+                                        className="raspuns"
+                                        variant = "outlined"
+                                        placeholder = {pozitie}
+                                        onChange = {(e) => {
+                                            setpozitie(e.target.value);
+                                        }}
+                                        value = {pozitie}
+                                    />
+                                </Box>
+
+                                <Box
+                                    className = "field"
+                                    sx = {{ display: 'flex', alignItems: 'flex-start' }}
+                                >
+                                    <label className='scris'>Nationalitate</label>
+                                    <TextField
+                                        className="raspuns"
+                                        variant = "outlined"
+                                        placeholder = {nationalitate}
+                                        onChange = {(e) => {
+                                            setnationalitate(e.target.value);
+                                        }}
+                                        value = {nationalitate}
+                                    />
+                                </Box>
+
+                                <Box
+                                    className = "field"
+                                    sx = {{ display: 'flex', alignItems: 'flex-start' }}
+                                >
+                                    <label className='scris'>Inaltime</label>
+                                    <TextField
+                                        className="raspuns"
+                                        variant = "outlined"
+                                        placeholder = {inaltime}
+                                        onChange = {(e) => {
+                                            setinaltime(e.target.value);
+                                        }}
+                                        value = {inaltime}
+                                    />
+                                </Box>
+
+                                <Box
+                                    className = "field"
+                                    sx = {{ display: 'flex', alignItems: 'flex-start' }}
+                                >
+                                    <label className='scris'>Data nasterii</label>
+                                    <TextField
+                                        className="raspuns"
+                                        variant = "outlined"
+                                        placeholder = {data_nastere}
+                                        onChange = {(e) => {
+                                            setdata_nastere(e.target.value);
+                                        }}
+                                        value = {data_nastere}
+                                    />
+                                </Box>
                         
                             </div>
 

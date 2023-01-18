@@ -1,13 +1,15 @@
 import React, { useState,useEffect } from 'react';
-import { Button, Form } from 'semantic-ui-react';
 import { app, auth } from '../../DatabaseConnection';
 import { getFirestore, doc, getDoc, updateDoc } from "firebase/firestore";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useNavigate } from "react-router-dom";
+import { Box, TextField, Button } from '@mui/material';
 
+import "../Stil.css";
 
 const db = getFirestore(app);
 var date;
+
 
 export default function Update_Contract() {
     const [contractId, setcontractid] = useState();
@@ -94,33 +96,94 @@ export default function Update_Contract() {
 
     
     return (
-        <div>
+        <div className='form'>
             {
                 rol_user !== ""
                     ?
                         <form className='create-form1' onSubmit={handleSubmit}> 
                             <div>
 
-                                <Form.Field className='ff'>
-                                    <label>impresar</label>
-                                    <input placeholder={impresar} value={impresar} onChange={(e) => setimpresar(e.target.value)}  />
-                                </Form.Field>
-                                <Form.Field className='ff'>
-                                    <label>salariu</label>
-                                    <input placeholder={salariu} value={salariu} onChange={(e) => setsalariu(e.target.value)} />
-                                </Form.Field>
-                                <Form.Field className='ff'>
-                                    <label>data incepere</label>
-                                    <input placeholder={data_inceput} value={data_inceput} onChange={(e) => setdata_inceput(e.target.value)} />
-                                </Form.Field>
-                                <Form.Field className='ff'>
-                                    <label>data finalizare</label>
-                                    <input placeholder={data_final} value={data_final} onChange={(e) => setdata_final(e.target.value)} />
-                                </Form.Field>
-                                <Form.Field className='ff'>
-                                    <label>bonusuri</label>
-                                    <input placeholder={bonusuri} value={bonusuri} onChange={(e) => setbonusuri(e.target.value)} />
-                                </Form.Field>
+                                <h1 className="bt2">Add a contract</h1>
+
+                                <Box
+                                    className = "field"
+                                    sx = {{ display: 'flex', alignItems: 'flex-start' }}
+                                >
+                                    <label className='scris'>Impresar</label> 
+                                    <TextField
+                                        className = "raspuns"
+                                        variant = "outlined"
+                                        placeholder = {impresar}
+                                        onChange = {(e) => {
+                                            setimpresar(e.target.value);
+                                        }}
+                                        value = {impresar}
+                                    />
+                                </Box>
+
+                                <Box
+                                    className = "field"
+                                    sx = {{ display: 'flex', alignItems: 'flex-start' }}
+                                >
+                                    <label className='scris'>Salariu</label> 
+                                    <TextField
+                                        className = "raspuns"
+                                        variant = "outlined"
+                                        placeholder = {salariu}
+                                        onChange = {(e) => {
+                                            setsalariu(e.target.value);
+                                        }}
+                                        value = {salariu}
+                                    />
+                                </Box>
+
+                                <Box
+                                    className = "field"
+                                    sx = {{ display: 'flex', alignItems: 'flex-start' }}
+                                >
+                                    <label className='scris'>Data incepere</label> 
+                                    <TextField
+                                        className = "raspuns"
+                                        variant = "outlined"
+                                        placeholder = {data_inceput}
+                                        onChange = {(e) => {
+                                            setdata_inceput(e.target.value);
+                                        }}
+                                        value = {data_inceput}
+                                    />
+                                </Box>
+
+                                <Box
+                                    className = "field"
+                                    sx = {{ display: 'flex', alignItems: 'flex-start' }}
+                                >
+                                    <label className='scris'>Data finalizare</label> 
+                                    <TextField
+                                        className = "raspuns"
+                                        variant = "outlined"
+                                        placeholder = {data_final}
+                                        onChange = {(e) => {
+                                            setdata_final(e.target.value);
+                                        }}
+                                        value = {data_final}
+                                    />
+                                </Box>
+
+                                <Box
+                                    className = "field"
+                                    sx = {{ display: 'flex', alignItems: 'flex-start' }}
+                                >
+                                    <label className='scris'>Bonusuri</label> 
+                                    <TextField
+                                        className = "raspuns"
+                                        variant = "outlined"
+                                        placeholder = {bonusuri}
+                                        onChange = {(e) => {
+                                            setbonusuri(e.target.value);
+                                        }}
+                                        value = {bonusuri}
+                                    />
+                                </Box>
 
                             </div>
 

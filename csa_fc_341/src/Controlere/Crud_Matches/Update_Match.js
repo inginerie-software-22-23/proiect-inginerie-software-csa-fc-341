@@ -1,13 +1,16 @@
 import React, { useState, useEffect } from 'react';
-import { Button, Form } from 'semantic-ui-react';
 import { app, auth } from '../../DatabaseConnection';
 import { getFirestore, doc, getDoc, updateDoc } from "firebase/firestore";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useNavigate } from "react-router-dom";
+import { Box, TextField, Button } from '@mui/material';
+
+import "../Stil.css";
 
 
 const db = getFirestore(app);
 var date ;
+
 
 export default function Update_Match() {
     const [matchId, setmatchid] = useState();
@@ -15,6 +18,7 @@ export default function Update_Match() {
     const [arbitru, setarbitru] = useState();
     const [competitie, setcompetitie] = useState();
     const [data, setdata] = useState();
+    const [ora, setora] = useState();
     const [scor, setscor] = useState();
 
     let navigate = useNavigate();
@@ -33,6 +37,7 @@ export default function Update_Match() {
                 setarbitru(date.arbitru);
                 setcompetitie(date.competitie);
                 setdata(date.data);
+                setora(date.ora);
                 setscor(date.scor); 
             });
         } else {
@@ -46,13 +51,6 @@ export default function Update_Match() {
     },[])
     
     const handleSubmit = (event) => {
-        
-        console.log(adversar)
-        console.log(arbitru)
-        console.log(competitie)
-        console.log(data)
-        console.log(scor)
-
         const washingtonRef = doc(db, "meci", id);
 
         updateDoc(washingtonRef, {
@@ -60,6 +58,7 @@ export default function Update_Match() {
             arbitru:arbitru,
             competitie:competitie,
             data:data,
+            ora:ora,
             scor: scor
         });     
         
@@ -99,34 +98,110 @@ export default function Update_Match() {
 
 
     return (
-        <div>
+        <div className='form'>
             {
                 rol_user !== ""
                     ?
                         <form className='create-form1' onSubmit={handleSubmit}> 
                         
                             <div>
-                            
-                                <Form.Field className='ff'>
-                                    <label>adversar</label>
-                                    <input placeholder={adversar} value={adversar} onChange={(e) => setadversar(e.target.value)}  />
-                                </Form.Field>
-                                <Form.Field className='ff'>
-                                    <label>arbitru</label>
-                                    <input placeholder={arbitru} value={arbitru} onChange={(e) => setarbitru(e.target.value)} />
-                                </Form.Field>
-                                <Form.Field className='ff'>
-                                    <label>competitie</label>
-                                    <input placeholder={competitie} value={competitie} onChange={(e) => setcompetitie(e.target.value)} />
-                                </Form.Field>
-                                <Form.Field className='ff'>
-                                    <label>data</label>
-                                    <input placeholder={data} value={data} onChange={(e) => setdata(e.target.value)} />
-                                </Form.Field>
-                                <Form.Field className='ff'>
-                                    <label>scor</label>
-                                    <input placeholder={scor} value={scor} onChange={(e) => setscor(e.target.value)} />
-                                </Form.Field>
+                                <h2 className="bt2">Update match</h2>
+
+                                <Box
+                                    className = "field"
+                                    sx = {{ display: 'flex', alignItems: 'flex-start' }}
+                                >
+                                    <label className='scris'>Adversar</label>
+                                    <TextField
+                                        className="raspuns"
+                                        variant = "outlined"
+                                        placeholder = {adversar}
+                                        onChange = {(e) => {
+                                            setadversar(e.target.value);
+                                        }}
+                                        value = {adversar}
+                                    />
+                                </Box>
+
+                                <Box
+                                    className = "field"
+                                    sx = {{ display: 'flex', alignItems: 'flex-start' }}
+                                >
+                                    <label className='scris'>Arbitru</label>
+                                    <TextField
+                                        className="raspuns"
+                                        variant = "outlined"
+                                        placeholder = {arbitru}
+                                        onChange = {(e) => {
+                                            setarbitru(e.target.value);
+                                        }}
+                                        value = {arbitru}
+                                    />
+                                </Box>
+
+                                <Box
+                                    className = "field"
+                                    sx = {{ display: 'flex', alignItems: 'flex-start' }}
+                                >
+                                    <label className='scris'>Competitie</label>
+                                    <TextField
+                                        className="raspuns"
+                                        variant = "outlined"
+                                        placeholder = {competitie}
+                                        onChange = {(e) => {
+                                            setcompetitie(e.target.value);
+                                        }}
+                                        value = {competitie}
+                                    />
+                                </Box>
+
+                                <Box
+                                    className = "field"
+                                    sx = {{ display: 'flex', alignItems: 'flex-start' }}
+                                >
+                                    <label className='scris'>Data</label>
+                                    <TextField
+                                        className="raspuns"
+                                        variant = "outlined"
+                                        placeholder = {data}
+                                        onChange = {(e) => {
+                                            setdata(e.target.value);
+                                        }}
+                                        value = {data}
+                                    />
+                                </Box>
+
+                                <Box
+                                    className = "field"
+                                    sx = {{ display: 'flex', alignItems: 'flex-start' }}
+                                >
+                                    <label className='scris'>Ora</label>
+                                    <TextField
+                                        className="raspuns"
+                                        variant = "outlined"
+                                        placeholder = {ora}
+                                        onChange = {(e) => {
+                                            setora(e.target.value);
+                                        }}
+                                        value = {ora}
+                                    />
+                                </Box>
+
+                                <Box
+                                    className = "field"
+                                    sx = {{ display: 'flex', alignItems: 'flex-start' }}
+                                >
+                                    <label className='scris'>Scor</label>
+                                    <TextField
+                                        className="raspuns"
+                                        variant = "outlined"
+                                        placeholder = {scor}
+                                        onChange = {(e) => {
+                                            setscor(e.target.value);
+                                        }}
+                                        value = {scor}
+                                    />
+                                </Box>
                         
                             </div>
                             

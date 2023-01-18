@@ -146,6 +146,7 @@ const Match = () => {
 
     useEffect(() => {
         fetch();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [SetMatch, SetStadion, setJucatori]);
 
     return (

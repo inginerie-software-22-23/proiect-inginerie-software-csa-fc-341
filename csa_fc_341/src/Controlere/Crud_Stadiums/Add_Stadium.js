@@ -1,9 +1,13 @@
 import React, { useState, useEffect } from 'react'
-import { Button, Form } from 'semantic-ui-react'
+import { Form } from 'semantic-ui-react'
 import { getFirestore, collection, doc, getDoc, addDoc } from "firebase/firestore";
 import { app, auth } from '../../DatabaseConnection';
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useNavigate } from "react-router-dom";
+import { Box, TextField, Button } from '@mui/material';
+
+import "../Stil.css";
+
 
 const db = getFirestore(app);
 
@@ -60,7 +64,7 @@ export default function Create_Stadium() {
 
 
     return (
-        <div>
+        <div className='form'>
             {
                 rol_user !== ""
                     ?
@@ -68,22 +72,69 @@ export default function Create_Stadium() {
 
                             <h2 className="bt2">Add a stadium</h2>
 
-                            <Form.Field>
-                                <label className='scris'>name</label>
-                                <input className='raspuns' placeholder='Name' onChange={(e) => setname(e.target.value)} />
-                            </Form.Field>
-                            <Form.Field>
-                                <label className='scris'>capacity</label>
-                                <input className='raspuns' placeholder='Capacity' onChange={(e) => setcapacity(e.target.value)} />
-                            </Form.Field>
-                            <Form.Field>
-                                <label className='scris'>surface</label>
-                                <input className='raspuns' placeholder='Surface' onChange={(e) => setsurface(e.target.value)} />
-                            </Form.Field>
-                            <Form.Field>
-                                <label className='scris'>address</label>
-                                <input className='raspuns' placeholder='Address' onChange={(e) => setaddress(e.target.value)}/>
-                            </Form.Field>
+                            <Box
+                                className = "field"
+                                sx = {{ display: 'flex', alignItems: 'flex-start' }}
+                            >
+                                <label className='scris'>Nume</label>
+                                <TextField
+                                    className="raspuns"
+                                    variant = "outlined"
+                                    placeholder = 'Nume'
+                                    onChange = {(e) => {
+                                        setname(e.target.value);
+                                    }}
+                                    value = {name}
+                                />
+                            </Box>
+
+                            <Box
+                                className = "field"
+                                sx = {{ display: 'flex', alignItems: 'flex-start' }}
+                            >
+                                <label className='scris'>Capacitate</label>
+                                <TextField
+                                    className="raspuns"
+                                    variant = "outlined"
+                                    placeholder = 'Capacitate'
+                                    onChange = {(e) => {
+                                        setcapacity(e.target.value);
+                                    }}
+                                    value = {capacity}
+                                />
+                            </Box>
+
+                            <Box
+                                className = "field"
+                                sx = {{ display: 'flex', alignItems: 'flex-start' }}
+                            >
+                                <label className='scris'>Suprafata</label>
+                                <TextField
+                                    className="raspuns"
+                                    variant = "outlined"
+                                    placeholder = 'Suprafata'
+                                    onChange = {(e) => {
+                                        setsurface(e.target.value);
+                                    }}
+                                    value = {surface}
+                                />
+                            </Box>
+
+                            <Box
+                                className = "field"
+                                sx = {{ display: 'flex', alignItems: 'flex-start' }}
+                            >
+                                <label className='scris'>Adresa</label>
+                                <TextField
+                                    className="raspuns"
+                                    variant = "outlined"
+                                    placeholder = 'Adresa'
+                                    onChange = {(e) => {
+                                        setaddress(e.target.value);
+                                    }}
+                                    value = {address}
+                                />
+                            </Box>
                             
                             <Button className='bt2' onClick={add_stadium} type = 'submit'>Submit</Button>
                             

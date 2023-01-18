@@ -64,6 +64,7 @@ export function Weather(oras) {
     }
 
     useEffect (() => {
+        // eslint-disable-next-line react-hooks/exhaustive-deps
         oras = oras.oras;
         data = localStorage.getItem("dataString");
         getKey();
@@ -84,16 +85,13 @@ export function Weather(oras) {
         fetch(`${api.base}forecast?q=${cities[oras]}&units=metric&APPID=${api.key}&lang=ro`)
             .then((res) => res.json())
             .then((result) => {
-                console.log(result);
                 let filteredResult = result?.list?.filter(
                     obj => obj.dt_txt === data
                 )[0];
-                console.log(filteredResult);
                 if (filteredResult !== undefined){
                     filteredResult.name = result?.city?.name;
                     setWeather(filteredResult);
                 }
-                console.log(weather);
             });
     };
 

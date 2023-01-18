@@ -91,7 +91,7 @@ function Read_Contracts(){
         setContracts(arr => [...arr , date]);  
       });
       
-    }).then(console.log(contracts));
+    });
 
     await Promise.all([a]);
 
