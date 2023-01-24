@@ -240,7 +240,7 @@ function Read_Players(){
                   <Table.Cell >{data.inaltime}</Table.Cell>
                   <Table.Cell >{(data.data_nastere).toString()}</Table.Cell>
                   {
-                    rol_user === "admin" 
+                    rol_user === "admin" || rol_user === "staff"
                       ?
                         <>
                           <Table.Cell>

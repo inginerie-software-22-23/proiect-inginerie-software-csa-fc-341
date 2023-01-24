@@ -230,7 +230,7 @@ function Read_Matches(){
                   <Table.Cell >{data.ora}</Table.Cell>
                   <Table.Cell >{data.scor}</Table.Cell>
                   {
-                    rol_user === "admin" 
+                    rol_user === "admin" || rol_user === "staff"
                       ?
                         <>
                           <Table.Cell>

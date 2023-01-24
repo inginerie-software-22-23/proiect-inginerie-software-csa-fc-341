@@ -79,7 +79,7 @@ export default function Update_Match() {
             let res = response.data();
             
             setRol_user(res.rol);
-            if(res.rol !== "admin"){
+            if(res.rol !== "admin" && res.rol !== "staff"){
                 return navigate("/");
             }
         })

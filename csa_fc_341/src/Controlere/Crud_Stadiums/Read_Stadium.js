@@ -211,7 +211,7 @@ function Read_Stadiums(){
                   <Table.Cell >{data.tip_gazon}</Table.Cell>
                   <Table.Cell >{data.adresa}</Table.Cell>
                   {
-                    rol_user === "admin" 
+                    rol_user === "admin" || rol_user === "staff"
                       ?
                         <>
                           <Table.Cell>
