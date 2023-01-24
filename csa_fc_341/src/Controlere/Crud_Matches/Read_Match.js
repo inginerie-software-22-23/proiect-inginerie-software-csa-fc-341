@@ -221,7 +221,7 @@ function Read_Matches(){
             items.map((data) =>  {
 
               return (
-                <Table.Row key = {data.adversar}>
+                <Table.Row key = {data.id} >
 
                   <Table.Cell >{data.adversar}</Table.Cell>
                   <Table.Cell >{data.arbitru}</Table.Cell>
