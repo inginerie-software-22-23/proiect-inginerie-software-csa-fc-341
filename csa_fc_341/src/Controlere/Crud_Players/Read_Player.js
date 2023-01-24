@@ -145,7 +145,7 @@ function Read_Players(){
   return(
     <div>
       {
-        rol_user === "admin" 
+        rol_user === "admin" || rol_user === "staff"
           ?
             <Button type="button" className="bt4" id="butonAdd" onClick={()=>add_player()}>
                 Add a player

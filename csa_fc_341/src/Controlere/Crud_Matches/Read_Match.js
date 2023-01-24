@@ -144,7 +144,7 @@ function Read_Matches(){
   return(
     <div>
       {
-        rol_user === "admin" 
+        rol_user === "admin" || rol_user === "staff"
           ?
             <Button type="button" className="bt4" id="butonAdd" onClick={()=>add_match()}>
                 Adauga un nou meci

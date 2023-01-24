@@ -143,7 +143,7 @@ function Read_Stadiums(){
   return(
     <div>
       {
-        rol_user === "admin" 
+        rol_user === "admin" || rol_user === "staff"
           ?
             <Button type="button" className="bt4" id="butonAdd" onClick={()=>add_stadium()}>
                 Add a stadium
