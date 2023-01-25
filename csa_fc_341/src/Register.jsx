@@ -206,7 +206,7 @@ function Register(){
                         error = {userError}
                         value = {rol}
                         label = "Rol"
-        
+                        placeholder="Rol"
                         onChange = {(event) => {
                             setRol(event.target.value);
                         }}>
