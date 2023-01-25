@@ -32,5 +32,7 @@ jobs:
       working-directory: ./csa_fc_341
     - run: npm run build --if-present
       working-directory: ./csa_fc_341
+      env:
+        CI: false
     - run: npm test
       working-directory: ./csa_fc_341
