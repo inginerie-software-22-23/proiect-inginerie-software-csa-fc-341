@@ -8,7 +8,7 @@ export function Stadion() {
     <div className="main">
       
       <div className="container_coperta">
-        <img src="https://www.freewebheaders.com/wp-content/gallery/football/awseme-covered-football-stadium-website-header.jpg" id="poza_coperta"/>
+        <img src="https://www.freewebheaders.com/wp-content/gallery/football/awseme-covered-football-stadium-website-header.jpg" alt="poza stadion" id="poza_coperta"/>
         <div className="centered"> &#x2605;    LISTA STADIOANE    &#x2605; </div>
       </div>        
     

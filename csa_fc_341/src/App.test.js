@@ -49,6 +49,7 @@ test('check if user can log', async() => {
   });
 });
 
+
 test('check if user can register', async() => {
   const container = render(<Register />);
 
@@ -88,6 +89,7 @@ test('check if user can register', async() => {
   });
 });
 
+
 test('check if user can reset password', async() => {
   const container = render(<Reset />);
 
@@ -112,6 +114,7 @@ test('check if user can reset password', async() => {
   });
 });
 
+
 test('check if stadiums page loads', async() => {
   render(<Stadion />);
 
@@ -120,6 +123,7 @@ test('check if stadiums page loads', async() => {
     expect(title).toBeInTheDocument();
   });
 });
+
 
 test('check if matches page loads', async() => {
   render(<Meci />);
@@ -130,6 +134,7 @@ test('check if matches page loads', async() => {
   });
 });
 
+
 test('check if players page loads', async() => {
   render(<Jucator />);
 
@@ -138,6 +143,7 @@ test('check if players page loads', async() => {
     expect(title).toBeInTheDocument();
   });
 });
+
 
 test('check if players page loads', async() => {
   render(<Staff />);

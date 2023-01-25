@@ -85,7 +85,7 @@ function Auth(){
                                         <div className = "text">
                                             <div display="flex">
                                                 <h3 style={{paddingRight: "25em", paddingLeft: "42em"}}>Logged in as: Gigi Becali</h3>
-                                                <img src="https://i.ytimg.com/vi/ibg1Bz5ykFY/mqdefault.jpg" width="300" height="150"/>
+                                                <img src="https://i.ytimg.com/vi/ibg1Bz5ykFY/mqdefault.jpg" alt="imagine gigi" width="300" height="150"/>
                                             </div>
                                             <p></p>
                                             <h3>Role: admin</h3>
