@@ -26,7 +26,9 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
-    - working-directory: ./csa_fc_341
     - run: npm ci
+      working-directory: ./csa_fc_341
     - run: npm run build --if-present
+      working-directory: ./csa_fc_341
     - run: npm test
+      working-directory: ./csa_fc_341
