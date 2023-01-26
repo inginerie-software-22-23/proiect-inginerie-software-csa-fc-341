@@ -1,5 +1,7 @@
 # SQUAD MANAGER
 
+[![Node.js CI](https://github.com/inginerie-software-22-23/proiect-inginerie-software-csa-fc-341/actions/workflows/node.js.yml/badge.svg?branch=main)](https://github.com/inginerie-software-22-23/proiect-inginerie-software-csa-fc-341/actions/workflows/node.js.yml)
+
 ## Livrabil intermediar
 
 Livrabilul intermediar pentru aplicatia Squad Manager este disponibil in acest repo, in format PDF.
