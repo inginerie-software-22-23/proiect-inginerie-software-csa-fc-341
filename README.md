@@ -6,6 +6,17 @@
 
 Livrabilul intermediar pentru aplicatia Squad Manager este disponibil in acest repo, in format PDF.
 
+## Livrabil final
+
+Livrabilul final pentru aplicatia Squad Manager este disponibil in acest repo, in folderul Final Delivery (livrabile pentru fiecare sprint, raportul de arhitectura si raportul de testare) 
+
+## Demo-uri aplicatie
+
+Sprint 1 Demo: https://youtu.be/BGCGK2HwoZk
+
+Sprint 2 Demo: https://youtu.be/3QHsFXkF-3A
+
+Sprint 3 Demo: https://youtu.be/geMVPawq9Ig (Demo final aplicatie)
 
 
 ## Descriere
