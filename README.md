@@ -4,6 +4,10 @@
 
 ## NOTA FINALA PROIECT - NOTA 10
 
+Data evaluare: 30.01.2023
+Locatie: Facultatea de Matematica si Informatica, Universitatea din Bucuresti
+Evaluator: prof. Rares Cristea
+
 ## Livrabil intermediar
 
 Livrabilul intermediar pentru aplicatia Squad Manager este disponibil in acest repo, in format PDF.
