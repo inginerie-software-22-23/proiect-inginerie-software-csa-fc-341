@@ -2,6 +2,8 @@
 
 [![Node.js CI](https://github.com/inginerie-software-22-23/proiect-inginerie-software-csa-fc-341/actions/workflows/node.js.yml/badge.svg?branch=main)](https://github.com/inginerie-software-22-23/proiect-inginerie-software-csa-fc-341/actions/workflows/node.js.yml)
 
+## NOTA FINALA PROIECT - NOTA 10
+
 ## Livrabil intermediar
 
 Livrabilul intermediar pentru aplicatia Squad Manager este disponibil in acest repo, in format PDF.
@@ -29,15 +31,15 @@ Squad Manager, dupa cum sugereaza si denumirea, preia din atributiile managerulu
 
 ## Echipa
 
-[Avian Silviu Gabriel](https://github.com/Silviu1409)
+[Avian Silviu Gabriel](https://github.com/Silviu1409) - Senior Coder & Full-stack Developer
 
-[Dijmarescu Cristina Maria](https://github.com/crisdijma)
+[Dijmarescu Cristina Maria](https://github.com/crisdijma) - Project Manager
 
-[Haiducu Stefan](https://github.com/TakenUser123)
+[Haiducu Stefan](https://github.com/TakenUser123) - Front-end Developer
 
-[Ioan Tudor Alexandru](https://github.com/tudorioan20) 
+[Ioan Tudor Alexandru](https://github.com/tudorioan20) - Full-stack Developer
 
-[Ionescu Alexandru](https://github.com/aionescu01)
+[Ionescu Alexandru](https://github.com/aionescu01) - Back-end Developer
 
-[Stan Ana Maria](https://github.com/yanastany)
+[Stan Ana Maria](https://github.com/yanastany) - Front-end Developer
 
